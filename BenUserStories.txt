@@ -1,0 +1,13 @@
+Ben Caras
+COS 420
+
+My contribution of user stories:
+
+1.
+As an instructor, I want the interface of Teaching Tasks to be suitable for all of my clients so that they will be able to properly use and learn from Teaching Tasks.
+
+2.
+As an instructor, I want Teaching Tasks to follow the proper guidelines when educating my clients so that I know my client will be able to learn and not get frustrated and not want to continue.
+
+3. 
+As an instructor, I want there to be positive reinforcement so that my clients know when they have done something right.
