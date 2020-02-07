@@ -1,0 +1,12 @@
+Jeremy Hutchinson
+COS 420
+
+My contribution of user stories:
+
+User Story 1
+	As a user (clinician), I want the game to be locked in when I hand it to the child, so they cannot access any settings or sensitive information in the app
+User Story 2
+	As a child using the application, I want the game to recognise when I am struggling and revert back to something I was more successful at so that I stay engaged and do not get frustrated. 
+
+User Story 3
+	As a child who has not yet learned to read using the application, I want the game to have many audio cues to make it as accessible to me as it is to anyone else.
