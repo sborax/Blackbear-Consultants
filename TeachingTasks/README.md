@@ -4,11 +4,11 @@ You will need:
 - NodeJS
 - React
 
-1. Install [NodeJS](https://nodejs.org/en/)
-2. Follow the installation instructions for [React-Native](https://facebook.github.io/react-native/docs/getting-started)
+1. Install [NodeJS](https://nodejs.org/en/ )
+2. Follow the installation instructions for [React-Native](https://facebook.github.io/react-native/docs/getting-started )
   - These instructions will detail how to get Android Studio virtual devices to work with React-Native
   - __CAREFULLY READ THE INSTRUCTIONS__. Failure to follow the steps may prevent you from running the app.
-3. Follow the installation instructions for [React-Navigation](https://facebook.github.io/react-native/docs/navigation)
+3. Follow the installation instructions for [React-Navigation](https://facebook.github.io/react-native/docs/navigation )
 
 Contact Chad Berry (chad.berry@maine.edu) with any problems regarding the project.
 
