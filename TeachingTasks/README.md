@@ -1,7 +1,7 @@
 # Tools Needed
 You will need:
-- Android Studio
-- NodeJS
+- Android Studio 3.5.3
+- NodeJS 13.9.0
 - React
 
 1. Install [NodeJS](https://nodejs.org/en/ )
