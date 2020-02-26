@@ -13,6 +13,7 @@ You will need:
 - **CAREFULLY READ THE INSTRUCTIONS**. Failure to follow the steps may prevent you from running the app.
 
 3. Follow the installation instructions for [React-Navigation](https://facebook.github.io/react-native/docs/navigation)
+4. Type 'npm install' to install dependencies
 
 Contact Chad Berry (chad.berry@maine.edu) with any problems regarding the project.
 
