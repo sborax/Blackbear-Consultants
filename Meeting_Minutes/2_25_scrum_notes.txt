@@ -1,0 +1,107 @@
+Sprint Goal: Complete mockup, user stories, and presentation to lay groundwork for writing code. Complete documentation for deliverable 1.
+
+Product Owner - Abdullah Karim
+Scrum Master  - Ethan Levy
+
+Goals: 
+    * Start react frontend development
+    * Start flask api backend development
+
+James (frontend) -
+    * Complete the mockup before the presentation.
+
+    TODO:
+    * Planning to create initial frontend React app and allow for a shape to be viewed in react.
+    * Complete the SRS for deliverable 1.
+
+    2/25:
+    * Work on SRS document.
+    * Research for frontend development
+
+Mark (frontend) -
+    * Complete the presentation for 2/20.
+    * Give ideas for the mockup.
+
+    TODO: 
+    * Begin use case models in the SRS and complete for 2/25.
+    * Learn how to use React.
+
+    2/25:
+    * Work on SRS document.
+    * Use case model diagram.
+    * KA for app.
+    * Put effort in to learn react.
+    * Research for frontend development.
+
+
+Chad (frontend) - 
+    * Edited the user stories based on comments from Sepideh.
+
+    TODO:
+    * Complete sprint review document for deliverable 1.
+    * Learn how to use React - put in a lot of effort already.
+
+    2/25:
+    * Created frontend repository for development
+    * Worked on sprint review
+    * Put more work into React initialization.
+
+
+Abdullah (backend) - 
+    * Give ideas for mockup.
+    * Created product backlog.
+
+    TODO: 
+    * Learn how to use Flask api
+    * Begin use case models in the SRS and complete for deliverable 1.
+    * Begin SRS documentation to pick up slack.
+
+    2/25:
+    * Work on SRS document.
+    * Use case model document.
+    * Finish product backlog
+    * Learn about api's overall for development
+    * Made reqs for SRS.
+
+Ethan (backend) - 
+    * I fixed my one user story
+    * Made the sprint backlog
+
+    TODO:
+    * Complete the sprint backlog with Abdullah's product backlog for deliverable 1.
+    * Complete sprint review document for deliverable 1.
+    * Learn how to use Flask api.
+    * Learn about how to create and send JSON files.
+
+    2/25:
+    * Worked on the sprint backlog document - will be completed at 5.
+    * Reviewed sprint review doc and completed for Chad
+    * Put some research into Flask api, not as much as desired.
+
+Jeremy (backend) - 
+    TODO: 
+    * Complete SRS document for deliverable 1. 
+    * Learn how to use Flask api.
+    * Learn about how to create and send JSON files.
+
+    2/25:
+    * Finish up SRS document.
+    * Began research on flask api for backend development.
+
+
+Ben (backend) -
+    TODO:
+    * Complete SRS document for deliverable 1.
+    * Learn how to use Flask api.
+    * Learn about how to create and send JSON files.
+
+    2/25:
+    * Worked on SRS document.
+
+Group for deliverable 1:
+    TODO:
+        * Use Case models  -        Abdullah and Mark
+        * SRS document  -           Jeremy and Ben - James may help out
+        * Peer Review report -      individual
+        * Team member report -      template already done
+        * Sprint Review document -  Ethan and Chad
