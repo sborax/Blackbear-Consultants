@@ -3,18 +3,18 @@ A Github for Blackbear Consultants.
 
 Group 2
 
-Abdullah Karim
+Abdullah Karim - abdullahkarim1999
 
-Ben Caras
+Ben Caras - Benji887
 
-Chad Berry
+Chad Berry - cberry-git
 
-Ethan Levy
+Ethan Levy - EMLLevy
 
-James West
+James West - RealizmHF
 
-Jeremy Hutchinson
+Jeremy Hutchinson - Ayyko
 
-Mark Sullivan
+Mark Sullivan - sborax
 
 Teaching Tasks
