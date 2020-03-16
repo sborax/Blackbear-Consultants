@@ -14,6 +14,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 // ---
 import HomeScreen from './_app_screens/HomeScreen';
 import InitialLoginScreen from './_app_screens/InitialLoginScreen';
+import RegisterInstructor from './_app_screens/RegisterInstructor';
+import RegisterParent from './_app_screens/RegisterParent';
 
 const Stack = createStackNavigator();
 
@@ -23,6 +25,11 @@ function App() {
       <Stack.Navigator initialRouteName="Welcome Page">
         <Stack.Screen name="Welcome Page" component={HomeScreen} />
         <Stack.Screen name="Getting Started" component={InitialLoginScreen} />
+        <Stack.Screen
+          name="Register Instructor"
+          component={RegisterInstructor}
+        />
+        <Stack.Screen name="Register Parent" component={RegisterParent} />
       </Stack.Navigator>
     </NavigationContainer>
   );

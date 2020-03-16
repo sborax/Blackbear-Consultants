@@ -1,26 +1,21 @@
 // ---
 // COMPONENT DESCRIPTION:
-// This is the screen that allows for user creation.
+// This is the screen that opens when the app is first installed.
 // ---
 import * as React from 'react';
 import {View, Text, Button, StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import {TextInput} from 'react-native-gesture-handler';
 
-function InitialLoginScreen({navigation}) {
+function RegisterParent({navigation}) {
   return (
     <View style={styles.main_BG}>
+      <Text style={styles.text}>Create Parent Account</Text>
       <View style={{padding: 10}}>
-        <Text style={styles.text}>
-          To begin, please create an instructor account.
-        </Text>
-      </View>
-      <View style={{paddingHorizontal: 100, paddingVertical: 10}}>
-        <Button
-          title="Continue"
-          color="teal"
-          onPress={() => navigation.navigate('Register Instructor')}
-        />
+        <TextInput style={styles.text_input} placeholder="Username" />
+        <TextInput style={styles.text_input} placeholder="Password" />
+        <Button title="Create account" color="green"></Button>
       </View>
     </View>
   );
@@ -43,6 +38,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 24,
   },
+  text_input: {
+    backgroundColor: 'white',
+    textAlign: 'center',
+    color: 'black',
+    padding: 10,
+    borderColor: 'black',
+    borderWidth: 2,
+    borderRadius: 10,
+  },
 });
 
-export default InitialLoginScreen;
+export default RegisterParent;
