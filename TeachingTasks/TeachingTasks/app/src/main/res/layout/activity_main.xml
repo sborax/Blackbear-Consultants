@@ -6,13 +6,81 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+    <ImageView
+        android:id="@+id/woodHeaderImageView2"
+        android:layout_width="412dp"
+        android:layout_height="125dp"
+        android:layout_marginBottom="630dp"
+        android:adjustViewBounds="true"
+        android:background="#875B42"
+        android:contentDescription="TODO"
+        android:cropToPadding="true"
+        android:scaleType="fitXY"
+        android:tint="#634433"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/chalkwood" />
+
+    <ImageView
+        android:id="@+id/woodHeaderImageView"
+        android:layout_width="395dp"
+        android:layout_height="104dp"
+        android:adjustViewBounds="true"
+        android:cropToPadding="true"
+        android:scaleType="fitXY"
+        android:tint="#99875B42"
+        app:layout_constraintBottom_toBottomOf="@+id/woodHeaderImageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/woodHeaderImageView2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/chalkwood" />
+
+    <ImageView
+        android:id="@+id/chalkBackgroundImageView"
+        android:layout_width="413dp"
+        android:layout_height="618dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="TODO"
+        android:cropToPadding="true"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/woodHeaderImageView2"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/chalk" />
+
+    <Button
+        android:id="@+id/addUserButton"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="124dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="270dp"
+        android:layout_marginRight="270dp"
+        android:layout_marginBottom="21dp"
+        android:drawableStart="@android:drawable/ic_menu_add"
+        android:drawableLeft="@android:drawable/ic_menu_add"
+        android:fontFamily="casual"
+        android:text="@string/add"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/woodHeaderImageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/woodHeaderImageView2"
+        app:layout_constraintVertical_bias="0.448"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
