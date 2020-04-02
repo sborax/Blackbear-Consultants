@@ -117,20 +117,22 @@
 
     <EditText
         android:id="@+id/newUserNameEditText"
-        style="@style/Widget.AppCompat.EditText"
         android:layout_width="290dp"
         android:layout_height="60dp"
+        android:layout_marginTop="96dp"
         android:background="#FFFFFF"
         android:ems="10"
-        android:inputType="textPassword"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:fontFamily="casual"
+        android:inputType="textPersonName"
+        android:singleLine="false"
+        android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/newPasswordEditText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/woodHeaderImageView2"
-        app:layout_constraintVertical_bias="0.746" />
+        app:layout_constraintVertical_bias="0.529" />
 
     <TextView
         android:id="@+id/newPasswordText"
@@ -154,8 +156,6 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/newUserNameEditText"
-        app:layout_constraintEnd_toEndOf="@+id/newUserNameEditText"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/newUserNameEditText" />
 
     <CheckBox
