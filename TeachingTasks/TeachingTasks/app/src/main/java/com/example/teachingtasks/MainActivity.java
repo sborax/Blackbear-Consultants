@@ -23,10 +23,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         //Assign variables to UI components
-        newUsername = findViewById(R.id.newUserNameEditText);
-        newPassword = findViewById(R.id.newPasswordEditText);
-        showPass = findViewById(R.id.showPasswordCheckBox);
-        createButton = findViewById(R.id.createUserButton);
+        newUsername = (EditText) findViewById(R.id.newUserNameEditText);
+        newPassword = (EditText) findViewById(R.id.newPasswordEditText);
+        showPass = (CheckBox) findViewById(R.id.showPasswordCheckBox);
+        createButton = (Button) findViewById(R.id.createUserButton);
 
 
         //Set EventHandlers
