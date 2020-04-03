@@ -15,7 +15,7 @@ public class CreateUserEventHandler {
         Temp Function until above is done
          */
 
-        Intent gameIntent = new Intent(mainActivity.getBaseContext(),GameActivity.class);
-        mainActivity.startActivity(gameIntent);
+        Intent userSelectIntent = new Intent(mainActivity.getBaseContext(),UserSelectActivity.class);
+        mainActivity.startActivity(userSelectIntent);
     }
 }
