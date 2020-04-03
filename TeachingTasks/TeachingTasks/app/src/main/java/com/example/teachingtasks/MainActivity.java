@@ -32,16 +32,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Set EventHandlers
         createButton.setOnClickListener(this);
         showPass.setOnClickListener(this);
-
-
     }
     @Override
     public void onClick(View v) {
 
         //Checks the ID and calls the appropriate EventHandler
         switch (v.getId()){
-            case R.id.showPasswordCheckBox: new ShowPassEventHandler().onCheck(showPass, newPassword);
-            case R.id.createUserButton: new CreateUserEventHandler().onClick(newUsername, newPassword);
+            case R.id.showPasswordCheckBox: new ShowPassEventHandler().onCheck(showPass, newPassword); break;
+            case R.id.createUserButton: new CreateUserEventHandler().onClick(this, newUsername, newPassword); break;
             default: return;
         }
     }
