@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Sets the initial Content View
         setContentView(R.layout.activity_main);
 
         //Assign variables to UI components
@@ -36,16 +38,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
+        //Checks the ID and calls the appropriate EventHandler
         switch (v.getId()){
             case R.id.showPasswordCheckBox: new ShowPassEventHandler().onCheck(showPass, newPassword);
+            case R.id.createUserButton: new CreateUserEventHandler().onClick(newUsername, newPassword);
+            default: return;
         }
-
-        if(newUsername.getText().toString().length() > 0 && newPassword.getText().toString().length() > 0){
-            Toast.makeText(getApplicationContext(),newUsername.getText().toString()+"   "+newPassword.getText().toString(),Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void showPassClick(View v) {
-        System.out.println("SHOW PASS CHECK WORKED");
     }
 }

@@ -15,7 +15,5 @@ public class ShowPassEventHandler {
         else {
             pass.setTransformationMethod(PasswordTransformationMethod.getInstance());
         }
-
-        System.out.println("InputType: " + pass.getInputType());
     }
 }
