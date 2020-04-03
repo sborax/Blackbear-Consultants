@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
 
         switch (v.getId()){
-            case R.id.showPasswordCheckBox: new ShowPassEventHandler().onCheck(newPassword);
+            case R.id.showPasswordCheckBox: new ShowPassEventHandler().onCheck(showPass, newPassword);
         }
 
         if(newUsername.getText().toString().length() > 0 && newPassword.getText().toString().length() > 0){
