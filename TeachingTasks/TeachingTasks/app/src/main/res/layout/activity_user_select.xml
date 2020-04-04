@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/userSelectLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".UserSelectActivity">
@@ -95,18 +96,14 @@
         app:layout_constraintEnd_toEndOf="@+id/woodHeaderImageView"
         app:layout_constraintTop_toTopOf="@+id/woodHeaderImageView" />
 
-    <EditText
-        android:id="@+id/userNameOption"
+    <TextView
+        android:id="@+id/userSelectOption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:editable="false"
-        android:ems="10"
         android:fontFamily="casual"
-        android:gravity="center"
-        android:inputType="textPersonName"
-        android:singleLine="true"
         android:text="Patient"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#FFFFFF"
         android:textSize="48sp"
         android:textStyle="bold"
