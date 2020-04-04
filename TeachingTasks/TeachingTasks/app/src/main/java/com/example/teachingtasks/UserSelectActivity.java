@@ -3,6 +3,7 @@ package com.example.teachingtasks;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -32,7 +33,11 @@ public class UserSelectActivity extends AppCompatActivity {
         //If no users found, Intent to CreateUser Activity
         //Else, user(s) found, userOptions initialized, display userOptions
 
-        if(userOptions.length < 1) {
+        /*
+        FIX THE IF STATEMENT AFTER TESTING IS DONE
+        COUNT < 1
+         */
+        if(count < 0) {
             Intent createUserIntent = new Intent(UserSelectActivity.this, MainActivity.class);
             startActivity(createUserIntent);
         }
@@ -51,6 +56,9 @@ public class UserSelectActivity extends AppCompatActivity {
     }
 
     private void addUserOption(){
+        //Create new userOption to add to the userOptions array
+        //Styles and formats new userOption
+        
         TextView temp = new TextView(this);
 
         LinearLayout constraintLayout = (LinearLayout) findViewById(R.id.userSelectionLayout);
@@ -60,7 +68,7 @@ public class UserSelectActivity extends AppCompatActivity {
         temp.setText("tempUser");
         temp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 48);
         temp.setTextColor(0xFFFFFFFF);
-        //temp.setPadding(0,24,0,0);
+        temp.setTypeface(Typeface.create("casual", Typeface.BOLD), Typeface.BOLD);
 
         constraintLayout.addView(temp);
         userOptions[count] = temp;
@@ -71,7 +79,7 @@ public class UserSelectActivity extends AppCompatActivity {
     private void initializeUserOptions() {
         //Grab users from Database
         //Initialize userOptions with users from Database
-        userOptions[count] = (TextView) findViewById(R.id.userSelectOption);
-        count++;
+//        userOptions[count] = (TextView) findViewById(R.id.userSelectOption);
+//        count++;
     }
 }
