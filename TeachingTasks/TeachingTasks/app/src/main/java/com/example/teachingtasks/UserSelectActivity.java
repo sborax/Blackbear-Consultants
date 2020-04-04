@@ -41,6 +41,7 @@ public class UserSelectActivity extends AppCompatActivity {
             Intent createUserIntent = new Intent(UserSelectActivity.this, MainActivity.class);
             startActivity(createUserIntent);
         }
+
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,7 +59,7 @@ public class UserSelectActivity extends AppCompatActivity {
     private void addUserOption(){
         //Create new userOption to add to the userOptions array
         //Styles and formats new userOption
-        
+
         TextView temp = new TextView(this);
 
         LinearLayout constraintLayout = (LinearLayout) findViewById(R.id.userSelectionLayout);
