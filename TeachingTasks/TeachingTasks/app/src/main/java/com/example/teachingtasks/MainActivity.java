@@ -13,10 +13,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText newUsername, newPassword;
     CheckBox showPass;
     Button createButton;
+    DatabaseHelper mydb;
+    String[] users;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mydb = new DatabaseHelper(this);
+
+        users = mydb.getAllUsers();
 
         //Sets the initial Content View
         setContentView(R.layout.activity_main);
@@ -38,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Checks the ID and calls the appropriate EventHandler
         switch (v.getId()){
             case R.id.showPasswordCheckBox: new ShowPassEventHandler().onCheck(showPass, newPassword); break;
-            case R.id.createUserButton: new CreateUserEventHandler().onClick(this, newUsername, newPassword); break;
+            case R.id.createUserButton: new CreateUserEventHandler().onClick(this, mydb, newUsername, newPassword); break;
             default: return;
         }
     }

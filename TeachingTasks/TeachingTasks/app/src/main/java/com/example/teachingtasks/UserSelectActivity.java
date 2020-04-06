@@ -18,11 +18,15 @@ public class UserSelectActivity extends AppCompatActivity {
     Button editButton, searchButton;
     TextView userOptions[] = new TextView[20];
     int count = 0;
+    DatabaseHelper mydb;
+    String[] users;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_select);
+        mydb = new DatabaseHelper(this);
+        users = mydb.getAllUsers();
 
         //Initial variables with UI components
         editButton = (Button) findViewById(R.id.editUsersButton);
@@ -80,7 +84,20 @@ public class UserSelectActivity extends AppCompatActivity {
     private void initializeUserOptions() {
         //Grab users from Database
         //Initialize userOptions with users from Database
-//        userOptions[count] = (TextView) findViewById(R.id.userSelectOption);
-//        count++;
+
+        for(int k = 0; k < users.length; k++){
+
+            TextView temp = new TextView(this);
+
+            LinearLayout constraintLayout = (LinearLayout) findViewById(R.id.userSelectionLayout);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.gravity = Gravity.CENTER;
+            temp.setLayoutParams(params);
+            temp.setText(users[k]);
+            temp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 48);
+            temp.setTextColor(0xFFFFFFFF);
+            temp.setTypeface(Typeface.create("casual", Typeface.BOLD), Typeface.BOLD);
+
+        }
     }
 }

@@ -5,7 +5,7 @@ import android.widget.EditText;
 
 public class CreateUserEventHandler {
 
-    public void onClick(MainActivity mainActivity, EditText newUsername, EditText newPassword) {
+    public void onClick(MainActivity mainActivity, DatabaseHelper mydb, EditText newUsername, EditText newPassword) {
 
         //Check password meets required guidelines (Caps, special char, length, etc)
         //Check database for duplicate username
@@ -16,6 +16,8 @@ public class CreateUserEventHandler {
          */
 
         String pass = newPassword.getText().toString();
+
+        mydb.addUser(newUsername.getText().toString(), newPassword.getText().toString());
 
         Intent userSelectIntent = new Intent(mainActivity.getBaseContext(),UserSelectActivity.class);
         mainActivity.startActivity(userSelectIntent);

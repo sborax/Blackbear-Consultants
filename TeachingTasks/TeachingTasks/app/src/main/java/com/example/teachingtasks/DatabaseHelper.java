@@ -2,6 +2,7 @@ package com.example.teachingtasks;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -11,7 +12,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "database";
     public static final String TABLE_NAME = "users";
-    public static final String TABLE_ID = "1";
+    public static final String TABLE_ID = "id";
     public static final String COL_USERNAME = "username";
     public static final String COL_PASSWORD = "password";
     public static int version = 1;
@@ -43,7 +44,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_PASSWORD, pass);
 
         //Insert and return
-        db.insert(TABLE_NAME, null, contentValues);
+        long temp = db.insert(TABLE_NAME, null, contentValues);
+
+        System.out.println(temp);
+
         return;
     }
 
@@ -57,5 +61,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String[] selectionArgs = { user };
 
         db.delete(TABLE_NAME, selection, selectionArgs);
+    }
+
+    public String[] getAllUsers() {
+        //Returns a list of all users
+        //Limited to 20 users
+
+        //Call Readable
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] users = new String[20];
+        Cursor res = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        res.moveToFirst();
+
+        int count = 0;
+        while(res.isAfterLast() == false){
+            users[count] = res.getString(res.getColumnIndex(COL_USERNAME));
+            res.moveToNext();
+            System.out.println(users[count]);
+            count++;
+        }
+
+        return users;
     }
 }
