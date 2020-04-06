@@ -15,6 +15,8 @@ public class CreateUserEventHandler {
         Temp Function until above is done
          */
 
+        String pass = newPassword.getText().toString();
+
         Intent userSelectIntent = new Intent(mainActivity.getBaseContext(),UserSelectActivity.class);
         mainActivity.startActivity(userSelectIntent);
     }
