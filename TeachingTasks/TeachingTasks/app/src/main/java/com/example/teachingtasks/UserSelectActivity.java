@@ -98,6 +98,9 @@ public class UserSelectActivity extends AppCompatActivity {
             temp.setTextColor(0xFFFFFFFF);
             temp.setTypeface(Typeface.create("casual", Typeface.BOLD), Typeface.BOLD);
 
+            constraintLayout.addView(temp);
+            userOptions[k] = temp;
+            System.out.println(userOptions[k].getText().toString());
         }
     }
 }
