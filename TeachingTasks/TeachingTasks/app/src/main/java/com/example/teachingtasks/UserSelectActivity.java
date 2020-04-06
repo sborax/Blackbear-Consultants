@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class UserSelectActivity extends AppCompatActivity {
 
@@ -29,7 +30,7 @@ public class UserSelectActivity extends AppCompatActivity {
         users = mydb.getAllUsers();
 
         //Initial variables with UI components
-        editButton = (Button) findViewById(R.id.editUsersButton);
+        editButton = (Button) findViewById(R.id.addUsersButton);
         searchButton = (Button) findViewById(R.id.searchButton);
 
 
@@ -53,13 +54,21 @@ public class UserSelectActivity extends AppCompatActivity {
                 //If clicked, swap the Text and do appropriate behavior.
                switch (editButton.getText().toString()){
                    case "Add": addUserOption(); break;
-                   default: editButton.setText("Add");
+                   case "Edit": editButton.setText("Add"); editUserOption(); break;
+                   default: return;
                }
             }
         });
     }
 
     private void addUserOption(){
+        //Set all of the stuff back to normal and then go to Register User
+
+        Intent registerUserIntent = new Intent(UserSelectActivity.this,MainActivity.class);
+        UserSelectActivity.this.startActivity(registerUserIntent);
+    }
+
+    private void editUserOption(){
         //Create new userOption to add to the userOptions array
         //Styles and formats new userOption
 
@@ -76,9 +85,6 @@ public class UserSelectActivity extends AppCompatActivity {
             //Add the selection check bubble to each username
 
         }
-
-        count++;
-
     }
 
     private void initializeUserOptions() {
@@ -97,6 +103,13 @@ public class UserSelectActivity extends AppCompatActivity {
             temp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 48);
             temp.setTextColor(0xFFFFFFFF);
             temp.setTypeface(Typeface.create("casual", Typeface.BOLD), Typeface.BOLD);
+            temp.setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View v){
+                    Toast.makeText(UserSelectActivity.this, "InProgress",Toast.LENGTH_SHORT).show();
+                }
+            });
 
             constraintLayout.addView(temp);
             userOptions[k] = temp;

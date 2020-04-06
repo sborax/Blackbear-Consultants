@@ -46,8 +46,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //Insert and return
         long temp = db.insert(TABLE_NAME, null, contentValues);
 
-        System.out.println(temp);
-
         return;
     }
 
@@ -61,6 +59,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String[] selectionArgs = { user };
 
         db.delete(TABLE_NAME, selection, selectionArgs);
+
+        return;
     }
 
     public String[] getAllUsers() {
@@ -76,9 +76,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         int count = 0;
         while(res.isAfterLast() == false){
-            users[count] = res.getString(res.getColumnIndex(COL_USERNAME));
+            //If the next username is not an empty index, add to users
+            //Else, keep going until the end of database is reached
+
+            String temp = res.getString(res.getColumnIndex(COL_USERNAME));
+            if(!temp.isEmpty())
+                users[count] = temp;
             res.moveToNext();
-            System.out.println(users[count]);
             count++;
         }
 
@@ -89,10 +93,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //If the database contains the username, return true
         //Else, false
 
-        String[] users = getAllUsers();
+        String[] users = this.getAllUsers();
 
-        for(int k = 0; k < users.length; k++){
-            if(users[k].equals(tempUser)){
+        for(int k = 0; k < users.length-1; k++){
+            if(tempUser.equals(users[k])){
                 return true;
             }
         }

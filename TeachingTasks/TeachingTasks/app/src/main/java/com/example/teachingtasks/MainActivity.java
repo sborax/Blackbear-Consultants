@@ -1,6 +1,8 @@
 package com.example.teachingtasks;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.View;
@@ -32,6 +34,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         newPassword = (EditText) findViewById(R.id.newPasswordEditText);
         showPass = (CheckBox) findViewById(R.id.showPasswordCheckBox);
         createButton = (Button) findViewById(R.id.createUserButton);
+
+        //Easy quick fix to making login default screen
+        //Must change the classes around
+        //Rename this class to RegisterUserActivity
+        Button addButton = (Button) findViewById(R.id.addUsersButton);
+        addButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+                Intent selectUserIntent = new Intent(MainActivity.this,UserSelectActivity.class);
+                MainActivity.this.startActivity(selectUserIntent);
+            }
+        });
 
 
         //Set EventHandlers
