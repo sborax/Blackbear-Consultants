@@ -17,9 +17,30 @@ public class CreateUserEventHandler {
 
         String pass = newPassword.getText().toString();
 
-        mydb.addUser(newUsername.getText().toString(), newPassword.getText().toString());
+        if(!mydb.containsUser(newUsername.getText().toString())){
 
-        Intent userSelectIntent = new Intent(mainActivity.getBaseContext(),UserSelectActivity.class);
-        mainActivity.startActivity(userSelectIntent);
+            if(isAcceptablePassword(pass)){
+
+                mydb.addUser(newUsername.getText().toString(), newPassword.getText().toString());
+
+                Intent userSelectIntent = new Intent(mainActivity.getBaseContext(),UserSelectActivity.class);
+                mainActivity.startActivity(userSelectIntent);
+            }
+        }
+
     }
+
+    private boolean isAcceptablePassword(String pass) {
+        //True if pass length > 8 and contains at least 1 letter, number, and special char.
+        //Else, false.
+
+        if(pass.length() > 8){
+            //Create regex match
+            //If regex contains capital letter, number, and special char such as !,@,#,$,<,?... etc.
+            //Then return true, else, return false
+
+            return true;
+        }
+    }
+
 }

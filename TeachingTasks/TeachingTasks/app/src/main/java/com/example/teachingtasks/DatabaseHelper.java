@@ -84,4 +84,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return users;
     }
+
+    public boolean containsUser(String tempUser) {
+        //If the database contains the username, return true
+        //Else, false
+
+        String[] users = getAllUsers();
+
+        for(int k = 0; k < users.length; k++){
+            if(users[k].equals(tempUser)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

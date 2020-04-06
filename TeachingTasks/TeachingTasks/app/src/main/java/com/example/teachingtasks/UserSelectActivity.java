@@ -50,12 +50,11 @@ public class UserSelectActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(count < 20) {
-                    addUserOption();
-                }
-                else{
-                    //Error message for max users reached
-                }
+                //If clicked, swap the Text and do appropriate behavior.
+               switch (editButton.getText().toString()){
+                   case "Add": addUserOption(); break;
+                   default: editButton.setText("Add");
+               }
             }
         });
     }
@@ -64,19 +63,20 @@ public class UserSelectActivity extends AppCompatActivity {
         //Create new userOption to add to the userOptions array
         //Styles and formats new userOption
 
-        TextView temp = new TextView(this);
+        //Create the Delete button
+        // ^ This would require us to 'delete' this button variable when they are done
+        // --- or ---
+        //We can have it created in the UI, but hidden initially and make it visible in this method
+        // ^ This would require we make it invisible again rather than delete it aka var = null;
 
-        LinearLayout constraintLayout = (LinearLayout) findViewById(R.id.userSelectionLayout);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.gravity = Gravity.CENTER;
-        temp.setLayoutParams(params);
-        temp.setText("tempUser");
-        temp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 48);
-        temp.setTextColor(0xFFFFFFFF);
-        temp.setTypeface(Typeface.create("casual", Typeface.BOLD), Typeface.BOLD);
 
-        constraintLayout.addView(temp);
-        userOptions[count] = temp;
+        //Create the Select button
+
+        for(int k = 0; k < userOptions.length; k++){
+            //Add the selection check bubble to each username
+
+        }
+
         count++;
 
     }
