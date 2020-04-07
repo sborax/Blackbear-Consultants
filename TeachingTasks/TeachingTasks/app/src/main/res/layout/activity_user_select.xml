@@ -14,7 +14,7 @@
         android:layout_marginBottom="630dp"
         android:adjustViewBounds="true"
         android:background="#875B42"
-        android:contentDescription="TODO"
+        android:contentDescription="@string/outerheader"
         android:cropToPadding="true"
         android:scaleType="fitXY"
         android:tint="#634433"
@@ -31,6 +31,7 @@
         android:layout_width="395dp"
         android:layout_height="104dp"
         android:adjustViewBounds="true"
+        android:contentDescription="@string/innerheader"
         android:cropToPadding="true"
         android:scaleType="fitXY"
         android:tint="#99875B42"
@@ -46,7 +47,7 @@
         android:layout_width="413dp"
         android:layout_height="618dp"
         android:adjustViewBounds="true"
-        android:contentDescription="TODO"
+        android:contentDescription="@string/background"
         android:cropToPadding="true"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -71,7 +72,7 @@
         android:drawableStart="@android:drawable/ic_menu_add"
         android:drawableLeft="@android:drawable/ic_menu_add"
         android:fontFamily="casual"
-        android:text="Edit"
+        android:text="@string/edit"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
@@ -96,18 +97,23 @@
         app:layout_constraintEnd_toEndOf="@+id/woodHeaderImageView"
         app:layout_constraintTop_toTopOf="@+id/woodHeaderImageView" />
 
-    <LinearLayout
-        android:id="@+id/userSelectionLayout"
-        android:layout_width="412dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="150dp"
-        android:fadeScrollbars="true"
-        android:orientation="vertical"
-        android:scrollbarSize="4dp"
-        android:scrollbarStyle="outsideInset"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ScrollView
+        android:id="@+id/userSelectScrollView"
+        android:layout_width="409dp"
+        android:layout_height="550dp"
+        android:layout_marginTop="24dp"
+        android:fillViewport="false"
+        android:isScrollContainer="true"
+        android:scrollbarStyle="insideOverlay"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/chalkBackgroundImageView"
+        app:layout_constraintTop_toBottomOf="@+id/woodHeaderImageView2">
+
+        <LinearLayout
+            android:id="@+id/userSelectionLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,17 +22,20 @@ public class UserSelectActivity extends AppCompatActivity {
     int count = 0;
     DatabaseHelper mydb;
     String[] users;
+    TextView[] selectedUsers = new TextView[20];
+    TextView temp;  //Temp TextView to add userOptions to screen
+    LinearLayout constraintLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_select);
         mydb = new DatabaseHelper(this);
-        users = mydb.getAllUsers();
 
         //Initial variables with UI components
         editButton = (Button) findViewById(R.id.addUsersButton);
         searchButton = (Button) findViewById(R.id.searchButton);
+        constraintLayout = (LinearLayout) findViewById(R.id.userSelectionLayout);
 
         this.initializeUserOptions();
 
@@ -42,6 +46,26 @@ public class UserSelectActivity extends AppCompatActivity {
             startActivity(createUserIntent);
         }
 
+        /*
+        Search / Delete Button
+        --- Event Handler ---
+         */
+        searchButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+                switch (searchButton.getText().toString()){
+                    case "Delete": new DeleteUserEventHandler().onClick(UserSelectActivity.this, mydb, selectedUsers, constraintLayout, v); break;
+                    //case "": new SearchUsersEventHandler().onClick(mydb, searchButton.getTextORSOMETHING().toString()); break;
+                }
+            }
+        });
+
+        /*
+        Edit / Add Button
+        --- Event Handler ---
+         */
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,6 +80,9 @@ public class UserSelectActivity extends AppCompatActivity {
         });
     }
 
+    /*
+    Add User Option
+     */
     private void addUserOption(){
         //Set all of the stuff back to normal and then go to Register User
 
@@ -67,15 +94,9 @@ public class UserSelectActivity extends AppCompatActivity {
         //Create new userOption to add to the userOptions array
         //Styles and formats new userOption
 
-        //Create the Delete button
-        // ^ This would require us to 'delete' this button variable when they are done
-        // --- or ---
-        //We can have it created in the UI, but hidden initially and make it visible in this method
-        // ^ This would require we make it invisible again rather than delete it aka var = null;
-
+        searchButton.setText("Delete");
 
         //Create the Select button
-
         for(int k = 0; k < userOptions.length; k++){
             //Add the selection check bubble to each username
 
@@ -86,29 +107,51 @@ public class UserSelectActivity extends AppCompatActivity {
         //Grab users from Database
         //Initialize userOptions with users from Database
 
-        for(int k = 0; k < users.length; k++){
+        users = mydb.getAllUsers();
 
-            TextView temp = new TextView(UserSelectActivity.this);
+        for(int m = 0; m < users.length; m++){
 
-            LinearLayout constraintLayout = (LinearLayout) findViewById(R.id.userSelectionLayout);
+            if(users[m] == null){
+                return;
+            }
+
+            temp = new TextView(UserSelectActivity.this);
+
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             params.gravity = Gravity.CENTER;
             temp.setLayoutParams(params);
-            temp.setText(users[k]);
+            temp.setId(R.id.selectUser + m);
+            temp.setText(users[m]);
             temp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 48);
             temp.setTextColor(0xFFFFFFFF);
             temp.setTypeface(Typeface.create("casual", Typeface.BOLD));
             temp.setOnClickListener(new View.OnClickListener(){
 
                 @Override
-                public void onClick(View v){
-                    Toast.makeText(UserSelectActivity.this, "InProgress",Toast.LENGTH_SHORT).show();
+                public void onClick(View v) {
+
+                    int[] ids = new int[20];
+                    for(int k = 0; k < userOptions.length; k++){
+                        ids[k] = userOptions[k].getId() - R.id.selectUser;
+                    }
+                    handleUserOptionClick(v, 0);
                 }
             });
 
-            constraintLayout.addView(temp);
-            userOptions[k] = temp;
-            System.out.println(userOptions[k].getText().toString());
+            constraintLayout.addView(temp, m);
+            userOptions[m] = temp;
+            System.out.println(userOptions[m].getId());
         }
     }
+
+    private void handleUserOptionClick(View v, int id) {
+        for (int k = 0; k < selectedUsers.length; k++){
+            if(selectedUsers[k] == null){
+                Toast.makeText(UserSelectActivity.this, "InProgress: " + v.findViewById(id),Toast.LENGTH_SHORT).show();
+                selectedUsers[k] = v.findViewById(id-k);
+                return;
+            }
+        }
+    }
+
 }

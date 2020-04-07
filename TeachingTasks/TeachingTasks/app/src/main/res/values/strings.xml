@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">TeachingTasks</string>
     <string name="add">Add</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="background">background</string>
+    <string name="innerheader">innerheader</string>
+    <string name="outerheader">outerheader</string>
 </resources>
