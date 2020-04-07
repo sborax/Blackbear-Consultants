@@ -10,19 +10,19 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class RegisterUserActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText newUsername, newPassword;
     CheckBox showPass;
     Button createButton;
-    DatabaseHelper mydb;
+    RegisterUserDBHelper mydb;
     String[] users;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mydb = new DatabaseHelper(this);
+        mydb = new RegisterUserDBHelper(this);
 
         users = mydb.getAllUsers();
 
@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
 
-                Intent selectUserIntent = new Intent(MainActivity.this,UserSelectActivity.class);
-                MainActivity.this.startActivity(selectUserIntent);
+                Intent selectUserIntent = new Intent(RegisterUserActivity.this,UserSelectActivity.class);
+                RegisterUserActivity.this.startActivity(selectUserIntent);
             }
         });
 

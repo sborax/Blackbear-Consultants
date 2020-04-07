@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class CreateUserEventHandler {
 
-    public void onClick(MainActivity mainActivity, DatabaseHelper mydb, EditText newUsername, EditText newPassword) {
+    public void onClick(RegisterUserActivity mainActivity, RegisterUserDBHelper mydb, EditText newUsername, EditText newPassword) {
 
         //Check password meets required guidelines (Caps, special char, length, etc)
         //Check database for duplicate username

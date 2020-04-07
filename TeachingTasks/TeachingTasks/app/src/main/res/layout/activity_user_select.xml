@@ -99,12 +99,14 @@
 
     <ScrollView
         android:id="@+id/userSelectScrollView"
-        android:layout_width="409dp"
-        android:layout_height="550dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="408dp"
+        android:layout_height="451dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginBottom="64dp"
         android:fillViewport="false"
         android:isScrollContainer="true"
         android:scrollbarStyle="insideOverlay"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/chalkBackgroundImageView"
         app:layout_constraintTop_toBottomOf="@+id/woodHeaderImageView2">
