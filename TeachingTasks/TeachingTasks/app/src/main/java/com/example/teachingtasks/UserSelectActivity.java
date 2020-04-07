@@ -10,7 +10,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +19,7 @@ public class UserSelectActivity extends AppCompatActivity {
     Button editButton, searchButton;
     TextView userOptions[] = new TextView[20];
     int count = 0;
-    DatabaseHelper mydb;
+    RegisterUserDBHelper mydb;
     String[] users;
     TextView[] selectedUsers = new TextView[20];
     TextView temp;  //Temp TextView to add userOptions to screen
@@ -30,7 +29,7 @@ public class UserSelectActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_select);
-        mydb = new DatabaseHelper(this);
+        mydb = new RegisterUserDBHelper(this);
 
         //Initial variables with UI components
         editButton = (Button) findViewById(R.id.addUsersButton);
@@ -42,7 +41,7 @@ public class UserSelectActivity extends AppCompatActivity {
         //If no users found, Intent to RegisterUser Activity
         //Else, user(s) found, userOptions initialized, display userOptions
         if(users.length < 1) {
-            Intent createUserIntent = new Intent(UserSelectActivity.this, MainActivity.class);
+            Intent createUserIntent = new Intent(UserSelectActivity.this, RegisterUserActivity.class);
             startActivity(createUserIntent);
         }
 
@@ -86,7 +85,7 @@ public class UserSelectActivity extends AppCompatActivity {
     private void addUserOption(){
         //Set all of the stuff back to normal and then go to Register User
 
-        Intent registerUserIntent = new Intent(UserSelectActivity.this,MainActivity.class);
+        Intent registerUserIntent = new Intent(UserSelectActivity.this, RegisterUserActivity.class);
         UserSelectActivity.this.startActivity(registerUserIntent);
     }
 

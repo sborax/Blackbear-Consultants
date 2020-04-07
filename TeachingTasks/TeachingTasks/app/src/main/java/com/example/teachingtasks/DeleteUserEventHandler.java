@@ -2,12 +2,11 @@ package com.example.teachingtasks;
 
 import android.widget.LinearLayout;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.TextView;
 
 public class DeleteUserEventHandler {
 
-    public void onClick(UserSelectActivity userSelectActivity, DatabaseHelper mydb, TextView[] selectedUsers, LinearLayout constraintLayout, View v) {
+    public void onClick(UserSelectActivity userSelectActivity, RegisterUserDBHelper mydb, TextView[] selectedUsers, LinearLayout constraintLayout, View v) {
 
 
         String [] temp = mydb.getAllUsers();
