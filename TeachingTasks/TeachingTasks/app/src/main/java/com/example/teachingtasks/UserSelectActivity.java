@@ -33,16 +33,11 @@ public class UserSelectActivity extends AppCompatActivity {
         editButton = (Button) findViewById(R.id.addUsersButton);
         searchButton = (Button) findViewById(R.id.searchButton);
 
-
         this.initializeUserOptions();
-        //If no users found, Intent to CreateUser Activity
-        //Else, user(s) found, userOptions initialized, display userOptions
 
-        /*
-        FIX THE IF STATEMENT AFTER TESTING IS DONE
-        COUNT < 1
-         */
-        if(count < 0) {
+        //If no users found, Intent to RegisterUser Activity
+        //Else, user(s) found, userOptions initialized, display userOptions
+        if(users.length < 1) {
             Intent createUserIntent = new Intent(UserSelectActivity.this, MainActivity.class);
             startActivity(createUserIntent);
         }
@@ -93,7 +88,7 @@ public class UserSelectActivity extends AppCompatActivity {
 
         for(int k = 0; k < users.length; k++){
 
-            TextView temp = new TextView(this);
+            TextView temp = new TextView(UserSelectActivity.this);
 
             LinearLayout constraintLayout = (LinearLayout) findViewById(R.id.userSelectionLayout);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -102,7 +97,7 @@ public class UserSelectActivity extends AppCompatActivity {
             temp.setText(users[k]);
             temp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 48);
             temp.setTextColor(0xFFFFFFFF);
-            temp.setTypeface(Typeface.create("casual", Typeface.BOLD), Typeface.BOLD);
+            temp.setTypeface(Typeface.create("casual", Typeface.BOLD));
             temp.setOnClickListener(new View.OnClickListener(){
 
                 @Override
