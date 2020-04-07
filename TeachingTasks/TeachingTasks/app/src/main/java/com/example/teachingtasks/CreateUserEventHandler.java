@@ -44,7 +44,7 @@ public class CreateUserEventHandler {
         }
         if(invalidPass){
             Toast.makeText(mainActivity, "Password must contain one Upper Case Letter, Number, and Special" + "" +
-                                              "Character (@,$,!,?,...)",
+                                              "Character (@,$,!,?,...)" + " and a length of eight.",
                     Toast.LENGTH_LONG).show();
         }
 
