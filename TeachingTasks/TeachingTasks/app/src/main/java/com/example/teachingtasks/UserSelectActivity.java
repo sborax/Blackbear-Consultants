@@ -9,6 +9,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,12 +18,12 @@ public class UserSelectActivity extends AppCompatActivity {
 
     //userOptions limits each device to 20 users
     Button editButton, searchButton;
-    TextView userOptions[] = new TextView[20];
+    EditText userOptions[] = new EditText[20];
     int count = 0;
     RegisterUserDBHelper mydb;
     String[] users;
-    TextView[] selectedUsers = new TextView[20];
-    TextView temp;  //Temp TextView to add userOptions to screen
+    EditText[] selectedUsers = new EditText[20];
+    EditText temp;  //Temp TextView to add userOptions to screen
     LinearLayout constraintLayout;
 
     @Override
@@ -114,7 +115,7 @@ public class UserSelectActivity extends AppCompatActivity {
                 return;
             }
 
-            temp = new TextView(UserSelectActivity.this);
+            temp = new EditText(UserSelectActivity.this);
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             params.gravity = Gravity.CENTER;
@@ -124,6 +125,7 @@ public class UserSelectActivity extends AppCompatActivity {
             temp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 48);
             temp.setTextColor(0xFFFFFFFF);
             temp.setTypeface(Typeface.create("casual", Typeface.BOLD));
+            temp.setInputType(0);
             temp.setOnClickListener(new View.OnClickListener(){
 
                 @Override
