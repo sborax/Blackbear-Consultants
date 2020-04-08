@@ -171,6 +171,13 @@ public class UserSelectActivity extends AppCompatActivity {
             if(selectedUsers[j] == null){
 
                 selectedUsers[j] = userOptions.get(v.getId());
+                selectedUsers[j].setTextSize(52);
+                selectedUsers[j].setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        v.requestFocus();
+                    }
+                });
                 return;
             }
         }
