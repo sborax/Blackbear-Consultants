@@ -59,7 +59,7 @@
         app:srcCompat="@drawable/chalk" />
 
     <Button
-        android:id="@+id/addUsersButton"
+        android:id="@+id/cancelButton"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="124dp"
         android:layout_height="51dp"
@@ -99,9 +99,9 @@
 
     <ScrollView
         android:id="@+id/userSelectScrollView"
-        android:layout_width="408dp"
-        android:layout_height="451dp"
-        android:layout_marginTop="64dp"
+        android:layout_width="409dp"
+        android:layout_height="442dp"
+        android:layout_marginTop="72dp"
         android:layout_marginBottom="64dp"
         android:fillViewport="false"
         android:isScrollContainer="true"

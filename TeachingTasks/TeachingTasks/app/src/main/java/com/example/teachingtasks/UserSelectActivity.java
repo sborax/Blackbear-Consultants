@@ -32,7 +32,7 @@ public class UserSelectActivity extends AppCompatActivity {
         mydb = new RegisterUserDBHelper(this);
 
         //Initial variables with UI components
-        editButton = (Button) findViewById(R.id.addUsersButton);
+        editButton = (Button) findViewById(R.id.cancelButton);
         searchButton = (Button) findViewById(R.id.searchButton);
         constraintLayout = (LinearLayout) findViewById(R.id.userSelectionLayout);
 

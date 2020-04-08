@@ -1,3 +1,5 @@
+package com.example.teachingtasks;
+
 import android.widget.EditText;
 
 import com.example.teachingtasks.RegisterUserDBHelper;
