@@ -9,7 +9,7 @@
 
     <ImageView
         android:id="@+id/woodHeaderImageView2"
-        android:layout_width="412dp"
+        android:layout_width="0dp"
         android:layout_height="125dp"
         android:layout_marginBottom="630dp"
         android:adjustViewBounds="true"
@@ -28,8 +28,12 @@
 
     <ImageView
         android:id="@+id/woodHeaderImageView"
-        android:layout_width="395dp"
+        android:layout_width="0dp"
         android:layout_height="104dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:adjustViewBounds="true"
         android:contentDescription="@string/innerheader"
         android:cropToPadding="true"
@@ -44,7 +48,7 @@
 
     <ImageView
         android:id="@+id/chalkBackgroundImageView"
-        android:layout_width="413dp"
+        android:layout_width="0dp"
         android:layout_height="618dp"
         android:adjustViewBounds="true"
         android:contentDescription="@string/background"
@@ -99,10 +103,10 @@
 
     <ScrollView
         android:id="@+id/userSelectScrollView"
-        android:layout_width="409dp"
-        android:layout_height="442dp"
-        android:layout_marginTop="72dp"
-        android:layout_marginBottom="64dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="8dp"
         android:fillViewport="false"
         android:isScrollContainer="true"
         android:scrollbarStyle="insideOverlay"
