@@ -132,6 +132,7 @@
         android:layout_width="287dp"
         android:layout_height="72dp"
         android:layout_marginTop="96dp"
+        android:layout_marginBottom="24dp"
         android:fontFamily="casual"
         android:gravity="center_horizontal|center_vertical"
         android:text="tempUser"

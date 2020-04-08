@@ -49,7 +49,6 @@ public class RegisterUserActivity extends AppCompatActivity implements View.OnCl
             }
         });
 
-
         //Set EventHandlers
         createButton.setOnClickListener(this);
         showPass.setOnClickListener(this);

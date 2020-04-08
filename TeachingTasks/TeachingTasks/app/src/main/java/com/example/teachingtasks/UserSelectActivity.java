@@ -8,25 +8,26 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import java.util.HashMap;
+import java.util.Random;
 
 public class UserSelectActivity extends AppCompatActivity {
 
     //userOptions limits each device to 20 users
     Button editButton, searchButton;
-    EditText userOptions[] = new EditText[20];
+    HashMap<Integer, EditText> userOptions = new HashMap<Integer, EditText>();
     int count = 0;
     RegisterUserDBHelper mydb;
     String[] users;
     EditText[] selectedUsers = new EditText[20];
-    EditText temp;  //Temp TextView to add userOptions to screen
+    EditText temp;                                    //Temp TextView to add userOptions to screen
     LinearLayout constraintLayout;
+    UserSelectActivity userSelectActivity = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,10 +100,10 @@ public class UserSelectActivity extends AppCompatActivity {
         searchButton.setText("Delete");
 
         //Create the Select button
-        for(int k = 0; k < userOptions.length; k++){
+//        for(int k = 0; k < userOptions.length; k++){
             //Add the selection check bubble to each username
 
-        }
+//        }
     }
 
     private void initializeUserOptions() {
@@ -117,31 +118,45 @@ public class UserSelectActivity extends AppCompatActivity {
                 return;
             }
 
-            temp = new EditText(UserSelectActivity.this);
+//            temp = new EditText(userSelectActivity);
+//
+//            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+//            params.gravity = Gravity.CENTER;
+//            temp.setLayoutParams(params);
+//            temp.setId(R.id.selectUser + m);
+//            temp.setText(users[m]);
+//            temp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 48);
+//            temp.setTextColor(0xFFFFFFFF);
+//            temp.setTypeface(Typeface.create("casual", Typeface.BOLD));
+//            temp.setInputType(InputType.TYPE_NULL);
+//            temp.setOnClickListener(new View.OnClickListener(){
+
+            Random rand = new Random();
+            int id = rand.nextInt(9999999);
+
+            userOptions.put(id, new EditText(userSelectActivity));
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             params.gravity = Gravity.CENTER;
-            temp.setLayoutParams(params);
-            temp.setId(R.id.selectUser + m);
-            temp.setText(users[m]);
-            temp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 48);
-            temp.setTextColor(0xFFFFFFFF);
-            temp.setTypeface(Typeface.create("casual", Typeface.BOLD));
-            temp.setInputType(InputType.TYPE_NULL);
-            temp.setOnClickListener(new View.OnClickListener(){
+            userOptions.get(id).setLayoutParams(params);
+            userOptions.get(id).setId(id);
+            userOptions.get(id).setText(users[m]);
+            userOptions.get(id).setTextSize(TypedValue.COMPLEX_UNIT_SP, 48);
+            userOptions.get(id).setTextColor(0xFFFFFFFF);
+            userOptions.get(id).setTypeface(Typeface.create("casual", Typeface.BOLD));
+            userOptions.get(id).setInputType(InputType.TYPE_NULL);
+            userOptions.get(id).setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
 
-                    Toast.makeText(UserSelectActivity.this, "InProgress: " + v.getId(),Toast.LENGTH_SHORT).show();
-                    System.out.println("InProgress: " + v.getId());
-                    handleUserOptionClick(v, 0);
+                    System.out.println("Temp Values: " + userOptions.get(v.getId()).getText().toString());
+                    EditText tempUser = (EditText) findViewById()
+                    new UserOptionEventHandler().onClick(userSelectActivity);
                 }
             });
 
-            constraintLayout.addView(temp, m);
-            userOptions[m] = temp;
-            System.out.println(userOptions[m].getId());
+            constraintLayout.addView(userOptions.get(id), m);
         }
     }
 

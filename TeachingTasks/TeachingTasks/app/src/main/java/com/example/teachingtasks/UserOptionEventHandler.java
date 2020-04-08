@@ -1,5 +1,6 @@
 package com.example.teachingtasks;
 
+import android.content.Intent;
 import android.widget.EditText;
 
 import com.example.teachingtasks.RegisterUserDBHelper;
@@ -7,9 +8,9 @@ import com.example.teachingtasks.RegisterUserActivity;
 
 public class UserOptionEventHandler {
 
-    public void onClick(RegisterUserActivity registerUserActivity, RegisterUserDBHelper mydb, EditText newUsername, EditText newPassword) {
+    public void onClick(UserSelectActivity userSelectActivity) {
 
-//        Intent userSelectIntent = new Intent(UserSelectActivity, UserSelectActivity.class);
-//        mainActivity.startActivity(userSelectIntent);
+        Intent userLoginIntent = new Intent(userSelectActivity.getBaseContext(), LoginActivity.class);
+        userSelectActivity.startActivity(userLoginIntent);
     }
 }
