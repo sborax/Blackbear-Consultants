@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -150,9 +151,7 @@ public class UserSelectActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    System.out.println("Temp Values: " + userOptions.get(v.getId()).getText().toString());
-                    EditText tempUser = (EditText) findViewById()
-                    new UserOptionEventHandler().onClick(userSelectActivity);
+                    new UserOptionEventHandler().onClick(userSelectActivity, userOptions.get(v.getId()).getText().toString());
                 }
             });
 
