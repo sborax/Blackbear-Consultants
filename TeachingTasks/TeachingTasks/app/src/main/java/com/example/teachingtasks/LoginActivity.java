@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText inputPassword;
     TextView username;
     Button cancelButton, loginButton;
+    CheckBox showPass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         inputPassword = (EditText) findViewById(R.id.newPasswordEditText);
         cancelButton = (Button) findViewById(R.id.cancelButton);
         loginButton = (Button) findViewById(R.id.loginButton);
+        showPass = (CheckBox) findViewById(R.id.showPasswordCheckBox);
 
         //Initialize username text to the appropriate username
         username.setText(getIntent().getStringExtra("EXTRA_USER"));
@@ -45,6 +48,18 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         /*
+        Show Password CheckBox
+        --- EventHandler ---
+         */
+        showPass.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                new ShowPassEventHandler().onCheck(showPass, inputPassword);
+            }
+        });
+
+        /*
         Login Button
         --- Event Handler ---
          */
@@ -52,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                new LoginEventHandler().onClick(username.getText().toString(), inputPassword.getText().toString());
+                new LoginEventHandler().onClick(LoginActivity.this, username.getText().toString(), inputPassword.getText().toString());
             }
         });
     }
