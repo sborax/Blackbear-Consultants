@@ -56,8 +56,6 @@ public class RegisterUserDBHelper extends SQLiteOpenHelper {
 
         String selection = COL_USERNAME + " LIKE ? ";
 
-        System.out.println("Removing: " + user);
-
         String[] selectionArgs = { user };
 
         int temp = db.delete(TABLE_NAME, selection, selectionArgs);

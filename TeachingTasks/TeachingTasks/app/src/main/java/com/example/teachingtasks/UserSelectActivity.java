@@ -8,11 +8,13 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -138,10 +140,10 @@ public class UserSelectActivity extends AppCompatActivity {
             User Options
             --- EventHandler ---
              */
-            userOptions.get(id).setOnClickListener(new View.OnClickListener() {
+            userOptions.get(id).setOnTouchListener(new View.OnTouchListener() {
 
                 @Override
-                public void onClick(View v) {
+                public boolean onTouch(View v, MotionEvent event) {
 
                     switch (editButton.getText().toString()) {
                         case "Add":
@@ -151,6 +153,7 @@ public class UserSelectActivity extends AppCompatActivity {
                             new UserOptionEventHandler().onClick(userSelectActivity, userOptions.get(v.getId()).getText().toString());
                             break;
                     }
+                    return false;
                 }
             });
 
