@@ -33,7 +33,7 @@ public class RegisterUserActivity extends AppCompatActivity implements View.OnCl
         newUsername = (EditText) findViewById(R.id.newUserNameEditText);
         newPassword = (EditText) findViewById(R.id.newPasswordEditText);
         showPass = (CheckBox) findViewById(R.id.showPasswordCheckBox);
-        createButton = (Button) findViewById(R.id.createUserButton);
+        createButton = (Button) findViewById(R.id.loginButton);
 
         //Easy quick fix to making login default screen
         //Must change the classes around
@@ -60,7 +60,7 @@ public class RegisterUserActivity extends AppCompatActivity implements View.OnCl
         //Checks the ID and calls the appropriate EventHandler
         switch (v.getId()){
             case R.id.showPasswordCheckBox: new ShowPassEventHandler().onCheck(showPass, newPassword); break;
-            case R.id.createUserButton: new CreateUserEventHandler().onClick(this, mydb, newUsername, newPassword); break;
+            case R.id.loginButton: new CreateUserEventHandler().onClick(this, mydb, newUsername, newPassword); break;
             default: return;
         }
     }

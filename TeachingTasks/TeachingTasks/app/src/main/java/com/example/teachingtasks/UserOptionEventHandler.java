@@ -7,9 +7,9 @@ import com.example.teachingtasks.RegisterUserActivity;
 
 public class UserOptionEventHandler {
 
-    public void onClick(RegisterUserActivity mainActivity, RegisterUserDBHelper mydb, EditText newUsername, EditText newPassword) {
+    public void onClick(RegisterUserActivity registerUserActivity, RegisterUserDBHelper mydb, EditText newUsername, EditText newPassword) {
 
-//        Intent userSelectIntent = new Intent(mainActivity.getBaseContext(), UserSelectActivity.class);
+//        Intent userSelectIntent = new Intent(UserSelectActivity, UserSelectActivity.class);
 //        mainActivity.startActivity(userSelectIntent);
     }
 }

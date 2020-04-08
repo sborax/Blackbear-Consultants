@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -125,16 +127,14 @@ public class UserSelectActivity extends AppCompatActivity {
             temp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 48);
             temp.setTextColor(0xFFFFFFFF);
             temp.setTypeface(Typeface.create("casual", Typeface.BOLD));
-            temp.setInputType(0);
+            temp.setInputType(InputType.TYPE_NULL);
             temp.setOnClickListener(new View.OnClickListener(){
 
                 @Override
                 public void onClick(View v) {
 
-                    int[] ids = new int[20];
-                    for(int k = 0; k < userOptions.length; k++){
-                        ids[k] = userOptions[k].getId() - R.id.selectUser;
-                    }
+                    Toast.makeText(UserSelectActivity.this, "InProgress: " + v.getId(),Toast.LENGTH_SHORT).show();
+                    System.out.println("InProgress: " + v.getId());
                     handleUserOptionClick(v, 0);
                 }
             });
@@ -148,7 +148,6 @@ public class UserSelectActivity extends AppCompatActivity {
     private void handleUserOptionClick(View v, int id) {
         for (int k = 0; k < selectedUsers.length; k++){
             if(selectedUsers[k] == null){
-                Toast.makeText(UserSelectActivity.this, "InProgress: " + v.findViewById(id),Toast.LENGTH_SHORT).show();
                 selectedUsers[k] = v.findViewById(id-k);
                 return;
             }
