@@ -60,12 +60,8 @@ public class RegisterUserDBHelper extends SQLiteOpenHelper {
 
         String[] selectionArgs = { user };
 
-        db.delete(TABLE_NAME, selection, selectionArgs);
+        int temp = db.delete(TABLE_NAME, selection, selectionArgs);
 
-        Cursor res = db.rawQuery("SELECT * FROM " + TABLE_NAME, selectionArgs);
-        res.moveToFirst();
-        System.out.println("Raw Query: " + res.getString(res.getColumnIndex(COL_USERNAME)));
-        System.out.println("Raw Query 2: " + res.toString());
         return;
     }
 

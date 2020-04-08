@@ -116,24 +116,14 @@ public class UserSelectActivity extends AppCompatActivity {
                 return;
             }
 
-//            temp = new EditText(userSelectActivity);
-//
-//            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-//            params.gravity = Gravity.CENTER;
-//            temp.setLayoutParams(params);
-//            temp.setId(R.id.selectUser + m);
-//            temp.setText(users[m]);
-//            temp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 48);
-//            temp.setTextColor(0xFFFFFFFF);
-//            temp.setTypeface(Typeface.create("casual", Typeface.BOLD));
-//            temp.setInputType(InputType.TYPE_NULL);
-//            temp.setOnClickListener(new View.OnClickListener(){
-
+            //Create a Unique ID for each userOption
             Random rand = new Random();
             int id = rand.nextInt(9999999);
 
+            //Add the user text to userOption
             userOptions.put(id, new EditText(userSelectActivity));
 
+            //Add attributes to the user text
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             params.gravity = Gravity.CENTER;
             userOptions.get(id).setLayoutParams(params);
@@ -143,26 +133,43 @@ public class UserSelectActivity extends AppCompatActivity {
             userOptions.get(id).setTextColor(0xFFFFFFFF);
             userOptions.get(id).setTypeface(Typeface.create("casual", Typeface.BOLD));
             userOptions.get(id).setInputType(InputType.TYPE_NULL);
+
+            /*
+            User Options
+            --- EventHandler ---
+             */
             userOptions.get(id).setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
 
-                    new UserOptionEventHandler().onClick(userSelectActivity, userOptions.get(v.getId()).getText().toString());
+                    switch (editButton.getText().toString()) {
+                        case "Add":
+                            handleUserOptionClick(userOptions.get(v.getId()));
+                            break;
+                        case "Edit":
+                            new UserOptionEventHandler().onClick(userSelectActivity, userOptions.get(v.getId()).getText().toString());
+                            break;
+                    }
                 }
             });
 
+            //Add user text to the view
             constraintLayout.addView(userOptions.get(id), m);
         }
     }
 
-    private void handleUserOptionClick(View v, int id) {
-        for (int k = 0; k < selectedUsers.length; k++){
-            if(selectedUsers[k] == null){
-                selectedUsers[k] = v.findViewById(id-k);
+    private void handleUserOptionClick(View v) {
+        //Add user to selectedUsers
+
+        for(int j = 0; j < selectedUsers.length; j++){
+
+            //If empty slot found, insert user into selectedUsers, return
+            if(selectedUsers[j] == null){
+
+                selectedUsers[j] = userOptions.get(v.getId());
                 return;
             }
         }
     }
-
 }
