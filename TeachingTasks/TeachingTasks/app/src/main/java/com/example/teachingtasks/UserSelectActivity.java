@@ -19,14 +19,11 @@ import java.util.Random;
 
 public class UserSelectActivity extends AppCompatActivity {
 
-    //userOptions limits each device to 20 users
     Button editButton, searchButton;
     HashMap<Integer, EditText> userOptions = new HashMap<Integer, EditText>();
-    int count = 0;
     RegisterUserDBHelper mydb;
     String[] users;
     EditText[] selectedUsers = new EditText[20];
-    EditText temp;                                    //Temp TextView to add userOptions to screen
     LinearLayout constraintLayout;
     UserSelectActivity userSelectActivity = this;
 
