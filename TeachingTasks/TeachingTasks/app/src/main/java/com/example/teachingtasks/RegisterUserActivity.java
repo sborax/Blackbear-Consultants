@@ -64,4 +64,10 @@ public class RegisterUserActivity extends AppCompatActivity implements View.OnCl
             default: return;
         }
     }
+
+    //When test button is clicked
+    public void testButton(View v) {
+        Intent testIntent = new Intent(RegisterUserActivity.this, StatisticsActivity.class);
+        RegisterUserActivity.this.startActivity(testIntent);
+    }
 }
