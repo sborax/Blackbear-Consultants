@@ -6,8 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.Nullable;
-
 public class RegisterUserDBHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "database";
@@ -69,7 +67,6 @@ public class RegisterUserDBHelper extends SQLiteOpenHelper {
 
         //Call Readable
         SQLiteDatabase db = this.getReadableDatabase();
-
         String[] users = new String[20];
         Cursor res = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
         res.moveToFirst();
