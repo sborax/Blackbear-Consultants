@@ -37,7 +37,7 @@ public class RegisterUserActivity extends AppCompatActivity implements View.OnCl
 
         //Easy quick fix to making login default screen
         //Must change the default main class to UserSelectActivity
-        Button cancelButton = (Button) findViewById(R.id.cancelButton);
+        Button cancelButton = (Button) findViewById(R.id.editButton);
         cancelButton.setOnClickListener(new View.OnClickListener(){
 
             @Override

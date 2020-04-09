@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -26,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
         //Initialize variables with UI components
         username = (TextView) findViewById(R.id.userNameText);
         inputPassword = (EditText) findViewById(R.id.newPasswordEditText);
-        cancelButton = (Button) findViewById(R.id.cancelButton);
+        cancelButton = (Button) findViewById(R.id.editButton);
         loginButton = (Button) findViewById(R.id.loginButton);
         showPass = (CheckBox) findViewById(R.id.showPasswordCheckBox);
 
