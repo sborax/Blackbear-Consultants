@@ -102,13 +102,10 @@ public class UserSelectActivity extends AppCompatActivity {
                     }
                 });
                 selectedUsers[k].clearFocus();
+                selectedUsers[k].setTextSize(48);
             }
         }
         selectedUsers = new EditText[20];
-
-
-        //Reset the screen... I think...
-        v.invalidate();
     }
 
     /*
