@@ -33,13 +33,12 @@ public class RegisterUserActivity extends AppCompatActivity implements View.OnCl
         newUsername = (EditText) findViewById(R.id.newUserNameEditText);
         newPassword = (EditText) findViewById(R.id.newPasswordEditText);
         showPass = (CheckBox) findViewById(R.id.showPasswordCheckBox);
-        createButton = (Button) findViewById(R.id.createUserButton);
+        createButton = (Button) findViewById(R.id.loginButton);
 
         //Easy quick fix to making login default screen
-        //Must change the classes around
-        //Rename this class to RegisterUserActivity
-        Button addButton = (Button) findViewById(R.id.cancelButton);
-        addButton.setOnClickListener(new View.OnClickListener(){
+        //Must change the default main class to UserSelectActivity
+        Button cancelButton = (Button) findViewById(R.id.editButton);
+        cancelButton.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
@@ -48,7 +47,6 @@ public class RegisterUserActivity extends AppCompatActivity implements View.OnCl
                 RegisterUserActivity.this.startActivity(selectUserIntent);
             }
         });
-
 
         //Set EventHandlers
         createButton.setOnClickListener(this);
@@ -60,7 +58,7 @@ public class RegisterUserActivity extends AppCompatActivity implements View.OnCl
         //Checks the ID and calls the appropriate EventHandler
         switch (v.getId()){
             case R.id.showPasswordCheckBox: new ShowPassEventHandler().onCheck(showPass, newPassword); break;
-            case R.id.createUserButton: new CreateUserEventHandler().onClick(this, mydb, newUsername, newPassword); break;
+            case R.id.loginButton: new CreateUserEventHandler().onClick(this, mydb, newUsername, newPassword); break;
             default: return;
         }
     }

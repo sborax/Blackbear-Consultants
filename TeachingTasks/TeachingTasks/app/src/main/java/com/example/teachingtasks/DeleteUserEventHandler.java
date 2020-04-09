@@ -15,7 +15,7 @@ public class DeleteUserEventHandler {
             if(selectedUsers[k] == null){
                 return;
             }
-            System.out.println("Delete onClick: " + selectedUsers[k].getText());
+
             mydb.deleteUser(selectedUsers[k].getText().toString());
             constraintLayout.removeView(v.findViewById(selectedUsers[k].getId()));
         }

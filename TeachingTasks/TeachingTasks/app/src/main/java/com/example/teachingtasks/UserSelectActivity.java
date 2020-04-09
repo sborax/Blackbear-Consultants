@@ -1,30 +1,34 @@
 package com.example.teachingtasks;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.ScrollView;
+
+import java.util.HashMap;
+import java.util.Random;
 
 public class UserSelectActivity extends AppCompatActivity {
 
-    //userOptions limits each device to 20 users
-    Button editButton, searchButton;
-    EditText userOptions[] = new EditText[20];
-    int count = 0;
+    Button cancelButton, editButton, searchButton;
+    HashMap<Integer, EditText> userOptions = new HashMap<Integer, EditText>();
     RegisterUserDBHelper mydb;
     String[] users;
     EditText[] selectedUsers = new EditText[20];
-    EditText temp;  //Temp TextView to add userOptions to screen
-    LinearLayout constraintLayout;
+    LinearLayout linearLayout;
+    ScrollView userSelectScrollView;
+    UserSelectActivity userSelectActivity = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +37,13 @@ public class UserSelectActivity extends AppCompatActivity {
         mydb = new RegisterUserDBHelper(this);
 
         //Initial variables with UI components
-        editButton = (Button) findViewById(R.id.cancelButton);
+        editButton = (Button) findViewById(R.id.editButton);
         searchButton = (Button) findViewById(R.id.searchButton);
-        constraintLayout = (LinearLayout) findViewById(R.id.userSelectionLayout);
+        cancelButton = (Button) findViewById(R.id.cancelButton);
+        linearLayout = (LinearLayout) findViewById(R.id.userSelectionLayout);
+        userSelectScrollView = (ScrollView) findViewById(R.id.userSelectScrollView);
+
+        cancelButton.setVisibility(View.INVISIBLE);
 
         this.initializeUserOptions();
 
@@ -56,7 +64,7 @@ public class UserSelectActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 switch (searchButton.getText().toString()){
-                    case "Delete": new DeleteUserEventHandler().onClick(UserSelectActivity.this, mydb, selectedUsers, constraintLayout, v); break;
+                    case "Delete": new DeleteUserEventHandler().onClick(UserSelectActivity.this, mydb, selectedUsers, linearLayout, v); break;
                     //case "": new SearchUsersEventHandler().onClick(mydb, searchButton.getTextORSOMETHING().toString()); break;
                 }
             }
@@ -97,10 +105,10 @@ public class UserSelectActivity extends AppCompatActivity {
         searchButton.setText("Delete");
 
         //Create the Select button
-        for(int k = 0; k < userOptions.length; k++){
+//        for(int k = 0; k < userOptions.length; k++){
             //Add the selection check bubble to each username
 
-        }
+//        }
     }
 
     private void initializeUserOptions() {
@@ -115,44 +123,68 @@ public class UserSelectActivity extends AppCompatActivity {
                 return;
             }
 
-            temp = new EditText(UserSelectActivity.this);
+            //Create a Unique ID for each userOption
+            Random rand = new Random();
+            int id = rand.nextInt(9999999);
 
+            //Add the user text to userOption
+            userOptions.put(id, new EditText(userSelectActivity));
+
+            //Add attributes to the user text
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             params.gravity = Gravity.CENTER;
-            temp.setLayoutParams(params);
-            temp.setId(R.id.selectUser + m);
-            temp.setText(users[m]);
-            temp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 48);
-            temp.setTextColor(0xFFFFFFFF);
-            temp.setTypeface(Typeface.create("casual", Typeface.BOLD));
-            temp.setInputType(0);
-            temp.setOnClickListener(new View.OnClickListener(){
+            userOptions.get(id).setLayoutParams(params);
+            userOptions.get(id).setId(id);
+            userOptions.get(id).setText(users[m]);
+            userOptions.get(id).setTextSize(TypedValue.COMPLEX_UNIT_SP, 48);
+            userOptions.get(id).setTextColor(0xFFFFFFFF);
+            userOptions.get(id).setTypeface(Typeface.create("casual", Typeface.BOLD));
+            userOptions.get(id).setInputType(InputType.TYPE_NULL);
+
+            /*
+            User Options
+            --- EventHandler ---
+             */
+            userOptions.get(id).setOnTouchListener(new View.OnTouchListener() {
 
                 @Override
-                public void onClick(View v) {
+                public boolean onTouch(View v, MotionEvent event) {
 
-                    int[] ids = new int[20];
-                    for(int k = 0; k < userOptions.length; k++){
-                        ids[k] = userOptions[k].getId() - R.id.selectUser;
+                    switch (editButton.getText().toString()) {
+                        case "Add":
+                            handleUserOptionClick(userOptions.get(v.getId()));
+                            break;
+                        case "Edit":
+                            new UserOptionEventHandler().onClick(userSelectActivity, userOptions.get(v.getId()).getText().toString());
+                            break;
                     }
-                    handleUserOptionClick(v, 0);
+                    return false;
                 }
             });
 
-            constraintLayout.addView(temp, m);
-            userOptions[m] = temp;
-            System.out.println(userOptions[m].getId());
+            //Add user text to the view
+            linearLayout.addView(userOptions.get(id), m);
         }
     }
 
-    private void handleUserOptionClick(View v, int id) {
-        for (int k = 0; k < selectedUsers.length; k++){
-            if(selectedUsers[k] == null){
-                Toast.makeText(UserSelectActivity.this, "InProgress: " + v.findViewById(id),Toast.LENGTH_SHORT).show();
-                selectedUsers[k] = v.findViewById(id-k);
+    private void handleUserOptionClick(View v) {
+        //Add user to selectedUsers
+
+        for(int j = 0; j < selectedUsers.length; j++){
+
+            //If empty slot found, insert user into selectedUsers, return
+            if(selectedUsers[j] == null){
+
+                selectedUsers[j] = userOptions.get(v.getId());
+                selectedUsers[j].setTextSize(52);
+                selectedUsers[j].setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        v.requestFocus();
+                    }
+                });
                 return;
             }
         }
     }
-
 }
