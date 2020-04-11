@@ -68,4 +68,10 @@ public class RegisterUserActivity extends AppCompatActivity implements View.OnCl
         Intent testIntent = new Intent(RegisterUserActivity.this, StatisticsActivity.class);
         RegisterUserActivity.this.startActivity(testIntent);
     }
+
+    //When game selection button is clicked
+    public void selectionButton(View v) {
+        Intent gameSelectIntent = new Intent(this, SelectionActivity.class);
+        startActivity(gameSelectIntent);
+    }
 }
