@@ -5,11 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteStatement;
 
-import androidx.annotation.Nullable;
-
-public class StatisticsDBHelper extends SQLiteOpenHelper {
+public class StatisticsDBHelper extends SQLiteOpenHelper {  //TODO: integrate users with RegisterUserDBHelper
 
     public static final String DATABASE_NAME = "database";
     public static final String TABLE_NAME = "statistics";
@@ -30,7 +27,7 @@ public class StatisticsDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" + TABLE_ID + " INTEGER PRIMARY KEY," + COL_USERNAME + " TEXT, " + COL_SQUARE_CORRECT + " INTEGER, " + COL_SQUARE_INCORRECT + " INTEGER, " + COL_CIRCLE_CORRECT + " INTEGER, " + COL_CIRCLE_INCORRECT + " INTEGER)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" + TABLE_ID+ " INTEGER PRIMARY KEY," + COL_USERNAME + " TEXT, " + COL_SQUARE_CORRECT + " INTEGER, " + COL_SQUARE_INCORRECT + " INTEGER, " + COL_CIRCLE_CORRECT + " INTEGER, " + COL_CIRCLE_INCORRECT + " INTEGER)");
     }
 
     @Override
@@ -131,8 +128,9 @@ public class StatisticsDBHelper extends SQLiteOpenHelper {
     public int getValue(String user, String col) {
         //returns value in col
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.query(TABLE_NAME, new String[] {COL_USERNAME, col}, "? = ?", new String[] {COL_USERNAME, user}, null, null, null);
-        int ret = res.getInt(res.getColumnIndex(col));  //FIXME: android.database.CursorIndexOutOfBoundsException: Index -1 requested, with a size of 0
+        Cursor res = db.query(TABLE_NAME, null, "\"username\" = ?", new String[] {user}, null, null, null, "1");
+        res.moveToFirst();
+        int ret = res.getInt(res.getColumnIndex(col));
         return ret;
     }
 }

@@ -41,7 +41,8 @@ public class StatisticsActivity extends AppCompatActivity {
 
         db = new StatisticsDBHelper(this);
 
-        //DB test
+        //test database entries
+        db.deleteUser("test");
         db.addUser("test");
         db.increment("test", "correct_square");
         db.increment("test", "correct_square");
@@ -89,7 +90,7 @@ public class StatisticsActivity extends AppCompatActivity {
                 new PieEntry(circleIncorrect, "Incorrect")
         );
 
-        pieDataSetCircle = new PieDataSet(pieEntriesSquare, "CircleData");
+        pieDataSetCircle = new PieDataSet(pieEntriesCircle, "CircleData");
         pieDataSetCircle.setColors(new int[] { R.color.colorPieGreen, R.color.colorPieRed }, StatisticsActivity.this);
 
         pieDataCircle = new PieData(pieDataSetCircle);
@@ -98,7 +99,7 @@ public class StatisticsActivity extends AppCompatActivity {
         pieDataCircle.setValueFormatter(new MyValueFormatter());
 
         chartCircle.setData(pieDataCircle);
-        chartCircle.setCenterText("Square Identification");
+        chartCircle.setCenterText("Circle Identification");
         setChartStyle(chartCircle);
 
 
