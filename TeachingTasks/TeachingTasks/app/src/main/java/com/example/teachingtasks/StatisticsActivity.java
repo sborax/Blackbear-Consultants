@@ -12,11 +12,15 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 
+import com.example.teachingtasks.StatisticsDBHelper;
+
 import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
 
 public class StatisticsActivity extends AppCompatActivity {
+
+    StatisticsDBHelper db;
 
     PieChart chartTotal;
     PieDataSet pieDataSetTotal;
@@ -35,12 +39,31 @@ public class StatisticsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
 
+        db = new StatisticsDBHelper(this);
+
+        //DB test
+        db.addUser("test");
+        db.increment("test", "correct_square");
+        db.increment("test", "correct_square");
+        db.increment("test", "correct_square");
+        db.increment("test", "incorrect_square");
+        db.increment("test", "correct_circle");
+        db.increment("test", "incorrect_circle");
+
+        int squareCorrect = db.getValue("test", "correct_square");
+        int squareIncorrect = db.getValue("test", "incorrect_square");
+        int circleCorrect = db.getValue("test", "correct_circle");
+        int circleIncorrect = db.getValue("test", "incorrect_circle");
+        int totalCorrect = squareCorrect + circleCorrect;
+        int totalIncorrect = squareIncorrect + circleIncorrect;
+
+
         chartSquare = (PieChart) findViewById(R.id.chartSquare);
 
         //This will need to match the styling of whether we use Arrays, Lists, ArrayLists, etc.
         List<PieEntry> pieEntriesSquare = Arrays.asList(
-                new PieEntry(6, "Correct"),
-                new PieEntry(3, "Incorrect")
+                new PieEntry(squareCorrect, "Correct"),
+                new PieEntry(squareIncorrect, "Incorrect")
         );
 
         pieDataSetSquare = new PieDataSet(pieEntriesSquare, "SquareData");
@@ -62,8 +85,8 @@ public class StatisticsActivity extends AppCompatActivity {
 
         //This will need to match the styling of whether we use Arrays, Lists, ArrayLists, etc.
         List<PieEntry> pieEntriesCircle = Arrays.asList(
-                new PieEntry(6, "Correct"),
-                new PieEntry(7, "Incorrect")
+                new PieEntry(circleCorrect, "Correct"),
+                new PieEntry(circleIncorrect, "Incorrect")
         );
 
         pieDataSetCircle = new PieDataSet(pieEntriesSquare, "CircleData");
@@ -83,8 +106,8 @@ public class StatisticsActivity extends AppCompatActivity {
 
         //This will need to match the styling of whether we use Arrays, Lists, ArrayLists, etc.
         List<PieEntry> pieEntriesTotal = Arrays.asList(
-                new PieEntry(12, "Correct"),
-                new PieEntry(10, "Incorrect")
+                new PieEntry(totalCorrect, "Correct"),
+                new PieEntry(totalIncorrect, "Incorrect")
         );
 
         pieDataSetTotal = new PieDataSet(pieEntriesTotal, "");
@@ -121,8 +144,6 @@ public class StatisticsActivity extends AppCompatActivity {
 }
 
 class MyValueFormatter extends ValueFormatter {
-
-    private DecimalFormat mFormat;
 
     @Override
     public String getFormattedValue(float value) {
