@@ -1,5 +1,7 @@
 package com.example.teachingtasks;
 
+import android.content.Intent;
+
 public class LoginEventHandler {
     public void onClick(LoginActivity loginActivity, String username, String passwordAttempt) {
 
@@ -11,5 +13,9 @@ public class LoginEventHandler {
         RegisterUserDBHelper mydb = new RegisterUserDBHelper(loginActivity);
 
 
+
+        //Change this to GameActivity once it's ready
+        Intent statsIntent = new Intent(loginActivity.getBaseContext(), StatisticsActivity.class);
+        loginActivity.startActivity(statsIntent);
     }
 }

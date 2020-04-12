@@ -45,7 +45,7 @@ public class UserSelectActivity extends AppCompatActivity {
 
         //If no users found, Intent to RegisterUser Activity
         //Else, user(s) found, userOptions initialized, display userOptions
-        if(users.length < 1) {
+        if(users[0] == null) {
             Intent createUserIntent = new Intent(UserSelectActivity.this, RegisterUserActivity.class);
             startActivity(createUserIntent);
         }
@@ -77,7 +77,7 @@ public class UserSelectActivity extends AppCompatActivity {
                 //If clicked, swap the Text and do appropriate behavior.
                switch (editButton.getText().toString()){
                    case "Cancel": cancelUserEdit(v); break;
-                   case "Edit": editButton.setText("Cancel"); editUserOption(); break;
+                   case "Edit": editButton.setText("Cancel"); addButton.setText("Delete"); break;
                    default: return;
                }
             }
@@ -116,19 +116,6 @@ public class UserSelectActivity extends AppCompatActivity {
 
         Intent registerUserIntent = new Intent(UserSelectActivity.this, RegisterUserActivity.class);
         UserSelectActivity.this.startActivity(registerUserIntent);
-    }
-
-    private void editUserOption(){
-        //Create new userOption to add to the userOptions array
-        //Styles and formats new userOption
-
-        addButton.setText("Delete");
-
-        //Create the Select button
-//        for(int k = 0; k < userOptions.length; k++){
-            //Add the selection check bubble to each username
-
-//        }
     }
 
     private void initializeUserOptions() {
