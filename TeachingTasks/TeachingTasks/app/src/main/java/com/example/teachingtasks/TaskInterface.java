@@ -1,7 +1,10 @@
 package com.example.teachingtasks;
 
+import java.util.UUID;
+
 public interface TaskInterface {
 
+    public UUID getTaskID();
     public String getQuestion();
     public Object[] getTaskObjects();
     public String getQuestionObject();
