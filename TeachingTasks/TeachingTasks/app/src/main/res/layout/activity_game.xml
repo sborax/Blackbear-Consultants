@@ -114,5 +114,19 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="casual"
+        android:text="tempUser"
+        android:textColor="#FFFFFF"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/woodHeaderImageView"
+        app:layout_constraintEnd_toEndOf="@+id/woodHeaderImageView"
+        app:layout_constraintStart_toStartOf="@+id/woodHeaderImageView"
+        app:layout_constraintTop_toTopOf="@+id/woodHeaderImageView" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

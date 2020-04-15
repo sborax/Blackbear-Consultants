@@ -16,6 +16,7 @@ public class LoginEventHandler {
 
         //Change this to GameActivity once it's ready
         Intent gameIntent = new Intent(loginActivity.getBaseContext(), GameActivity.class);
+        gameIntent.putExtra("EXTRA_USER", username);
         loginActivity.startActivity(gameIntent);
     }
 }
