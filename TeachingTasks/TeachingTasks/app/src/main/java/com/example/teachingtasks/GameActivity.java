@@ -13,6 +13,7 @@ import android.widget.TextView;
 public class GameActivity extends AppCompatActivity {
 
     TextView username;
+    View square;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,28 @@ public class GameActivity extends AppCompatActivity {
 
         username = (TextView) findViewById(R.id.username);
         username.setText(getIntent().getStringExtra("EXTRA_USER"));
+
+        square = (View) findViewById(R.id.square);
+
+        /*
+        TEMP EVENT HANDLER
+         */
+
+        square.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                Intent taskSuccessIntent = new Intent(GameActivity.this, TaskSuccessActivity.class);
+                taskSuccessIntent.putExtra("EXTRA_USER", username.getText());
+                GameActivity.this.startActivity(taskSuccessIntent);
+
+                return false;
+            }
+        });
+
+
+
+
 
         Button taskNavButton = (Button) findViewById(R.id.taskNavButton);
         /*
