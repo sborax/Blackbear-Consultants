@@ -1,16 +1,17 @@
 package com.example.teachingtasks;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class Task implements TaskInterface {
 
     String question;
     String questionObject;
-    Object[] taskObjects;
+    ArrayList<T> taskObjects;         //Images for Custom Tasks, Text or Images for regular Tasks
     int mastery = 0;
     UUID taskID;
 
-    public Task(UUID id, String q, Object[] obj){
+    public Task(UUID id, String q, ArrayList<T> obj){
 
         this.taskID = id;
         this.question = q;
@@ -18,7 +19,7 @@ public class Task implements TaskInterface {
     }
 
     @Override
-    public Object[] getTaskObjects() {
+    public ArrayList<T> getTaskObjects() {
         return taskObjects;
     }
 
@@ -48,7 +49,7 @@ public class Task implements TaskInterface {
     }
 
     @Override
-    public void setTaskObjects(Object[] objects) {
+    public void setTaskObjects(ArrayList<T> objects) {
         this.taskObjects = objects;
     }
 

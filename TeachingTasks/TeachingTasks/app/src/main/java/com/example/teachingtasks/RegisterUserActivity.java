@@ -3,7 +3,6 @@ package com.example.teachingtasks;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import android.view.View;
@@ -11,13 +10,15 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+
 public class RegisterUserActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText newUsername, newPassword;
     CheckBox showPass;
     Button createButton;
     RegisterUserDBHelper mydb;
-    String[] users;
+    ArrayList<String> users;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

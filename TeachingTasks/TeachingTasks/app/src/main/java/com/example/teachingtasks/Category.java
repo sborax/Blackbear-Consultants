@@ -1,14 +1,14 @@
 package com.example.teachingtasks;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class Category implements CategoryInterface {
 
     String category;
-    Task[] tasks;
+    ArrayList<Task> tasks;
     int taskCount;
 
-    public Category(String newCatName, Task[] initTasks){
+    public Category(String newCatName, ArrayList<Task> initTasks){
 
         this.category = newCatName;
         this.tasks = initTasks;
@@ -21,7 +21,7 @@ public class Category implements CategoryInterface {
     }
 
     @Override
-    public Task[] getTasks() {
+    public ArrayList<Task> getTasks() {
         return this.tasks;
     }
 
@@ -32,28 +32,14 @@ public class Category implements CategoryInterface {
 
     @Override
     public void addTask(Task newTask) {
-
-        if(tasks.length == taskCount){
-            this.tasks = resize();
-        }
-
-        this.tasks[taskCount] = newTask;
-        taskCount++;
+        this.tasks.add(newTask);
     }
 
     @Override
     public void deleteTask(Task delTask) {
 
-        for(int k = 0; k < this.tasks.length; k++){
-            if (this.tasks[k].getTaskID().equals(delTask.getTaskID())){
-                this.tasks[k] = null;
-            }
+        if(this.tasks.contains(delTask)){
+            this.tasks.remove(delTask);
         }
-    }
-
-    private Task[] resize(){
-
-        Task[] temp = Arrays.copyOf(this.tasks, taskCount+1);
-        return temp;
     }
 }

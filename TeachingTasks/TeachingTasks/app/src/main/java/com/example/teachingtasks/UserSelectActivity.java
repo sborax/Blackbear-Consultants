@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -23,8 +24,8 @@ public class UserSelectActivity extends AppCompatActivity {
     Button cancelButton, editButton, addButton;
     HashMap<Integer, EditText> userOptions = new HashMap<Integer, EditText>();
     RegisterUserDBHelper mydb;
-    String[] users;
-    EditText[] selectedUsers = new EditText[20];
+    ArrayList<String> users;
+    ArrayList<EditText> selectedUsers = new ArrayList<EditText>();
     LinearLayout linearLayout;
     ScrollView userSelectScrollView;
     UserSelectActivity userSelectActivity = this;
@@ -45,7 +46,7 @@ public class UserSelectActivity extends AppCompatActivity {
 
         //If no users found, Intent to RegisterUser Activity
         //Else, user(s) found, userOptions initialized, display userOptions
-        if(users[0] == null) {
+        if(users.get(0) == null) {
             Intent createUserIntent = new Intent(UserSelectActivity.this, RegisterUserActivity.class);
             startActivity(createUserIntent);
         }
@@ -90,22 +91,22 @@ public class UserSelectActivity extends AppCompatActivity {
         editButton.setText("Edit");
         addButton.setText("Add");
 
-        for(int k = 0; k < selectedUsers.length; k++){
-            if(selectedUsers[k] == null){
-                k = selectedUsers.length;
+        for(int k = 0; k < selectedUsers.size(); k++){
+            if(selectedUsers.get(k) == null){
+                k = selectedUsers.size();
             }
             else{
-                selectedUsers[k].setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                selectedUsers.get(k).setOnFocusChangeListener(new View.OnFocusChangeListener() {
                     @Override
                     public void onFocusChange(View v, boolean hasFocus) {
 
                     }
                 });
-                selectedUsers[k].clearFocus();
-                selectedUsers[k].setTextSize(48);
+                selectedUsers.get(k).clearFocus();
+                selectedUsers.get(k).setTextSize(48);
             }
         }
-        selectedUsers = new EditText[20];
+        selectedUsers = new ArrayList<EditText>();
     }
 
     /*
@@ -124,9 +125,9 @@ public class UserSelectActivity extends AppCompatActivity {
 
         users = mydb.getAllUsers();
 
-        for(int m = 0; m < users.length; m++){
+        for(int m = 0; m < users.size(); m++){
 
-            if(users[m] == null){
+            if(users.get(m) == null){
                 return;
             }
 
@@ -142,7 +143,7 @@ public class UserSelectActivity extends AppCompatActivity {
             params.gravity = Gravity.CENTER;
             userOptions.get(id).setLayoutParams(params);
             userOptions.get(id).setId(id);
-            userOptions.get(id).setText(users[m]);
+            userOptions.get(id).setText(users.get(m));
             userOptions.get(id).setTextSize(TypedValue.COMPLEX_UNIT_SP, 48);
             userOptions.get(id).setTextColor(0xFFFFFFFF);
             userOptions.get(id).setTypeface(Typeface.create("casual", Typeface.BOLD));
@@ -177,14 +178,14 @@ public class UserSelectActivity extends AppCompatActivity {
     private void handleUserOptionClick(View v) {
         //Add user to selectedUsers
 
-        for(int j = 0; j < selectedUsers.length; j++){
+        for(int j = 0; j < selectedUsers.size(); j++){
 
             //If empty slot found, insert user into selectedUsers, return
-            if(selectedUsers[j] == null){
+            if(selectedUsers.get(j) == null){
 
-                selectedUsers[j] = userOptions.get(v.getId());
-                selectedUsers[j].setTextSize(52);
-                selectedUsers[j].setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                selectedUsers.set(j, userOptions.get(v.getId()));
+                selectedUsers.get(j).setTextSize(52);
+                selectedUsers.get(j).setOnFocusChangeListener(new View.OnFocusChangeListener() {
                     @Override
                     public void onFocusChange(View v, boolean hasFocus) {
                         v.requestFocus();
