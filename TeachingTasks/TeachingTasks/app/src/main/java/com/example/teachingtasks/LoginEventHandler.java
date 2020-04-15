@@ -15,7 +15,7 @@ public class LoginEventHandler {
 
 
         //Change this to GameActivity once it's ready
-        Intent statsIntent = new Intent(loginActivity.getBaseContext(), StatisticsActivity.class);
-        loginActivity.startActivity(statsIntent);
+        Intent gameIntent = new Intent(loginActivity.getBaseContext(), GameActivity.class);
+        loginActivity.startActivity(gameIntent);
     }
 }
