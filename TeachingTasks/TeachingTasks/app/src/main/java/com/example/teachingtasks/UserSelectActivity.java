@@ -21,7 +21,7 @@ import java.util.Random;
 
 public class UserSelectActivity extends AppCompatActivity {
 
-    Button cancelButton, editButton, addButton;
+    Button editButton, addButton;
     HashMap<Integer, EditText> userOptions = new HashMap<Integer, EditText>();
     RegisterUserDBHelper mydb;
     ArrayList<String> users;
