@@ -92,19 +92,14 @@ public class UserSelectActivity extends AppCompatActivity {
         addButton.setText("Add");
 
         for(int k = 0; k < selectedUsers.size(); k++){
-            if(selectedUsers.get(k) == null){
-                k = selectedUsers.size();
-            }
-            else{
-                selectedUsers.get(k).setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                    @Override
-                    public void onFocusChange(View v, boolean hasFocus) {
+            selectedUsers.get(k).setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
 
-                    }
-                });
-                selectedUsers.get(k).clearFocus();
-                selectedUsers.get(k).setTextSize(48);
-            }
+                }
+            });
+            selectedUsers.get(k).clearFocus();
+            selectedUsers.get(k).setTextSize(48);
         }
         selectedUsers = new ArrayList<EditText>();
     }
@@ -126,10 +121,6 @@ public class UserSelectActivity extends AppCompatActivity {
         users = mydb.getAllUsers();
 
         for(int m = 0; m < users.size(); m++){
-
-            if(users.get(m) == null){
-                return;
-            }
 
             //Create a Unique ID for each userOption
             Random rand = new Random();
@@ -178,21 +169,15 @@ public class UserSelectActivity extends AppCompatActivity {
     private void handleUserOptionClick(View v) {
         //Add user to selectedUsers
 
-        for(int j = 0; j < selectedUsers.size(); j++){
-
-            //If empty slot found, insert user into selectedUsers, return
-            if(selectedUsers.get(j) == null){
-
-                selectedUsers.set(j, userOptions.get(v.getId()));
-                selectedUsers.get(j).setTextSize(52);
-                selectedUsers.get(j).setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                    @Override
-                    public void onFocusChange(View v, boolean hasFocus) {
-                        v.requestFocus();
-                    }
-                });
-                return;
+        selectedUsers.add(userOptions.get(v.getId()));
+        selectedUsers.get(selectedUsers.size()-1).setTextSize(52);
+        selectedUsers.get(selectedUsers.size()-1).setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                v.requestFocus();
             }
-        }
+        });
+
+        return;
     }
 }

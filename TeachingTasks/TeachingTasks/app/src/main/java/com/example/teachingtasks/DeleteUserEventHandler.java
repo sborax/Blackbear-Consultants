@@ -13,7 +13,7 @@ public class DeleteUserEventHandler {
 
         ArrayList<String> temp = mydb.getAllUsers();
 
-        for(int k = 0; k < selectedUsers.length; k++){
+        for(int k = 0; k < selectedUsers.size(); k++){
             if(selectedUsers.get(k) == null){
                 return;
             }

@@ -7,11 +7,11 @@ public class Task implements TaskInterface {
 
     String question;
     String questionObject;
-    ArrayList<T> taskObjects;         //Images for Custom Tasks, Text or Images for regular Tasks
+    ArrayList<Object> taskObjects;         //Images for Custom Tasks, Text or Images for regular Tasks
     int mastery = 0;
     UUID taskID;
 
-    public Task(UUID id, String q, ArrayList<T> obj){
+    public Task(UUID id, String q, ArrayList<Object> obj){
 
         this.taskID = id;
         this.question = q;
@@ -19,7 +19,7 @@ public class Task implements TaskInterface {
     }
 
     @Override
-    public ArrayList<T> getTaskObjects() {
+    public ArrayList<Object> getTaskObjects() {
         return taskObjects;
     }
 
@@ -49,7 +49,7 @@ public class Task implements TaskInterface {
     }
 
     @Override
-    public void setTaskObjects(ArrayList<T> objects) {
+    public void setTaskObjects(ArrayList<Object> objects) {
         this.taskObjects = objects;
     }
 

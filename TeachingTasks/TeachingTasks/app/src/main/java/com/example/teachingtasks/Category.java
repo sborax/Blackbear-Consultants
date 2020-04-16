@@ -12,7 +12,7 @@ public class Category implements CategoryInterface {
 
         this.category = newCatName;
         this.tasks = initTasks;
-        taskCount = initTasks.length;
+        taskCount = initTasks.size();
     }
 
     @Override

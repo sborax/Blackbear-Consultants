@@ -17,7 +17,6 @@ import java.util.List;
 public class StatisticsActivity extends AppCompatActivity {
 
     PieChart chart;
-    //PieEntry[] pieEntries;
     PieDataSet pieDataSet;
     PieData pieData;
     Legend legend;
@@ -30,7 +29,6 @@ public class StatisticsActivity extends AppCompatActivity {
 
         chart = (PieChart) findViewById(R.id.chart);
 
-        //This will need to match the styling of whether we use Arrays, Lists, ArrayLists, etc.
         List<PieEntry> pieEntries = Arrays.asList(
                 new PieEntry(6, "Correct"),
                 new PieEntry(3, "Incorrect")

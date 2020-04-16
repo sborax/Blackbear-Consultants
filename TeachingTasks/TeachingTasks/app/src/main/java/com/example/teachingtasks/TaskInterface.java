@@ -7,10 +7,10 @@ public interface TaskInterface {
 
     public UUID getTaskID();
     public String getQuestion();
-    public ArrayList<T> getTaskObjects();
+    public ArrayList<Object> getTaskObjects();
     public String getQuestionObject();
     public int getMastery();
     public void setMastery(int newMastery);
     public void setQuestionObject(String qObj);
-    public void setTaskObjects(ArrayList<T> objects);
+    public void setTaskObjects(ArrayList<Object> objects);
 }

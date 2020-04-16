@@ -14,6 +14,7 @@ public class GameActivity extends AppCompatActivity {
 
     TextView username;
     View square;
+    Button taskNavButton, statisticsNavButton, settingsNavButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +46,11 @@ public class GameActivity extends AppCompatActivity {
 
 
 
-        Button taskNavButton = (Button) findViewById(R.id.taskNavButton);
+        taskNavButton = (Button) findViewById(R.id.taskNavButton);
+        statisticsNavButton = (Button) findViewById(R.id.statisticsNavButton);
+        settingsNavButton = (Button) findViewById(R.id.settingsNavButton);
         /*
-        TEMP EVENT HANDLER
+        TEMP EVENT HANDLERS
          */
 
         taskNavButton.setOnTouchListener(new View.OnTouchListener() {
@@ -57,6 +60,26 @@ public class GameActivity extends AppCompatActivity {
                 Intent loginIntent = new Intent(GameActivity.this, LoginActivity.class);
                 loginIntent.putExtra("EXTRA_USER", username.getText());
                 GameActivity.this.startActivity(loginIntent);
+                return false;
+            }
+        });
+
+        statisticsNavButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                Intent statsIntent = new Intent(GameActivity.this, StatisticsActivity.class);
+                GameActivity.this.startActivity(statsIntent);
+                return false;
+            }
+        });
+
+        settingsNavButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                Intent settingsIntent = new Intent(GameActivity.this, SettingsActivity.class);
+                GameActivity.this.startActivity(settingsIntent);
                 return false;
             }
         });
