@@ -20,8 +20,7 @@ public class LoginEventHandler {
             loginActivity.startActivity(gameIntent);
         }
         else{
-            //Toast.makeText(loginActivity, "Incorrect Password", Toast.LENGTH_SHORT); <-----DID NOT WORK IDK WHY...
-            
+            Toast.makeText(loginActivity, "Incorrect Password", Toast.LENGTH_SHORT).show();
             loginActivity.inputPassword.setText("");
         }
     }
