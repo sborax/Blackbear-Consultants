@@ -98,4 +98,28 @@ public class RegisterUserDBHelper extends SQLiteOpenHelper {
         }
         return false;
     }
+
+    public boolean userPasswordCheck(String username, String password){
+        //Checks the database for the username, if the password in the table matches the given password, return true
+
+        //Call Readable
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        res.moveToFirst();
+
+        while(res.isAfterLast() == false){
+            //If the next username is not an empty index, keep going
+            //Else, end of database is reached
+
+            String tempUser = res.getString(res.getColumnIndex(COL_USERNAME));
+            String tempPass = res.getString(res.getColumnIndex(COL_PASSWORD));
+
+            if(username.equals(tempUser) && password.equals(tempPass))
+                return true;
+
+            res.moveToNext();
+        }
+
+        return false;
+    }
 }

@@ -1,5 +1,7 @@
 package com.example.teachingtasks;
 
+import android.widget.Button;
+
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -7,11 +9,11 @@ public class Task implements TaskInterface {
 
     String question;
     String questionObject;
-    ArrayList<Object> taskObjects;         //Images for Custom Tasks, Text or Images for regular Tasks
+    ArrayList<Button> taskObjects;         //Images for Custom Tasks, Text or Images for regular Tasks
     int mastery = 0;
     UUID taskID;
 
-    public Task(UUID id, String q, ArrayList<Object> obj){
+    public Task(UUID id, String q, ArrayList<Button> obj){
 
         this.taskID = id;
         this.question = q;
@@ -19,7 +21,7 @@ public class Task implements TaskInterface {
     }
 
     @Override
-    public ArrayList<Object> getTaskObjects() {
+    public ArrayList<Button> getTaskObjects() {
         return taskObjects;
     }
 
@@ -49,7 +51,7 @@ public class Task implements TaskInterface {
     }
 
     @Override
-    public void setTaskObjects(ArrayList<Object> objects) {
+    public void setTaskObjects(ArrayList<Button> objects) {
         this.taskObjects = objects;
     }
 

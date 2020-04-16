@@ -1,22 +1,28 @@
 package com.example.teachingtasks;
 
 import android.content.Intent;
+import android.widget.Toast;
 
 public class LoginEventHandler {
-    public void onClick(LoginActivity loginActivity, String username, String passwordAttempt) {
 
-        //Access database with username
-        //Check if passwordAttempt == password from database
-        //If yes, continue to Task screen logged in as username
-        //Else, failed password attempt, ask them to re-enter
+    public void onClick(LoginActivity loginActivity, String username, String passwordAttempt) {
 
         RegisterUserDBHelper mydb = new RegisterUserDBHelper(loginActivity);
 
+        if(mydb.userPasswordCheck(username, passwordAttempt)){
 
+            //Change this to GameSelectionActivity once it's ready
+            System.out.println("LoginEventHandler.java requires access to GameSelectionActivity...");
+            System.out.println("LoginEventHandler.java requires a popup for incorrect passwords...");
 
-        //Change this to GameActivity once it's ready
-        Intent gameIntent = new Intent(loginActivity.getBaseContext(), GameActivity.class);
-        gameIntent.putExtra("EXTRA_USER", username);
-        loginActivity.startActivity(gameIntent);
+            Intent gameIntent = new Intent(loginActivity.getBaseContext(), GameActivity.class);
+            gameIntent.putExtra("EXTRA_USER", username);
+            loginActivity.startActivity(gameIntent);
+        }
+        else{
+            //Toast.makeText(loginActivity, "Incorrect Password", Toast.LENGTH_SHORT); <-----DID NOT WORK IDK WHY...
+            
+            loginActivity.inputPassword.setText("");
+        }
     }
 }
