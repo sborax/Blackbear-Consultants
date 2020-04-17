@@ -1,7 +1,6 @@
 package com.example.teachingtasks;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -21,7 +20,7 @@ import java.util.Random;
 
 public class UserSelectActivity extends AppCompatActivity {
 
-    Button cancelButton, editButton, searchButton;
+    Button cancelButton, editButton, addButton;
     HashMap<Integer, EditText> userOptions = new HashMap<Integer, EditText>();
     RegisterUserDBHelper mydb;
     String[] users;
@@ -31,25 +30,22 @@ public class UserSelectActivity extends AppCompatActivity {
     UserSelectActivity userSelectActivity = this;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_select);
         mydb = new RegisterUserDBHelper(this);
 
         //Initial variables with UI components
         editButton = (Button) findViewById(R.id.editButton);
-        searchButton = (Button) findViewById(R.id.searchButton);
-        cancelButton = (Button) findViewById(R.id.cancelButton);
+        addButton = (Button) findViewById(R.id.addButton);
         linearLayout = (LinearLayout) findViewById(R.id.userSelectionLayout);
         userSelectScrollView = (ScrollView) findViewById(R.id.userSelectScrollView);
-
-        cancelButton.setVisibility(View.INVISIBLE);
 
         this.initializeUserOptions();
 
         //If no users found, Intent to RegisterUser Activity
         //Else, user(s) found, userOptions initialized, display userOptions
-        if(users.length < 1) {
+        if(users[0] == null) {
             Intent createUserIntent = new Intent(UserSelectActivity.this, RegisterUserActivity.class);
             startActivity(createUserIntent);
         }
@@ -58,14 +54,14 @@ public class UserSelectActivity extends AppCompatActivity {
         Search / Delete Button
         --- Event Handler ---
          */
-        searchButton.setOnClickListener(new View.OnClickListener(){
+        addButton.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
 
-                switch (searchButton.getText().toString()){
+                switch (addButton.getText().toString()){
                     case "Delete": new DeleteUserEventHandler().onClick(UserSelectActivity.this, mydb, selectedUsers, linearLayout, v); break;
-                    //case "": new SearchUsersEventHandler().onClick(mydb, searchButton.getTextORSOMETHING().toString()); break;
+                    case "Add": addUserOption(); break;
                 }
             }
         });
@@ -80,12 +76,36 @@ public class UserSelectActivity extends AppCompatActivity {
 
                 //If clicked, swap the Text and do appropriate behavior.
                switch (editButton.getText().toString()){
-                   case "Add": addUserOption(); break;
-                   case "Edit": editButton.setText("Add"); editUserOption(); break;
+                   case "Cancel": cancelUserEdit(v); break;
+                   case "Edit": editButton.setText("Cancel"); addButton.setText("Delete"); break;
                    default: return;
                }
             }
         });
+    }
+
+    private void cancelUserEdit(View v) {
+        //Deselect all users and change Cancel to Edit
+
+        editButton.setText("Edit");
+        addButton.setText("Add");
+
+        for(int k = 0; k < selectedUsers.length; k++){
+            if(selectedUsers[k] == null){
+                k = selectedUsers.length;
+            }
+            else{
+                selectedUsers[k].setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+
+                    }
+                });
+                selectedUsers[k].clearFocus();
+                selectedUsers[k].setTextSize(48);
+            }
+        }
+        selectedUsers = new EditText[20];
     }
 
     /*
@@ -96,19 +116,6 @@ public class UserSelectActivity extends AppCompatActivity {
 
         Intent registerUserIntent = new Intent(UserSelectActivity.this, RegisterUserActivity.class);
         UserSelectActivity.this.startActivity(registerUserIntent);
-    }
-
-    private void editUserOption(){
-        //Create new userOption to add to the userOptions array
-        //Styles and formats new userOption
-
-        searchButton.setText("Delete");
-
-        //Create the Select button
-//        for(int k = 0; k < userOptions.length; k++){
-            //Add the selection check bubble to each username
-
-//        }
     }
 
     private void initializeUserOptions() {
@@ -151,7 +158,7 @@ public class UserSelectActivity extends AppCompatActivity {
                 public boolean onTouch(View v, MotionEvent event) {
 
                     switch (editButton.getText().toString()) {
-                        case "Add":
+                        case "Cancel":
                             handleUserOptionClick(userOptions.get(v.getId()));
                             break;
                         case "Edit":
