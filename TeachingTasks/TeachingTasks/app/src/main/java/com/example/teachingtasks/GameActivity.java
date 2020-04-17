@@ -42,7 +42,6 @@ public class GameActivity extends AppCompatActivity {
         Button temp = new Button(this);
         taskObject.add(temp);
         temp.setId(taskObject.size()*1000);
-        temp.setGravity(Gravity.CENTER);
         taskObjectLayout.addView(taskObject.get(taskObject.size()-1));
 
         if(questionObject.getText().toString().equals("2")){
@@ -112,31 +111,45 @@ public class GameActivity extends AppCompatActivity {
         //Change constraints on taskObject
         //Create a duplicate to taskObject with a different text and/or background
 
-//        int idOne = taskObject.get(taskObject.size()-1).getId();
-//
-//        ConstraintSet topSet = new ConstraintSet();
-//        topSet.clone(taskObjectLayout);
-//
-////        topSet.connect(idOne, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0);
-////        topSet.connect(idOne, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT, 0);
-////        topSet.connect(idOne, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0);
-//
-//        Button taskObjTwo = new Button(this);
-//        taskObjTwo.setId((taskObject.size()+1)*1000);
-//
-////        topSet.connect(taskObjTwo.getId(), ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0);
-////        topSet.connect(taskObjTwo.getId(), ConstraintSet.LEFT, idOne, ConstraintSet.RIGHT, 0);
-////        topSet.connect(taskObjTwo.getId(), ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0);
-////        topSet.connect(taskObjTwo.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0);
-////
-////        topSet.connect(idOne, ConstraintSet.RIGHT, taskObjTwo.getId(), ConstraintSet.LEFT, 0);
-//
-//        int[] ids = {idOne, taskObjTwo.getId()};
-//        topSet.createHorizontalChainRtl(idOne, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, ids, new float[1], ConstraintSet.CHAIN_SPREAD);
-//        taskObject.add(taskObjTwo);
-//
-//        taskObjectLayout.addView(taskObjTwo);
-//        topSet.applyTo(taskObjectLayout);
+        int idOne = taskObject.get(taskObject.size()-1).getId();
+
+        ConstraintSet topSet = new ConstraintSet();
+        topSet.clone(taskObjectLayout);
+
+        topSet.connect(idOne, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0);
+        topSet.connect(idOne, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT, 0);
+        topSet.connect(idOne, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0);
+//        topSet.connect(idOne, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0);
+
+        Button taskObjTwo = new Button(this);
+        taskObjTwo.setId((taskObject.size()+1)*1000);
+
+        topSet.connect(taskObjTwo.getId(), ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0);
+        topSet.connect(taskObjTwo.getId(), ConstraintSet.LEFT, idOne, ConstraintSet.RIGHT, 0);
+        topSet.connect(taskObjTwo.getId(), ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0);
+        topSet.connect(taskObjTwo.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0);
+        topSet.constrainHeight(taskObjTwo.getId(),120);
+        topSet.constrainWidth(taskObjTwo.getId(), 230);
+
+        topSet.connect(idOne, ConstraintSet.RIGHT, taskObjTwo.getId(), ConstraintSet.LEFT, 0);
+
+        taskObject.add(taskObjTwo);
+
+
+        int idThree = taskObject.size()+1*1000;
+        Button taskObjThree = new Button(this);
+        taskObjThree.setId(idThree);
+
+        topSet.connect(idThree, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0);
+        topSet.connect(idThree, ConstraintSet.TOP, idOne, ConstraintSet.BOTTOM, 0);
+        topSet.connect(idThree, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT, 0);
+        topSet.connect(idThree, ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0);
+        topSet.constrainHeight(taskObjThree.getId(),120);
+        topSet.constrainWidth(taskObjThree.getId(), 230);
+
+        taskObjectLayout.addView(taskObjThree);
+        taskObjectLayout.addView(taskObjTwo);
+        topSet.applyTo(taskObjectLayout);
     }
 
 
