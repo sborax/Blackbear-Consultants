@@ -13,10 +13,12 @@ public class LoginEventHandler {
 
             //Change this to GameSelectionActivity once it's ready
             System.out.println("LoginEventHandler.java requires access to GameSelectionActivity...");
-            System.out.println("LoginEventHandler.java requires a popup for incorrect passwords...");
+            System.out.println("LoginEventHandler.java requires removal of EXTRA's");
 
             Intent gameIntent = new Intent(loginActivity.getBaseContext(), GameActivity.class);
             gameIntent.putExtra("EXTRA_USER", username);
+            gameIntent.putExtra("EXTRA_QUESTION", "Click the Number");
+            gameIntent.putExtra("EXTRA_TASK_OBJECT", "1");
             loginActivity.startActivity(gameIntent);
         }
         else{

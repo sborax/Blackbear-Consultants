@@ -1,35 +1,53 @@
 package com.example.teachingtasks;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import androidx.gridlayout.widget.GridLayout;
 import android.widget.TextView;
 
 public class GameActivity extends AppCompatActivity {
 
     TextView username;
-    View square;
+    TextView question;
+    TextView questionObject;
+    Button taskObject;
     Button taskNavButton, statisticsNavButton, settingsNavButton;
+    GridLayout taskObjectLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        taskObjectLayout = (GridLayout) findViewById(R.id.taskObjectLayout);
+
         username = (TextView) findViewById(R.id.username);
         username.setText(getIntent().getStringExtra("EXTRA_USER"));
 
-        square = (View) findViewById(R.id.square);
+        question = (TextView) findViewById(R.id.taskQuestion);
+        question.setText(getIntent().getStringExtra("EXTRA_QUESTION"));
+
+        questionObject = (TextView) findViewById(R.id.taskQuestionObject);
+        questionObject.setText(getIntent().getStringExtra("EXTRA_TASK_OBJECT"));
+
+        taskObject = new Button(this);
+        taskObjectLayout.addView(taskObject);
+
+        if(questionObject.getText().toString().equals("2")){
+            tryToChangeConstraints();
+        }
 
         /*
         TEMP EVENT HANDLER
          */
 
-        square.setOnTouchListener(new View.OnTouchListener() {
+        taskObject.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
@@ -82,5 +100,24 @@ public class GameActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    private void tryToChangeConstraints() {
+        //Change constraints on taskObject
+        //Create a duplicate to taskObject with a different text and/or background
+
+        Button taskObjTwo = new Button(this);
+//        ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
+//        params.startToEnd = taskObject.getRight();
+//        params.endToEnd = taskObjectLayout.getRight();
+//        params.bottomToBottom = taskObjectLayout.getBottom();
+//        params.topToTop = taskObjectLayout.getTop();
+//        taskObjTwo.setLayoutParams(params);
+
+//        params = (ConstraintLayout.LayoutParams) taskObject.getLayoutParams();
+//        params.endToStart = 0;
+//        taskObject.setLayoutParams(params);
+
+        taskObjectLayout.addView(taskObjTwo);
     }
 }

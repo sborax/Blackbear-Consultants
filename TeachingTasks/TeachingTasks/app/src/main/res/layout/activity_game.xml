@@ -104,24 +104,14 @@
         app:layout_constraintTop_toTopOf="@+id/woodHeaderImageView" />
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.gridlayout.widget.GridLayout
+        android:id="@+id/taskObjectLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskQuestionObject">
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toBottomOf="@+id/taskQuestionObject"/>
 
     <LinearLayout
         android:id="@+id/linearLayout"

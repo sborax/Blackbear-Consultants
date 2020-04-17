@@ -26,8 +26,12 @@ public class TaskSuccessActivity extends AppCompatActivity {
 
         if (e.getAction() == MotionEvent.ACTION_DOWN){
 
+            System.out.println("TaskSuccessActivity.java requires updated EXTRA's");
+
             Intent gameIntent = new Intent(TaskSuccessActivity.this, GameActivity.class);
             gameIntent.putExtra("EXTRA_USER", username.getText());
+            gameIntent.putExtra("EXTRA_QUESTION", "Click the Number");
+            gameIntent.putExtra("EXTRA_TASK_OBJECT", "2");
             TaskSuccessActivity.this.startActivity(gameIntent);
         }
         return false;
