@@ -93,7 +93,7 @@ public class UserSelectActivity extends AppCompatActivity {
 
 
         addButton.setText("Delete");
-        addButton.setCompoundDrawablesWithIntrinsicBounds(getBaseContext().getResources().getDrawable(android.R.drawable.ic_menu_close_clear_cancel), null, null, null);
+        addButton.setCompoundDrawablesWithIntrinsicBounds(getBaseContext().getResources().getDrawable(android.R.drawable.ic_menu_delete), null, null, null);
     }
 
     private void cancelUserEdit(View v) {
