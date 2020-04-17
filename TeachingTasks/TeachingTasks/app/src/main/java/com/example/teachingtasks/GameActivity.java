@@ -2,30 +2,33 @@ package com.example.teachingtasks;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import androidx.gridlayout.widget.GridLayout;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class GameActivity extends AppCompatActivity {
 
     TextView username;
     TextView question;
     TextView questionObject;
-    Button taskObject;
+    ArrayList<Button> taskObject = new ArrayList<>();
     Button taskNavButton, statisticsNavButton, settingsNavButton;
-    GridLayout taskObjectLayout;
+    ConstraintLayout taskObjectLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        taskObjectLayout = (GridLayout) findViewById(R.id.taskObjectLayout);
+        taskObjectLayout = (ConstraintLayout) findViewById(R.id.taskObjectLayout);
 
         username = (TextView) findViewById(R.id.username);
         username.setText(getIntent().getStringExtra("EXTRA_USER"));
@@ -36,8 +39,11 @@ public class GameActivity extends AppCompatActivity {
         questionObject = (TextView) findViewById(R.id.taskQuestionObject);
         questionObject.setText(getIntent().getStringExtra("EXTRA_TASK_OBJECT"));
 
-        taskObject = new Button(this);
-        taskObjectLayout.addView(taskObject);
+        Button temp = new Button(this);
+        taskObject.add(temp);
+        temp.setId(taskObject.size()*1000);
+        temp.setGravity(Gravity.CENTER);
+        taskObjectLayout.addView(taskObject.get(taskObject.size()-1));
 
         if(questionObject.getText().toString().equals("2")){
             tryToChangeConstraints();
@@ -47,7 +53,7 @@ public class GameActivity extends AppCompatActivity {
         TEMP EVENT HANDLER
          */
 
-        taskObject.setOnTouchListener(new View.OnTouchListener() {
+        taskObject.get(taskObject.size()-1).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
@@ -106,18 +112,54 @@ public class GameActivity extends AppCompatActivity {
         //Change constraints on taskObject
         //Create a duplicate to taskObject with a different text and/or background
 
-        Button taskObjTwo = new Button(this);
-//        ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
-//        params.startToEnd = taskObject.getRight();
-//        params.endToEnd = taskObjectLayout.getRight();
-//        params.bottomToBottom = taskObjectLayout.getBottom();
-//        params.topToTop = taskObjectLayout.getTop();
-//        taskObjTwo.setLayoutParams(params);
-
-//        params = (ConstraintLayout.LayoutParams) taskObject.getLayoutParams();
-//        params.endToStart = 0;
-//        taskObject.setLayoutParams(params);
-
-        taskObjectLayout.addView(taskObjTwo);
+//        int idOne = taskObject.get(taskObject.size()-1).getId();
+//
+//        ConstraintSet topSet = new ConstraintSet();
+//        topSet.clone(taskObjectLayout);
+//
+////        topSet.connect(idOne, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0);
+////        topSet.connect(idOne, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT, 0);
+////        topSet.connect(idOne, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0);
+//
+//        Button taskObjTwo = new Button(this);
+//        taskObjTwo.setId((taskObject.size()+1)*1000);
+//
+////        topSet.connect(taskObjTwo.getId(), ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0);
+////        topSet.connect(taskObjTwo.getId(), ConstraintSet.LEFT, idOne, ConstraintSet.RIGHT, 0);
+////        topSet.connect(taskObjTwo.getId(), ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0);
+////        topSet.connect(taskObjTwo.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0);
+////
+////        topSet.connect(idOne, ConstraintSet.RIGHT, taskObjTwo.getId(), ConstraintSet.LEFT, 0);
+//
+//        int[] ids = {idOne, taskObjTwo.getId()};
+//        topSet.createHorizontalChainRtl(idOne, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, ids, new float[1], ConstraintSet.CHAIN_SPREAD);
+//        taskObject.add(taskObjTwo);
+//
+//        taskObjectLayout.addView(taskObjTwo);
+//        topSet.applyTo(taskObjectLayout);
     }
+
+
+    //Button 1:
+//    Button button = new Button(this);
+//        button.setText("Hello");
+//        button.setId(100);           // <-- Important
+//        layout.addView(button);
+//        set.connect(button.getId(), ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0);
+//        set.connect(button.getId(),ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT,0);
+//        set.connect(button.getId(),ConstraintSet.LEFT,ConstraintSet.PARENT_ID,ConstraintSet.LEFT,0);
+//        set.constrainHeight(button.getId(), 200);
+//        set.applyTo(layout);
+//
+//
+//    //Button 2:
+//    Button newButton = new Button(this);
+//        newButton.setText("Yeeey");
+//        layout.addView(newButton);
+//        set.connect(newButton.getId(), ConstraintSet.BOTTOM, button.getId(), ConstraintSet.TOP, 0);
+//        set.connect(newButton.getId(),ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT,0);
+//        set.connect(newButton.getId(),ConstraintSet.LEFT,ConstraintSet.PARENT_ID,ConstraintSet.LEFT,0);
+//        set.constrainHeight(newButton.getId(), 200);
+//        set.applyTo(layout);
+
 }

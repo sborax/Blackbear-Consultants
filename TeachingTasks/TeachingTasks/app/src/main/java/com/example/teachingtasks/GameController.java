@@ -30,8 +30,8 @@ public class GameController {
     }
 
     public Task getNextTask(){
-        //Access database for category mastery
-        //Access database for task mastery
+        //Sort for category by mastery
+        //Sort for task by mastery
         //Give task with lowest mastery first if last X questions mastered (answered correct in X tries)
         //Else, give task with higher mastery
         //^do a small math equation... Based on last X questions, the number mastered, and the index in list of tasks sorted by mastery

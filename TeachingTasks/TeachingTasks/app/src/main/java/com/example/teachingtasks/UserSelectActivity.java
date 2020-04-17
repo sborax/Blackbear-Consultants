@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.TypedValue;
@@ -78,18 +79,31 @@ public class UserSelectActivity extends AppCompatActivity {
                 //If clicked, swap the Text and do appropriate behavior.
                switch (editButton.getText().toString()){
                    case "Cancel": cancelUserEdit(v); break;
-                   case "Edit": editButton.setText("Cancel"); addButton.setText("Delete"); break;
+                   case "Edit": changeButtons(); break;
                    default: return;
                }
             }
         });
     }
 
+    private void changeButtons(){
+
+        editButton.setText("Cancel");
+        editButton.setCompoundDrawablesWithIntrinsicBounds(getBaseContext().getResources().getDrawable(android.R.drawable.ic_menu_close_clear_cancel),null, null, null);
+
+
+        addButton.setText("Delete");
+        addButton.setCompoundDrawablesWithIntrinsicBounds(getBaseContext().getResources().getDrawable(android.R.drawable.ic_menu_close_clear_cancel), null, null, null);
+    }
+
     private void cancelUserEdit(View v) {
         //Deselect all users and change Cancel to Edit
 
         editButton.setText("Edit");
+        editButton.setCompoundDrawablesWithIntrinsicBounds(getBaseContext().getResources().getDrawable(android.R.drawable.ic_menu_manage),null, null, null);
+
         addButton.setText("Add");
+        addButton.setCompoundDrawablesWithIntrinsicBounds(getBaseContext().getResources().getDrawable(android.R.drawable.ic_menu_add), null,null,null);
 
         for(int k = 0; k < selectedUsers.size(); k++){
             selectedUsers.get(k).setOnFocusChangeListener(new View.OnFocusChangeListener() {
