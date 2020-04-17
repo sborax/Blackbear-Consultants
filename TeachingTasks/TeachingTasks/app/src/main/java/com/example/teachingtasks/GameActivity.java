@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -22,11 +23,14 @@ public class GameActivity extends AppCompatActivity {
     ArrayList<Button> taskObject = new ArrayList<>();
     Button taskNavButton, statisticsNavButton, settingsNavButton;
     ConstraintLayout taskObjectLayout;
+    NumberTask numberTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        numberTask = new NumberTask(this, UUID.randomUUID(), "Click the Number", new ArrayList<Button>());
 
         taskObjectLayout = (ConstraintLayout) findViewById(R.id.taskObjectLayout);
 
@@ -119,7 +123,6 @@ public class GameActivity extends AppCompatActivity {
         topSet.connect(idOne, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0);
         topSet.connect(idOne, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT, 0);
         topSet.connect(idOne, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0);
-//        topSet.connect(idOne, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0);
 
         Button taskObjTwo = new Button(this);
         taskObjTwo.setId((taskObject.size()+1)*1000);
@@ -129,7 +132,7 @@ public class GameActivity extends AppCompatActivity {
         topSet.connect(taskObjTwo.getId(), ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0);
         topSet.connect(taskObjTwo.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0);
         topSet.constrainHeight(taskObjTwo.getId(),120);
-        topSet.constrainWidth(taskObjTwo.getId(), 230);
+        topSet.constrainWidth(taskObjTwo.getId(), 220);
 
         topSet.connect(idOne, ConstraintSet.RIGHT, taskObjTwo.getId(), ConstraintSet.LEFT, 0);
 
@@ -145,34 +148,10 @@ public class GameActivity extends AppCompatActivity {
         topSet.connect(idThree, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT, 0);
         topSet.connect(idThree, ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0);
         topSet.constrainHeight(taskObjThree.getId(),120);
-        topSet.constrainWidth(taskObjThree.getId(), 230);
+        topSet.constrainWidth(taskObjThree.getId(), 220);
 
         taskObjectLayout.addView(taskObjThree);
         taskObjectLayout.addView(taskObjTwo);
         topSet.applyTo(taskObjectLayout);
     }
-
-
-    //Button 1:
-//    Button button = new Button(this);
-//        button.setText("Hello");
-//        button.setId(100);           // <-- Important
-//        layout.addView(button);
-//        set.connect(button.getId(), ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0);
-//        set.connect(button.getId(),ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT,0);
-//        set.connect(button.getId(),ConstraintSet.LEFT,ConstraintSet.PARENT_ID,ConstraintSet.LEFT,0);
-//        set.constrainHeight(button.getId(), 200);
-//        set.applyTo(layout);
-//
-//
-//    //Button 2:
-//    Button newButton = new Button(this);
-//        newButton.setText("Yeeey");
-//        layout.addView(newButton);
-//        set.connect(newButton.getId(), ConstraintSet.BOTTOM, button.getId(), ConstraintSet.TOP, 0);
-//        set.connect(newButton.getId(),ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT,0);
-//        set.connect(newButton.getId(),ConstraintSet.LEFT,ConstraintSet.PARENT_ID,ConstraintSet.LEFT,0);
-//        set.constrainHeight(newButton.getId(), 200);
-//        set.applyTo(layout);
-
 }

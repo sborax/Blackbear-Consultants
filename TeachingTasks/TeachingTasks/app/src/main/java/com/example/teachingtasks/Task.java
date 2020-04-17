@@ -9,7 +9,7 @@ public class Task implements TaskInterface {
 
     String question;
     String questionObject;
-    ArrayList<Button> taskObjects;         //Images for Custom Tasks, Text or Images for regular Tasks
+    ArrayList<Button> taskObjects;
     int mastery = 0;
     UUID taskID;
 
