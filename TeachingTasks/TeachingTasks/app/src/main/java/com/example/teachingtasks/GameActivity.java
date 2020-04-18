@@ -53,34 +53,7 @@ public class GameActivity extends AppCompatActivity {
         questionObject = (TextView) findViewById(R.id.taskQuestionObject);
         questionObject.setText(getIntent().getStringExtra("EXTRA_TASK_OBJECT"));
 
-        final String qObject = questionObject.getText().toString();
-
         taskObject = numberTask.getTaskObjects();
-
-        //This if check is just for now, but should be made redundant as GameController will not return a Task that doesn't exist
-        if (taskObject.size() > 0){
-            //If a task has an Object, constrain it and
-            int tempID = taskObject.get(qObject).getId();
-            set.connect(tempID, ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT,0);
-            set.connect(tempID, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT,0);
-            set.connect(tempID, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0);
-            set.connect(tempID, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM,0);
-            set.constrainHeight(tempID, 180);
-            set.constrainWidth(tempID,250);
-
-            taskObjectLayout.addView(taskObject.get(qObject));
-            set.applyTo(taskObjectLayout);
-
-            taskObject.get(qObject).setTypeface(Typeface.create("casual", Typeface.BOLD));
-            taskObject.get(qObject).setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-
-                    new TaskObjectEventHandler().onClick(GameActivity.this, v, username.getText().toString(), taskObject.get(qObject).getText().toString());
-                    return false;
-                }
-            });
-        }
 
         tryToChangeConstraints();
 
@@ -132,19 +105,42 @@ public class GameActivity extends AppCompatActivity {
         //Add them to the layout
 
 
+        //If a task has an Object, constrain it and
+        final String qObject = questionObject.getText().toString();
+        int tempID = taskObject.get(qObject).getId();
+        set.connect(tempID, ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT,0);
+        set.connect(tempID, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT,0);
+        set.connect(tempID, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0);
+        set.connect(tempID, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM,0);
+        set.constrainHeight(tempID, 180);
+        set.constrainWidth(tempID,250);
+
+        taskObjectLayout.addView(taskObject.get(qObject));
+        set.applyTo(taskObjectLayout);
+
+        taskObject.get(qObject).setTypeface(Typeface.create("casual", Typeface.BOLD));
+        taskObject.get(qObject).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                new TaskObjectEventHandler().onClick(GameActivity.this, v, username.getText().toString(), qObject);
+                return false;
+            }
+        });
+
         //Going to need to check for mastery level to determine how many to include on screen
         //MAX = 4
         //MIN = 1
         int maxMastery = 4;
 
         Iterator keySet = taskObject.keySet().iterator();
-        ArrayList<Button> tempObjects = new ArrayList<>();
-        tempObjects.add(taskObject.get(questionObject.getText().toString()));
+        final ArrayList<Button> tempObjects = new ArrayList<>();
+        tempObjects.add(taskObject.get(qObject));
 
         while (keySet.hasNext()){
 
             String temp = (String) keySet.next();
-            if(!temp.equals(questionObject.getText().toString()))
+            if(!temp.equals(qObject))
                 tempObjects.add(taskObject.get(temp));
         }
 
@@ -197,13 +193,14 @@ public class GameActivity extends AppCompatActivity {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
 
-                    new TaskObjectEventHandler().onClick(GameActivity.this, v, username.getText().toString(), taskObject.get(questionObject).getText().toString());
+                    new TaskObjectEventHandler().onClick(GameActivity.this, v, username.getText().toString(), qObject);
                     return false;
                 }
             });
 
             //Set font, add to Layout, and apply constraints
             tempObjects.get(k).setTypeface(Typeface.create("casual", Typeface.BOLD));
+            taskObjectLayout.removeView(tempObjects.get(k));
             taskObjectLayout.addView(tempObjects.get(k));
             set.applyTo(taskObjectLayout);
         }

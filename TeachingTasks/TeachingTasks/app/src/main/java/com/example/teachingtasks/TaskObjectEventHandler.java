@@ -13,10 +13,25 @@ public class TaskObjectEventHandler {
 
         Button curr = (Button) v.findViewById(v.getId());
 
-        if(curr.getText().toString().equals(questionObject)){
+        String qObject = "";
+
+        switch (questionObject){
+            case "Zero": qObject = "0"; break;
+            case "One": qObject = "1"; break;
+            case "Two": qObject = "2"; break;
+            case "Three": qObject = "3"; break;
+            case "Four": qObject = "4"; break;
+            case "Five": qObject = "5"; break;
+            case "Six": qObject = "6"; break;
+            case "Seven": qObject = "7"; break;
+            case "Eight": qObject = "8"; break;
+            case "Nine": qObject = "9"; break;
+        }
+
+        if(curr.getText().toString().equals(qObject)){
             Intent taskSuccessIntent = new Intent(gameActivity, TaskSuccessActivity.class);
             taskSuccessIntent.putExtra("EXTRA_USER", username);
-            taskSuccessIntent.putExtra("EXTRA_TASK_OBJECT", questionObject);
+            taskSuccessIntent.putExtra("EXTRA_TASK_OBJECT", qObject);
             gameActivity.startActivity(taskSuccessIntent);
         }
         else {
