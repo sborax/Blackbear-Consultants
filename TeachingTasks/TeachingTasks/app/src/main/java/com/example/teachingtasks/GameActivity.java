@@ -152,22 +152,30 @@ public class GameActivity extends AppCompatActivity {
             int leftConstraint = ConstraintSet.RIGHT;
             int rightConstraint = ConstraintSet.LEFT;
 
+            //2x2 grid, if this is the 2nd object it's RIGHT -> PATENT_RIGHT
             if (k == 1){
               set.connect(id, ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0);
             }
+
+            //2x2 grid, ensure the bottom 2 objects constrain bottomRow_TOP -> topRow_BOTTOM
             if (k >= 2){
                 topConstraint = taskObject.get(k-2).getId();
             }
+
+            //If this is the 3rd object, reset so:
+            // LEFT -> PARENT_LEFT
             if (k % 2 == 0){
                 leftConstID = ConstraintSet.PARENT_ID;
                 rightConstID = ConstraintSet.PARENT_ID;
                 leftConstraint = ConstraintSet.LEFT;
                 rightConstraint = ConstraintSet.RIGHT;
 
-                set.connect(topConstraint, ConstraintSet.BOTTOM, id, ConstraintSet.BOTTOM, 0);
-                set.connect(prevID, ConstraintSet.BOTTOM, id, ConstraintSet.BOTTOM, 0);
+                //Set previous object's topRow_BOTTOM -> bottomRow_TOP
+                set.connect(topConstraint, ConstraintSet.BOTTOM, id, ConstraintSet.BOTTOM, 40);
+                set.connect(prevID, ConstraintSet.BOTTOM, id, ConstraintSet.BOTTOM, 40);
             }
 
+            //Set the constraints
             set.connect(id, ConstraintSet.LEFT, leftConstID, leftConstraint, 0);
             set.connect(id, ConstraintSet.TOP, topConstraint, ConstraintSet.TOP, 0);
             set.connect(id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0);
@@ -176,11 +184,13 @@ public class GameActivity extends AppCompatActivity {
             set.constrainHeight(id, 180);
             set.constrainWidth(id, 250);
 
+            //Set font, add to Layout, and apply constraints
             taskObject.get(k).setTypeface(Typeface.create("casual", Typeface.BOLD));
             taskObjectLayout.addView(taskObject.get(k));
             set.applyTo(taskObjectLayout);
         }
 
+        //Ensure last object added constraints RIGHT -> PARENT_RIGHT
         set.connect(taskObject.get(maxMastery-1).getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0);
         set.applyTo(taskObjectLayout);
     }
