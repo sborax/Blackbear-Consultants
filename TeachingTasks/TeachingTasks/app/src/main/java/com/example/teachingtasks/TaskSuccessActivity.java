@@ -31,7 +31,7 @@ public class TaskSuccessActivity extends AppCompatActivity {
             Intent gameIntent = new Intent(TaskSuccessActivity.this, GameActivity.class);
             gameIntent.putExtra("EXTRA_USER", username.getText());
             gameIntent.putExtra("EXTRA_QUESTION", "Click the Number");
-            gameIntent.putExtra("EXTRA_TASK_OBJECT", "2");
+            gameIntent.putExtra("EXTRA_TASK_OBJECT", "Two");
             TaskSuccessActivity.this.startActivity(gameIntent);
         }
         return false;

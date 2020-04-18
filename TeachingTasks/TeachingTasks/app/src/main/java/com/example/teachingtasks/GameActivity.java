@@ -24,6 +24,7 @@ public class GameActivity extends AppCompatActivity {
     Button taskNavButton, statisticsNavButton, settingsNavButton;
     ConstraintLayout taskObjectLayout;
     NumberTask numberTask;
+    ConstraintSet set;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,9 @@ public class GameActivity extends AppCompatActivity {
 
         taskObjectLayout = (ConstraintLayout) findViewById(R.id.taskObjectLayout);
 
+        set = new ConstraintSet();
+        set.clone(taskObjectLayout);
+
         username = (TextView) findViewById(R.id.username);
         username.setText(getIntent().getStringExtra("EXTRA_USER"));
 
@@ -43,12 +47,24 @@ public class GameActivity extends AppCompatActivity {
         questionObject = (TextView) findViewById(R.id.taskQuestionObject);
         questionObject.setText(getIntent().getStringExtra("EXTRA_TASK_OBJECT"));
 
-        Button temp = new Button(this);
-        taskObject.add(temp);
-        temp.setId(taskObject.size()*1000);
-        taskObjectLayout.addView(taskObject.get(taskObject.size()-1));
+        taskObject = numberTask.getTaskObjects();
 
-        if(questionObject.getText().toString().equals("2")){
+        //This if check is just for now, but should be made redundant as GameController will not return a Task that doesn't exist
+        if (taskObject.size() > 0){
+            //If a task has an Object, constrain it and
+            int tempID = taskObject.get(0).getId();
+            set.connect(tempID, ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT,0);
+            set.connect(tempID, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT,0);
+            set.connect(tempID, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0);
+            set.connect(tempID, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM,0);
+            set.constrainHeight(tempID, 180);
+            set.constrainWidth(tempID,250);
+
+            taskObjectLayout.addView(taskObject.get(0));
+            set.applyTo(taskObjectLayout);
+        }
+
+        if(questionObject.getText().toString().equals("Two")){
             tryToChangeConstraints();
         }
 
@@ -56,7 +72,7 @@ public class GameActivity extends AppCompatActivity {
         TEMP EVENT HANDLER
          */
 
-        taskObject.get(taskObject.size()-1).setOnTouchListener(new View.OnTouchListener() {
+        taskObject.get(0).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
@@ -112,46 +128,57 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void tryToChangeConstraints() {
-        //Change constraints on taskObject
-        //Create a duplicate to taskObject with a different text and/or background
-
-        int idOne = taskObject.get(taskObject.size()-1).getId();
-
-        ConstraintSet topSet = new ConstraintSet();
-        topSet.clone(taskObjectLayout);
-
-        topSet.connect(idOne, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0);
-        topSet.connect(idOne, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT, 0);
-        topSet.connect(idOne, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0);
-
-        Button taskObjTwo = new Button(this);
-        taskObjTwo.setId((taskObject.size()+1)*1000);
-
-        topSet.connect(taskObjTwo.getId(), ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0);
-        topSet.connect(taskObjTwo.getId(), ConstraintSet.LEFT, idOne, ConstraintSet.RIGHT, 0);
-        topSet.connect(taskObjTwo.getId(), ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0);
-        topSet.connect(taskObjTwo.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0);
-        topSet.constrainHeight(taskObjTwo.getId(),120);
-        topSet.constrainWidth(taskObjTwo.getId(), 220);
-
-        topSet.connect(idOne, ConstraintSet.RIGHT, taskObjTwo.getId(), ConstraintSet.LEFT, 0);
-
-        taskObject.add(taskObjTwo);
+        //Change constraints on taskObjects
+        //Add them to the layout
 
 
-        int idThree = taskObject.size()+1*1000;
-        Button taskObjThree = new Button(this);
-        taskObjThree.setId(idThree);
+        //Going to need to check for mastery level to determine how many to include on screen
+        int maxMastery = 4;
 
-        topSet.connect(idThree, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0);
-        topSet.connect(idThree, ConstraintSet.TOP, idOne, ConstraintSet.BOTTOM, 0);
-        topSet.connect(idThree, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT, 0);
-        topSet.connect(idThree, ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0);
-        topSet.constrainHeight(taskObjThree.getId(),120);
-        topSet.constrainWidth(taskObjThree.getId(), 220);
+        //Loop through all objects
+        for(int k = 1; k < maxMastery; k++){
 
-        taskObjectLayout.addView(taskObjThree);
-        taskObjectLayout.addView(taskObjTwo);
-        topSet.applyTo(taskObjectLayout);
+            int id = taskObject.get(k).getId();
+
+            //If initial button, constrain to the parent_id left
+            //Else, connect to the previous component
+            int prevID = taskObject.get(k-1).getId();
+            int topConstraint = ConstraintSet.PARENT_ID;
+            int leftConstID = prevID;
+            int rightConstID = id;
+            int leftConstraint = ConstraintSet.RIGHT;
+            int rightConstraint = ConstraintSet.LEFT;
+
+            if (k == 1){
+              set.connect(id, ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0);
+            }
+            if (k >= 2){
+                topConstraint = taskObject.get(k-2).getId();
+            }
+            if (k % 2 == 0){
+                leftConstID = ConstraintSet.PARENT_ID;
+                rightConstID = ConstraintSet.PARENT_ID;
+                leftConstraint = ConstraintSet.LEFT;
+                rightConstraint = ConstraintSet.RIGHT;
+
+                set.connect(topConstraint, ConstraintSet.BOTTOM, id, ConstraintSet.BOTTOM, 0);
+//                set.connect(taskObject.get(k-2).getId(), ConstraintSet.BOTTOM, id, ConstraintSet.BOTTOM, 0);
+                set.connect(prevID, ConstraintSet.BOTTOM, id, ConstraintSet.BOTTOM, 0);
+            }
+
+            set.connect(id, ConstraintSet.LEFT, leftConstID, leftConstraint, 0);
+            set.connect(id, ConstraintSet.TOP, topConstraint, ConstraintSet.TOP, 0);
+            set.connect(id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0);
+            set.connect(prevID, ConstraintSet.RIGHT, rightConstID, rightConstraint,0);
+
+            set.constrainHeight(id, 180);
+            set.constrainWidth(id, 250);
+
+            taskObjectLayout.addView(taskObject.get(k));
+            set.applyTo(taskObjectLayout);
+        }
+
+        set.connect(taskObject.get(3).getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0);
+        set.applyTo(taskObjectLayout);
     }
 }

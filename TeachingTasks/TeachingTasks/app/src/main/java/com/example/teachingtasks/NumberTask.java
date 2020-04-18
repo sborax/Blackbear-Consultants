@@ -1,5 +1,6 @@
 package com.example.teachingtasks;
 
+import android.graphics.Color;
 import android.widget.Button;
 
 import java.util.ArrayList;
@@ -29,14 +30,17 @@ public class NumberTask extends Task implements TaskInterface{
         Button zero = new Button(gameActivity.getBaseContext());
 
         taskObjects.addAll(Arrays.asList(new Button[]{zero, one, two, three, four, five, six, seven, eight, nine}));
-
+        
         for(int k = 0; k < taskObjects.size(); k++){
 
             Button curr = taskObjects.get(k);
 
-            curr.setText(k);
-            curr.setId((k+1)*1000);
+            curr.setText(Integer.toString(k));
+            curr.setTextColor(Color.WHITE);
+            curr.setTextSize(36);
+            curr.setId((k+1)*1000000);
             curr.setBackground(null);
+
         }
     }
 

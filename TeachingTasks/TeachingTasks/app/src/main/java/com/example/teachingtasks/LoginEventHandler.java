@@ -18,7 +18,7 @@ public class LoginEventHandler {
             Intent gameIntent = new Intent(loginActivity.getBaseContext(), GameActivity.class);
             gameIntent.putExtra("EXTRA_USER", username);
             gameIntent.putExtra("EXTRA_QUESTION", "Click the Number");
-            gameIntent.putExtra("EXTRA_TASK_OBJECT", "1");
+            gameIntent.putExtra("EXTRA_TASK_OBJECT", "Zero");
             loginActivity.startActivity(gameIntent);
         }
         else{
