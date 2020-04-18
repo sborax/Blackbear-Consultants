@@ -141,6 +141,7 @@ public class GameActivity extends AppCompatActivity {
 
         Iterator keySet = taskObject.keySet().iterator();
         ArrayList<Button> tempObjects = new ArrayList<>();
+        tempObjects.add(taskObject.get(questionObject.getText().toString()));
 
         while (keySet.hasNext()){
 
