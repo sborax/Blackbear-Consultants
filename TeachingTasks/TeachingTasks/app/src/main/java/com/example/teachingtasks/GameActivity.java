@@ -5,6 +5,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -62,6 +63,8 @@ public class GameActivity extends AppCompatActivity {
 
             taskObjectLayout.addView(taskObject.get(0));
             set.applyTo(taskObjectLayout);
+
+            taskObject.get(0).setTypeface(Typeface.create("casual", Typeface.BOLD));
         }
 
         if(questionObject.getText().toString().equals("Two")){
@@ -78,6 +81,7 @@ public class GameActivity extends AppCompatActivity {
 
                 Intent taskSuccessIntent = new Intent(GameActivity.this, TaskSuccessActivity.class);
                 taskSuccessIntent.putExtra("EXTRA_USER", username.getText());
+                taskSuccessIntent.putExtra("EXTRA_TASK_OBJECT", "0");
                 GameActivity.this.startActivity(taskSuccessIntent);
 
                 return false;
@@ -133,15 +137,14 @@ public class GameActivity extends AppCompatActivity {
 
 
         //Going to need to check for mastery level to determine how many to include on screen
+        //MAX = 4
+        //MIN = 1
         int maxMastery = 4;
 
         //Loop through all objects
         for(int k = 1; k < maxMastery; k++){
 
             int id = taskObject.get(k).getId();
-
-            //If initial button, constrain to the parent_id left
-            //Else, connect to the previous component
             int prevID = taskObject.get(k-1).getId();
             int topConstraint = ConstraintSet.PARENT_ID;
             int leftConstID = prevID;
@@ -162,7 +165,6 @@ public class GameActivity extends AppCompatActivity {
                 rightConstraint = ConstraintSet.RIGHT;
 
                 set.connect(topConstraint, ConstraintSet.BOTTOM, id, ConstraintSet.BOTTOM, 0);
-//                set.connect(taskObject.get(k-2).getId(), ConstraintSet.BOTTOM, id, ConstraintSet.BOTTOM, 0);
                 set.connect(prevID, ConstraintSet.BOTTOM, id, ConstraintSet.BOTTOM, 0);
             }
 
@@ -174,11 +176,12 @@ public class GameActivity extends AppCompatActivity {
             set.constrainHeight(id, 180);
             set.constrainWidth(id, 250);
 
+            taskObject.get(k).setTypeface(Typeface.create("casual", Typeface.BOLD));
             taskObjectLayout.addView(taskObject.get(k));
             set.applyTo(taskObjectLayout);
         }
 
-        set.connect(taskObject.get(3).getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0);
+        set.connect(taskObject.get(maxMastery-1).getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0);
         set.applyTo(taskObjectLayout);
     }
 }
