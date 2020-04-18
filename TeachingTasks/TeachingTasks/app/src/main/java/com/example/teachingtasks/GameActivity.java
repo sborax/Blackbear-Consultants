@@ -82,9 +82,7 @@ public class GameActivity extends AppCompatActivity {
             });
         }
 
-        if(questionObject.getText().toString().equals("Two")){
-            tryToChangeConstraints();
-        }
+        tryToChangeConstraints();
 
         /*
         TEMP EVENT HANDLER
