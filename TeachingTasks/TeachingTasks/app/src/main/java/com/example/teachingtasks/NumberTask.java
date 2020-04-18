@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.UUID;
 
 public class NumberTask extends Task implements TaskInterface{
@@ -14,12 +15,13 @@ public class NumberTask extends Task implements TaskInterface{
     private final UUID ID = UUID.randomUUID();
     private final String QUESTION = "Click the Number";
     private String questionObject;
-    ArrayList<Button> taskObjects = new ArrayList<>();
+    HashMap<String, Button> taskObjects = new HashMap<>();
     int mastery = 0;
 
-    public NumberTask(GameActivity gameActivity, UUID id, String q, ArrayList<Button> obj) {
+    public NumberTask(GameActivity gameActivity, UUID id, String q, HashMap<String, Button> obj) {
         super(id, q, obj);
 
+        Button zero = new Button(gameActivity.getBaseContext());
         Button one = new Button(gameActivity.getBaseContext());
         Button two = new Button(gameActivity.getBaseContext());
         Button three = new Button(gameActivity.getBaseContext());
@@ -29,13 +31,13 @@ public class NumberTask extends Task implements TaskInterface{
         Button seven = new Button(gameActivity.getBaseContext());
         Button eight = new Button(gameActivity.getBaseContext());
         Button nine = new Button(gameActivity.getBaseContext());
-        Button zero = new Button(gameActivity.getBaseContext());
 
-        taskObjects.addAll(Arrays.asList(new Button[]{zero, one, two, three, four, five, six, seven, eight, nine}));
+        String[] questionObjects = {"Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"};
+        Button[] tempObjects = {zero, one, two, three, four, five, six, seven, eight, nine};
 
-        for(int k = 0; k < taskObjects.size(); k++){
+        for(int k = 0; k < questionObjects.length; k++){
 
-            Button curr = taskObjects.get(k);
+            Button curr = tempObjects[k];
 
             curr.setText(Integer.toString(k));
             curr.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
@@ -44,6 +46,7 @@ public class NumberTask extends Task implements TaskInterface{
             curr.setId((k+1)*1000000);
             curr.setBackground(null);
 
+            taskObjects.put(questionObjects[k], curr);
         }
 
 
@@ -61,7 +64,7 @@ public class NumberTask extends Task implements TaskInterface{
     }
 
     @Override
-    public ArrayList<Button> getTaskObjects() {
+    public HashMap<String, Button> getTaskObjects() {
         return this.taskObjects;
     }
 
@@ -86,7 +89,7 @@ public class NumberTask extends Task implements TaskInterface{
     }
 
     @Override
-    public void setTaskObjects(ArrayList<Button> objects) {
+    public void setTaskObjects(HashMap<String, Button> objects) {
 
     }
 }

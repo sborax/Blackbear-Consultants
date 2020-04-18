@@ -11,6 +11,7 @@ import android.widget.TextView;
 public class TaskSuccessActivity extends AppCompatActivity {
 
     TextView username;
+    TextView taskObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,9 @@ public class TaskSuccessActivity extends AppCompatActivity {
 
         username = (TextView) findViewById(R.id.username);
         username.setText(getIntent().getStringExtra("EXTRA_USER"));
+
+        taskObject = (TextView) findViewById(R.id.taskObject);
+        taskObject.setText(getIntent().getStringExtra("EXTRA_TASK_OBJECT"));
     }
 
     @Override

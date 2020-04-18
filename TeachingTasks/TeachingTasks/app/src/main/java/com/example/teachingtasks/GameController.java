@@ -3,6 +3,7 @@ package com.example.teachingtasks;
 import android.widget.Button;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 public class GameController {
@@ -39,6 +40,6 @@ public class GameController {
         //Give task with
 
 
-        return new Task(new UUID(10,1), "Temp Task Question", new ArrayList<Button>());
+        return new Task(new UUID(10,1), "Temp Task Question", new HashMap<String, Button>());
     }
 }

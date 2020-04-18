@@ -3,17 +3,18 @@ package com.example.teachingtasks;
 import android.widget.Button;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 public class Task implements TaskInterface {
 
     String question;
     String questionObject;
-    ArrayList<Button> taskObjects;
+    HashMap<String, Button> taskObjects;  //questionObject, ButtonObject
     int mastery = 0;
     UUID taskID;
 
-    public Task(UUID id, String q, ArrayList<Button> obj){
+    public Task(UUID id, String q, HashMap<String, Button> obj){
 
         this.taskID = id;
         this.question = q;
@@ -21,7 +22,7 @@ public class Task implements TaskInterface {
     }
 
     @Override
-    public ArrayList<Button> getTaskObjects() {
+    public HashMap<String, Button> getTaskObjects() {
         return taskObjects;
     }
 
@@ -51,7 +52,7 @@ public class Task implements TaskInterface {
     }
 
     @Override
-    public void setTaskObjects(ArrayList<Button> objects) {
+    public void setTaskObjects(HashMap<String, Button> objects) {
         this.taskObjects = objects;
     }
 
