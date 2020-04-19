@@ -1,5 +1,6 @@
 package com.example.teachingtasks;
 
+import android.app.Activity;
 import android.widget.Button;
 
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class GameController {
         return this.categories.remove(cat);
     }
 
-    public Task getNextTask(){
+    public static Task getNextTask(Activity activity){
         //Sort for category by mastery
         //Sort for task by mastery
         //Give task with lowest mastery first if last X questions mastered (answered correct in X tries)
@@ -39,8 +40,8 @@ public class GameController {
         //Give task with no recorded mastery if number of in-progress masteries < X
         //Give task with
 
+        NumberTask tempTask = new NumberTask(activity, new UUID(1000000,10), "Click the Number", new HashMap<String, Button>());
 
-
-        return new Task(new UUID(10,1), "Temp Task Question", new HashMap<String, Button>());
+        return tempTask;
     }
 }

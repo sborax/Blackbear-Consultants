@@ -57,10 +57,6 @@ public class GameActivity extends AppCompatActivity {
 
         tryToChangeConstraints();
 
-        /*
-        TEMP EVENT HANDLER
-         */
-
         taskNavButton = (Button) findViewById(R.id.taskNavButton);
         statisticsNavButton = (Button) findViewById(R.id.statisticsNavButton);
         settingsNavButton = (Button) findViewById(R.id.settingsNavButton);

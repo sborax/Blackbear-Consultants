@@ -1,13 +1,12 @@
 package com.example.teachingtasks;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.fonts.FontFamily;
 import android.widget.Button;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.UUID;
 
 public class NumberTask extends Task implements TaskInterface{
@@ -18,7 +17,7 @@ public class NumberTask extends Task implements TaskInterface{
     HashMap<String, Button> taskObjects = new HashMap<>();
     int mastery = 0;
 
-    public NumberTask(GameActivity gameActivity, UUID id, String q, HashMap<String, Button> obj) {
+    public NumberTask(Activity gameActivity, UUID id, String q, HashMap<String, Button> obj) {
         super(id, q, obj);
 
         Button zero = new Button(gameActivity.getBaseContext());
@@ -70,7 +69,7 @@ public class NumberTask extends Task implements TaskInterface{
 
     @Override
     public String getQuestionObject() {
-        return null;
+        return (String) this.taskObjects.keySet().toArray()[new Random().nextInt(9)];
     }
 
     @Override

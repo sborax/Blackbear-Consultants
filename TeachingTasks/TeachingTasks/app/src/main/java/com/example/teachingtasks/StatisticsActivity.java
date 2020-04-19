@@ -51,36 +51,6 @@ public class StatisticsActivity extends AppCompatActivity {
         username = (TextView) findViewById(R.id.username);
         username.setText(getIntent().getStringExtra("EXTRA_USER"));
 
-        taskNavButton = (Button) findViewById(R.id.taskNavButton);
-        statisticsNavButton = (Button) findViewById(R.id.statisticsNavButton);
-        settingsNavButton = (Button) findViewById(R.id.settingsNavButton);
-        taskNavButton.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                new NavButtonEventHandler().onClick(StatisticsActivity.this, v, username.getText().toString());
-                return false;
-            }
-        });
-
-        statisticsNavButton.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                new NavButtonEventHandler().onClick(StatisticsActivity.this, v, username.getText().toString());
-                return false;
-            }
-        });
-
-        settingsNavButton.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                new NavButtonEventHandler().onClick(StatisticsActivity.this, v, username.getText().toString());
-                return false;
-            }
-        });
-
         db = new StatisticsDBHelper(this);
 
         //test database entries
@@ -164,6 +134,37 @@ public class StatisticsActivity extends AppCompatActivity {
         chartTotal.setCenterText("Total Accuracy");
         setChartStyle(chartTotal, true);
         legend = chartTotal.getLegend();
+
+        taskNavButton = (Button) findViewById(R.id.taskNavButton);
+        statisticsNavButton = (Button) findViewById(R.id.statisticsNavButton);
+        settingsNavButton = (Button) findViewById(R.id.settingsNavButton);
+
+        taskNavButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                new NavButtonEventHandler().onClick(StatisticsActivity.this, v, username.getText().toString());
+                return false;
+            }
+        });
+
+        statisticsNavButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                new NavButtonEventHandler().onClick(StatisticsActivity.this, v, username.getText().toString());
+                return false;
+            }
+        });
+
+        settingsNavButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                new NavButtonEventHandler().onClick(StatisticsActivity.this, v, username.getText().toString());
+                return false;
+            }
+        });
     }
 
     private void setChartStyle(PieChart chart, boolean total) {
