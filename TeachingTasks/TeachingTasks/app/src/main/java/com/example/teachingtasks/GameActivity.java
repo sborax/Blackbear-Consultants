@@ -105,18 +105,24 @@ public class GameActivity extends AppCompatActivity {
         //Add them to the layout
 
 
-        //If a task has an Object, constrain it and
         final String qObject = questionObject.getText().toString();
 
         //Going to need to check for mastery level to determine how many to include on screen
+        //Mastery < 25% = 1 taskObject
+        //Mastery < 50% = 2 taskObject
+        //Mastery < 75% = 3 taskObject
+        //Mastery < 100% = 4 taskObject
         //MAX = 4
         //MIN = 1
         int maxMastery =  1;
 
+        //Create temp array for taskObjects that will be displayed
+        //Add the questionObject to the array
         Iterator keySet = taskObject.keySet().iterator();
         final ArrayList<Button> tempObjects = new ArrayList<>();
         tempObjects.add(taskObject.get(qObject));
 
+        //Add any random taskObjects necessary to match maxMastery
         while (keySet.hasNext() && tempObjects.size() != maxMastery){
 
             String temp = (String) keySet.next();
@@ -124,8 +130,10 @@ public class GameActivity extends AppCompatActivity {
                 tempObjects.add(taskObject.get(temp));
         }
 
+        //Randomize button locations by randomizing array index
         Collections.shuffle(tempObjects);
 
+        //Loop through temp array to set layout of taskObjects
         for (int k = 0; k < maxMastery; k++){
 
             int currID = tempObjects.get(k).getId();
@@ -133,7 +141,7 @@ public class GameActivity extends AppCompatActivity {
             int leftID = ConstraintSet.PARENT_ID;
             int leftConstraint = ConstraintSet.LEFT;
 
-            //If
+            //If this is the 2nd or 4th button, adjust constraints
             if (k % 2 != 0){
 
                 int prevID = tempObjects.get(k-1).getId();
@@ -142,19 +150,23 @@ public class GameActivity extends AppCompatActivity {
 
                 set.connect(prevID, ConstraintSet.RIGHT, currID, ConstraintSet.LEFT, 0);
             }
+
+            //2x2 layout, so if we are on the second row, adjust constraints
             if(k > 1) {
 
                 topID = tempObjects.get(k-2).getId();
-
                 set.connect(topID, ConstraintSet.BOTTOM, currID, ConstraintSet.TOP, 0);
             }
+
+            //If we only have 3 taskObjects to display, adjust constraints
             if(k == 2 && maxMastery == 3){
 
                 int prevID = tempObjects.get(k-1).getId();
-
                 set.connect(prevID, ConstraintSet.BOTTOM, currID, ConstraintSet.TOP, 0);
             }
 
+
+            //Set all constraints
             set.connect(currID, ConstraintSet.TOP, topID, ConstraintSet.TOP, 0);
             set.connect(currID, ConstraintSet.LEFT, leftID, leftConstraint, 0);
             set.connect(currID, ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0);
@@ -162,6 +174,8 @@ public class GameActivity extends AppCompatActivity {
             set.constrainHeight(currID, 180);
             set.constrainWidth(currID,250);
 
+
+            //Set Event Handler and Text Styling
             tempObjects.get(k).setTypeface(Typeface.create("casual", Typeface.BOLD));
             tempObjects.get(k).setOnTouchListener(new View.OnTouchListener() {
                 @Override
@@ -172,10 +186,13 @@ public class GameActivity extends AppCompatActivity {
                 }
             });
 
+
+            //Add to layout and apply connections
             taskObjectLayout.addView(tempObjects.get(k));
             set.applyTo(taskObjectLayout);
         }
 
+        //Ensure the last taskObject is constraint to the PARENT_RIGHT
         set.connect(tempObjects.get(maxMastery-1).getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0);
         set.applyTo(taskObjectLayout);
     }
