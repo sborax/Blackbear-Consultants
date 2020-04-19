@@ -1,6 +1,11 @@
 package com.example.teachingtasks;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -32,6 +37,8 @@ public class StatisticsActivity extends AppCompatActivity {
     PieChart chartCircle;
     PieDataSet pieDataSetCircle;
     PieData pieDataCircle;
+    Button taskNavButton, statisticsNavButton, settingsNavButton;
+    TextView username;
 
     Legend legend;
     Description description;
@@ -40,6 +47,39 @@ public class StatisticsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
+
+        username = (TextView) findViewById(R.id.username);
+        username.setText(getIntent().getStringExtra("EXTRA_USER"));
+
+        taskNavButton = (Button) findViewById(R.id.taskNavButton);
+        statisticsNavButton = (Button) findViewById(R.id.statisticsNavButton);
+        settingsNavButton = (Button) findViewById(R.id.settingsNavButton);
+        taskNavButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                new NavButtonEventHandler().onClick(StatisticsActivity.this, v, username.getText().toString());
+                return false;
+            }
+        });
+
+        statisticsNavButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                new NavButtonEventHandler().onClick(StatisticsActivity.this, v, username.getText().toString());
+                return false;
+            }
+        });
+
+        settingsNavButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                new NavButtonEventHandler().onClick(StatisticsActivity.this, v, username.getText().toString());
+                return false;
+            }
+        });
 
         db = new StatisticsDBHelper(this);
 

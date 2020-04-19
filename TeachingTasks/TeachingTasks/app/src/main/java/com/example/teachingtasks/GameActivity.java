@@ -64,17 +64,12 @@ public class GameActivity extends AppCompatActivity {
         taskNavButton = (Button) findViewById(R.id.taskNavButton);
         statisticsNavButton = (Button) findViewById(R.id.statisticsNavButton);
         settingsNavButton = (Button) findViewById(R.id.settingsNavButton);
-        /*
-        TEMP EVENT HANDLERS
-         */
 
         taskNavButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-                Intent loginIntent = new Intent(GameActivity.this, LoginActivity.class);
-                loginIntent.putExtra("EXTRA_USER", username.getText());
-                GameActivity.this.startActivity(loginIntent);
+                new NavButtonEventHandler().onClick(GameActivity.this, v, username.getText().toString());
                 return false;
             }
         });
@@ -83,8 +78,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-                Intent statsIntent = new Intent(GameActivity.this, StatisticsActivity.class);
-                GameActivity.this.startActivity(statsIntent);
+                new NavButtonEventHandler().onClick(GameActivity.this, v, username.getText().toString());
                 return false;
             }
         });
@@ -93,8 +87,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-                Intent settingsIntent = new Intent(GameActivity.this, SettingsActivity.class);
-                GameActivity.this.startActivity(settingsIntent);
+                new NavButtonEventHandler().onClick(GameActivity.this, v, username.getText().toString());
                 return false;
             }
         });
