@@ -111,16 +111,16 @@ public class GameActivity extends AppCompatActivity {
         //Going to need to check for mastery level to determine how many to include on screen
         //MAX = 4
         //MIN = 1
-        int maxMastery = 4;
+        int maxMastery =  1;
 
         Iterator keySet = taskObject.keySet().iterator();
         final ArrayList<Button> tempObjects = new ArrayList<>();
         tempObjects.add(taskObject.get(qObject));
 
-        while (keySet.hasNext()){
+        while (keySet.hasNext() && tempObjects.size() != maxMastery){
 
             String temp = (String) keySet.next();
-            if(!temp.equals(qObject) && tempObjects.size() < maxMastery)
+            if(!temp.equals(qObject))
                 tempObjects.add(taskObject.get(temp));
         }
 
@@ -130,9 +130,8 @@ public class GameActivity extends AppCompatActivity {
 
             int currID = tempObjects.get(k).getId();
             int topID = ConstraintSet.PARENT_ID;
-            int leftID = topID;
+            int leftID = ConstraintSet.PARENT_ID;
             int leftConstraint = ConstraintSet.LEFT;
-            int rightConstraint = ConstraintSet.RIGHT;
 
             //If
             if (k % 2 != 0){
@@ -143,16 +142,22 @@ public class GameActivity extends AppCompatActivity {
 
                 set.connect(prevID, ConstraintSet.RIGHT, currID, ConstraintSet.LEFT, 0);
             }
-            if(k > 1){
+            if(k > 1) {
 
                 topID = tempObjects.get(k-2).getId();
 
                 set.connect(topID, ConstraintSet.BOTTOM, currID, ConstraintSet.TOP, 0);
             }
+            if(k == 2 && maxMastery == 3){
+
+                int prevID = tempObjects.get(k-1).getId();
+
+                set.connect(prevID, ConstraintSet.BOTTOM, currID, ConstraintSet.TOP, 0);
+            }
 
             set.connect(currID, ConstraintSet.TOP, topID, ConstraintSet.TOP, 0);
             set.connect(currID, ConstraintSet.LEFT, leftID, leftConstraint, 0);
-            set.connect(currID, ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, rightConstraint, 0);
+            set.connect(currID, ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0);
             set.connect(currID, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0);
             set.constrainHeight(currID, 180);
             set.constrainWidth(currID,250);
