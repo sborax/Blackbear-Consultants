@@ -107,26 +107,6 @@ public class GameActivity extends AppCompatActivity {
 
         //If a task has an Object, constrain it and
         final String qObject = questionObject.getText().toString();
-        int tempID = taskObject.get(qObject).getId();
-        set.connect(tempID, ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT,0);
-        set.connect(tempID, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT,0);
-        set.connect(tempID, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0);
-        set.connect(tempID, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM,0);
-        set.constrainHeight(tempID, 180);
-        set.constrainWidth(tempID,250);
-
-        taskObjectLayout.addView(taskObject.get(qObject));
-        set.applyTo(taskObjectLayout);
-
-        taskObject.get(qObject).setTypeface(Typeface.create("casual", Typeface.BOLD));
-        taskObject.get(qObject).setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                new TaskObjectEventHandler().onClick(GameActivity.this, v, username.getText().toString(), qObject);
-                return false;
-            }
-        });
 
         //Going to need to check for mastery level to determine how many to include on screen
         //MAX = 4
@@ -140,55 +120,44 @@ public class GameActivity extends AppCompatActivity {
         while (keySet.hasNext()){
 
             String temp = (String) keySet.next();
-            if(!temp.equals(qObject))
+            if(!temp.equals(qObject) && tempObjects.size() < maxMastery)
                 tempObjects.add(taskObject.get(temp));
         }
 
         Collections.shuffle(tempObjects);
 
-        //Loop through all objects
-        for(int k = 1; k < maxMastery; k++){
+        for (int k = 0; k < maxMastery; k++){
 
-            int id = tempObjects.get(k).getId();
-            int prevID = tempObjects.get(k-1).getId();
-            int topConstraint = ConstraintSet.PARENT_ID;
-            int leftConstID = prevID;
-            int rightConstID = id;
-            int leftConstraint = ConstraintSet.RIGHT;
-            int rightConstraint = ConstraintSet.LEFT;
+            int currID = tempObjects.get(k).getId();
+            int topID = ConstraintSet.PARENT_ID;
+            int leftID = topID;
+            int leftConstraint = ConstraintSet.LEFT;
+            int rightConstraint = ConstraintSet.RIGHT;
 
-            //2x2 grid, if this is the 2nd object it's RIGHT -> PATENT_RIGHT
-            if (k == 1){
-              set.connect(id, ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0);
+            //If
+            if (k % 2 != 0){
+
+                int prevID = tempObjects.get(k-1).getId();
+                leftID = prevID;
+                leftConstraint = ConstraintSet.RIGHT;
+
+                set.connect(prevID, ConstraintSet.RIGHT, currID, ConstraintSet.LEFT, 0);
+            }
+            if(k > 1){
+
+                topID = tempObjects.get(k-2).getId();
+
+                set.connect(topID, ConstraintSet.BOTTOM, currID, ConstraintSet.TOP, 0);
             }
 
-            //2x2 grid, ensure the bottom 2 objects constrain bottomRow_TOP -> topRow_BOTTOM
-            if (k >= 2){
-                topConstraint = tempObjects.get(k-2).getId();
-            }
+            set.connect(currID, ConstraintSet.TOP, topID, ConstraintSet.TOP, 0);
+            set.connect(currID, ConstraintSet.LEFT, leftID, leftConstraint, 0);
+            set.connect(currID, ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, rightConstraint, 0);
+            set.connect(currID, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0);
+            set.constrainHeight(currID, 180);
+            set.constrainWidth(currID,250);
 
-            //If this is the 3rd object, reset so:
-            // LEFT -> PARENT_LEFT
-            if (k % 2 == 0){
-                leftConstID = ConstraintSet.PARENT_ID;
-                rightConstID = ConstraintSet.PARENT_ID;
-                leftConstraint = ConstraintSet.LEFT;
-                rightConstraint = ConstraintSet.RIGHT;
-
-                //Set previous object's topRow_BOTTOM -> bottomRow_TOP
-                set.connect(topConstraint, ConstraintSet.BOTTOM, id, ConstraintSet.BOTTOM, 200);
-                set.connect(prevID, ConstraintSet.BOTTOM, id, ConstraintSet.BOTTOM, 200);
-            }
-
-            //Set the constraints
-            set.connect(id, ConstraintSet.LEFT, leftConstID, leftConstraint, 0);
-            set.connect(id, ConstraintSet.TOP, topConstraint, ConstraintSet.TOP, 0);
-            set.connect(id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0);
-            set.connect(prevID, ConstraintSet.RIGHT, rightConstID, rightConstraint,0);
-
-            set.constrainHeight(id, 180);
-            set.constrainWidth(id, 250);
-
+            tempObjects.get(k).setTypeface(Typeface.create("casual", Typeface.BOLD));
             tempObjects.get(k).setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
@@ -198,14 +167,10 @@ public class GameActivity extends AppCompatActivity {
                 }
             });
 
-            //Set font, add to Layout, and apply constraints
-            tempObjects.get(k).setTypeface(Typeface.create("casual", Typeface.BOLD));
-            taskObjectLayout.removeView(tempObjects.get(k));
             taskObjectLayout.addView(tempObjects.get(k));
             set.applyTo(taskObjectLayout);
         }
 
-        //Ensure last object added constraints RIGHT -> PARENT_RIGHT
         set.connect(tempObjects.get(maxMastery-1).getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0);
         set.applyTo(taskObjectLayout);
     }
