@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TaskSuccessActivity">
+
+    <ImageView
+        android:id="@+id/woodHeaderImageView3"
+        android:layout_width="0dp"
+        android:layout_height="125dp"
+        android:adjustViewBounds="true"
+        android:background="#875B42"
+        android:contentDescription="TODO"
+        android:cropToPadding="true"
+        android:scaleType="fitXY"
+        android:tint="#634433"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/chalkwood" />
+
+    <ImageView
+        android:id="@+id/woodHeaderImageView4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:adjustViewBounds="true"
+        android:cropToPadding="true"
+        android:scaleType="fitXY"
+        android:tint="#99875B42"
+        app:layout_constraintBottom_toBottomOf="@+id/woodHeaderImageView3"
+        app:layout_constraintEnd_toEndOf="@+id/woodHeaderImageView3"
+        app:layout_constraintStart_toStartOf="@+id/woodHeaderImageView3"
+        app:layout_constraintTop_toTopOf="@+id/woodHeaderImageView3"
+        app:srcCompat="@drawable/chalkwood" />
+
+    <ImageView
+        android:id="@+id/chalkBackgroundImageView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="TODO"
+        android:cropToPadding="true"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/woodHeaderImageView3"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/chalk" />
+
+    <ImageView
+        android:id="@+id/balloon1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toStartOf="@+id/balloon2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/successText"
+        app:srcCompat="@drawable/ic_balloon_1" />
+
+    <ImageView
+        android:id="@+id/balloon2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/successText"
+        app:srcCompat="@drawable/ic_balloon_2" />
+
+    <ImageView
+        android:id="@+id/balloon3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/balloon2"
+        app:layout_constraintTop_toBottomOf="@+id/successText"
+        app:srcCompat="@drawable/ic_balloon_3" />
+
+    <TextView
+        android:id="@+id/successText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="casual"
+        android:text="Great Job!!!"
+        android:textColor="#FFFFFF"
+        android:textSize="58sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stars" />
+
+    <ImageView
+        android:id="@+id/stars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/woodHeaderImageView3"
+        app:srcCompat="@drawable/ic_star" />
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="casual"
+        android:text="tempUser"
+        android:textColor="#FFFFFF"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/woodHeaderImageView4"
+        app:layout_constraintEnd_toEndOf="@+id/woodHeaderImageView4"
+        app:layout_constraintStart_toStartOf="@+id/woodHeaderImageView4"
+        app:layout_constraintTop_toTopOf="@+id/woodHeaderImageView4" />
+
+    <TextView
+        android:id="@+id/taskObject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="casual"
+        android:text="TextView"
+        android:textColor="#FFFFFF"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/chalkBackgroundImageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/balloon1" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

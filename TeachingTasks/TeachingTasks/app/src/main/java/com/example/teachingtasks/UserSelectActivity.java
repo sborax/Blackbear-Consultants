@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.TypedValue;
@@ -15,16 +16,17 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
 public class UserSelectActivity extends AppCompatActivity {
 
-    Button cancelButton, editButton, addButton;
+    Button editButton, addButton;
     HashMap<Integer, EditText> userOptions = new HashMap<Integer, EditText>();
     RegisterUserDBHelper mydb;
-    String[] users;
-    EditText[] selectedUsers = new EditText[20];
+    ArrayList<String> users;
+    ArrayList<EditText> selectedUsers = new ArrayList<EditText>();
     LinearLayout linearLayout;
     ScrollView userSelectScrollView;
     UserSelectActivity userSelectActivity = this;
@@ -45,7 +47,7 @@ public class UserSelectActivity extends AppCompatActivity {
 
         //If no users found, Intent to RegisterUser Activity
         //Else, user(s) found, userOptions initialized, display userOptions
-        if(users[0] == null) {
+        if(users.get(0) == null) {
             Intent createUserIntent = new Intent(UserSelectActivity.this, RegisterUserActivity.class);
             startActivity(createUserIntent);
         }
@@ -77,35 +79,43 @@ public class UserSelectActivity extends AppCompatActivity {
                 //If clicked, swap the Text and do appropriate behavior.
                switch (editButton.getText().toString()){
                    case "Cancel": cancelUserEdit(v); break;
-                   case "Edit": editButton.setText("Cancel"); addButton.setText("Delete"); break;
+                   case "Edit": changeButtons(); break;
                    default: return;
                }
             }
         });
     }
 
+    private void changeButtons(){
+
+        editButton.setText("Cancel");
+        editButton.setCompoundDrawablesWithIntrinsicBounds(getBaseContext().getResources().getDrawable(android.R.drawable.ic_menu_close_clear_cancel),null, null, null);
+
+
+        addButton.setText("Delete");
+        addButton.setCompoundDrawablesWithIntrinsicBounds(getBaseContext().getResources().getDrawable(android.R.drawable.ic_menu_delete), null, null, null);
+    }
+
     private void cancelUserEdit(View v) {
         //Deselect all users and change Cancel to Edit
 
         editButton.setText("Edit");
+        editButton.setCompoundDrawablesWithIntrinsicBounds(getBaseContext().getResources().getDrawable(android.R.drawable.ic_menu_manage),null, null, null);
+
         addButton.setText("Add");
+        addButton.setCompoundDrawablesWithIntrinsicBounds(getBaseContext().getResources().getDrawable(android.R.drawable.ic_menu_add), null,null,null);
 
-        for(int k = 0; k < selectedUsers.length; k++){
-            if(selectedUsers[k] == null){
-                k = selectedUsers.length;
-            }
-            else{
-                selectedUsers[k].setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                    @Override
-                    public void onFocusChange(View v, boolean hasFocus) {
+        for(int k = 0; k < selectedUsers.size(); k++){
+            selectedUsers.get(k).setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
 
-                    }
-                });
-                selectedUsers[k].clearFocus();
-                selectedUsers[k].setTextSize(48);
-            }
+                }
+            });
+            selectedUsers.get(k).clearFocus();
+            selectedUsers.get(k).setTextSize(48);
         }
-        selectedUsers = new EditText[20];
+        selectedUsers = new ArrayList<EditText>();
     }
 
     /*
@@ -124,11 +134,7 @@ public class UserSelectActivity extends AppCompatActivity {
 
         users = mydb.getAllUsers();
 
-        for(int m = 0; m < users.length; m++){
-
-            if(users[m] == null){
-                return;
-            }
+        for(int m = 0; m < users.size(); m++){
 
             //Create a Unique ID for each userOption
             Random rand = new Random();
@@ -142,7 +148,7 @@ public class UserSelectActivity extends AppCompatActivity {
             params.gravity = Gravity.CENTER;
             userOptions.get(id).setLayoutParams(params);
             userOptions.get(id).setId(id);
-            userOptions.get(id).setText(users[m]);
+            userOptions.get(id).setText(users.get(m));
             userOptions.get(id).setTextSize(TypedValue.COMPLEX_UNIT_SP, 48);
             userOptions.get(id).setTextColor(0xFFFFFFFF);
             userOptions.get(id).setTypeface(Typeface.create("casual", Typeface.BOLD));
@@ -177,21 +183,15 @@ public class UserSelectActivity extends AppCompatActivity {
     private void handleUserOptionClick(View v) {
         //Add user to selectedUsers
 
-        for(int j = 0; j < selectedUsers.length; j++){
-
-            //If empty slot found, insert user into selectedUsers, return
-            if(selectedUsers[j] == null){
-
-                selectedUsers[j] = userOptions.get(v.getId());
-                selectedUsers[j].setTextSize(52);
-                selectedUsers[j].setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                    @Override
-                    public void onFocusChange(View v, boolean hasFocus) {
-                        v.requestFocus();
-                    }
-                });
-                return;
+        selectedUsers.add(userOptions.get(v.getId()));
+        selectedUsers.get(selectedUsers.size()-1).setTextSize(52);
+        selectedUsers.get(selectedUsers.size()-1).setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                v.requestFocus();
             }
-        }
+        });
+
+        return;
     }
 }
