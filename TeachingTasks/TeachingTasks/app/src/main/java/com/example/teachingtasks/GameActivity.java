@@ -27,24 +27,21 @@ public class GameActivity extends AppCompatActivity {
     ConstraintLayout taskObjectLayout;
     ConstraintSet set;
     GameController controller;
+    Task currentTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        controller = new GameController(this);
-        /*
-        Initialize UI variables (Buttons, etc)
-        getIntent.Username
-        GameController.getNextTask
-        GameController.getNextQuestionObject
-         */
-
         taskObjectLayout = (ConstraintLayout) findViewById(R.id.taskObjectLayout);
 
         set = new ConstraintSet();
         set.clone(taskObjectLayout);
+
+        controller = new GameController(this);
+        currentTask = controller.getNextTask(this);
+        taskObjects = currentTask.getTaskObjects();
 
         username = (TextView) findViewById(R.id.username);
         username.setText(getIntent().getStringExtra("EXTRA_USER"));
@@ -53,11 +50,8 @@ public class GameActivity extends AppCompatActivity {
         question.setText(getIntent().getStringExtra("EXTRA_QUESTION"));
 
         questionObject = (TextView) findViewById(R.id.taskQuestionObject);
-        questionObject.setText(getIntent().getStringExtra("EXTRA_TASK_OBJECT"));
+        questionObject.setText(currentTask.getQuestionObject());
 
-        Task tempTask = controller.getNextTask(this);
-
-        taskObjects = tempTask.getTaskObjects();
         initializeTaskObjects();
 
         taskNavButton = (Button) findViewById(R.id.taskNavButton);
@@ -106,7 +100,7 @@ public class GameActivity extends AppCompatActivity {
         //Mastery < 100% = 4 taskObject
         //MAX = 4
         //MIN = 1
-        int maxMastery =  1;
+        int maxMastery =  4;
 
         //Create temp array for taskObjects that will be displayed
         //Add the questionObject to the array

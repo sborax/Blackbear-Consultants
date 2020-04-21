@@ -10,13 +10,15 @@ import java.util.UUID;
 public class GameController {
 
     ArrayList<Category> categories = new ArrayList<Category>();
+    StatisticsDBHelper mydb;
 
     public GameController(GameActivity gameActivity){
 
         try {
-
             categories.add(new MatchingCategory(gameActivity,"", null));
-
+            mydb = new StatisticsDBHelper(gameActivity);
+            //Add the rest from the database
+            categories.addAll(mydb.getCategories());
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -74,8 +76,6 @@ public class GameController {
             if(tasks.get(n).getMastery() > taskMastery){
                 nextTask = tasks.get(n);
                 taskMastery = nextTask.getMastery();
-
-                System.out.println("Got Task: " + nextTask.getQuestion());
             }
         }
 

@@ -31,5 +31,4 @@ public class MatchingCategory extends Category implements CategoryInterface {
     public ArrayList<Task> getTasks(){
         return this.tasks;
     }
-
 }
