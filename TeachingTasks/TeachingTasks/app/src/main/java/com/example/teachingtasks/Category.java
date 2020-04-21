@@ -6,13 +6,13 @@ public class Category implements CategoryInterface {
 
     String category;
     ArrayList<Task> tasks;
-    int taskCount;
+    int mastery;
 
     public Category(String newCatName, ArrayList<Task> initTasks){
 
         this.category = newCatName;
         this.tasks = initTasks;
-        taskCount = initTasks.size();
+        mastery = 0;
     }
 
     @Override
@@ -41,5 +41,11 @@ public class Category implements CategoryInterface {
         if(this.tasks.contains(delTask)){
             this.tasks.remove(delTask);
         }
+    }
+
+    @Override
+    public int getMastery() {
+
+        return mastery;
     }
 }

@@ -11,6 +11,19 @@ public class GameController {
 
     ArrayList<Category> categories = new ArrayList<Category>();
 
+    public GameController(GameActivity gameActivity){
+
+        try {
+
+            categories.add(new MatchingCategory(gameActivity,"", null));
+
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
     public ArrayList<Category> getCategories(){
         return this.categories;
     }
@@ -31,7 +44,7 @@ public class GameController {
         return this.categories.remove(cat);
     }
 
-    public static Task getNextTask(Activity activity){
+    public Task getNextTask(Activity activity){
         //Sort for category by mastery
         //Sort for task by mastery
         //Give task with lowest mastery first if last X questions mastered (answered correct in X tries)
@@ -40,8 +53,32 @@ public class GameController {
         //Give task with no recorded mastery if number of in-progress masteries < X
         //Give task with
 
-        NumberTask tempTask = new NumberTask(activity, new UUID(1000000,10), "Click the Number", new HashMap<String, Button>());
 
-        return tempTask;
+        int catMastery = -1;
+        int taskMastery = -1;
+        ArrayList<Task> tasks = new ArrayList<>();
+        Task nextTask = null;
+
+        //Get the most mastered Category
+        for (int k = 0; k < this.categories.size(); k++){
+
+            if(this.categories.get(k).getMastery() > catMastery){
+                catMastery = this.categories.get(k).getMastery();
+                tasks = this.categories.get(k).getTasks();
+            }
+        }
+
+        //Get the most mastered Task
+        for (int n = 0; n < tasks.size(); n++){
+
+            if(tasks.get(n).getMastery() > taskMastery){
+                nextTask = tasks.get(n);
+                taskMastery = nextTask.getMastery();
+
+                System.out.println("Got Task: " + nextTask.getQuestion());
+            }
+        }
+
+        return nextTask;
     }
 }

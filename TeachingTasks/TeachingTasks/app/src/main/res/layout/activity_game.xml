@@ -103,7 +103,6 @@
         app:layout_constraintStart_toStartOf="@+id/woodHeaderImageView"
         app:layout_constraintTop_toTopOf="@+id/woodHeaderImageView" />
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/taskObjectLayout"
         android:layout_width="0dp"

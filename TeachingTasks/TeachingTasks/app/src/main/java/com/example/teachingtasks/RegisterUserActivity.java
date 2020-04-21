@@ -73,7 +73,7 @@ public class RegisterUserActivity extends AppCompatActivity implements View.OnCl
 
     //When game selection button is clicked
     public void selectionButton(View v) {
-        Intent gameSelectIntent = new Intent(this, SelectionActivity.class);
+        Intent gameSelectIntent = new Intent(this, GameSelectionActivity.class);
         startActivity(gameSelectIntent);
     }
 }

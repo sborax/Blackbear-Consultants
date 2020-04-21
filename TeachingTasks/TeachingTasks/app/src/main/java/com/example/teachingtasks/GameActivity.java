@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -16,28 +15,31 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
-import java.util.function.Consumer;
 
 public class GameActivity extends AppCompatActivity {
 
     TextView username;
     TextView question;
     TextView questionObject;
-    HashMap<String, Button> taskObject = new HashMap<>();
+    HashMap<String, Button> taskObjects = new HashMap<>();
     Button taskNavButton, statisticsNavButton, settingsNavButton;
     ConstraintLayout taskObjectLayout;
-    NumberTask numberTask;
     ConstraintSet set;
+    GameController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        numberTask = new NumberTask(this, UUID.randomUUID(), "Click the Number", new HashMap<String, Button>());
+        controller = new GameController(this);
+        /*
+        Initialize UI variables (Buttons, etc)
+        getIntent.Username
+        GameController.getNextTask
+        GameController.getNextQuestionObject
+         */
 
         taskObjectLayout = (ConstraintLayout) findViewById(R.id.taskObjectLayout);
 
@@ -53,9 +55,10 @@ public class GameActivity extends AppCompatActivity {
         questionObject = (TextView) findViewById(R.id.taskQuestionObject);
         questionObject.setText(getIntent().getStringExtra("EXTRA_TASK_OBJECT"));
 
-        taskObject = numberTask.getTaskObjects();
+        Task tempTask = controller.getNextTask(this);
 
-        tryToChangeConstraints();
+        taskObjects = tempTask.getTaskObjects();
+        initializeTaskObjects();
 
         taskNavButton = (Button) findViewById(R.id.taskNavButton);
         statisticsNavButton = (Button) findViewById(R.id.statisticsNavButton);
@@ -89,7 +92,7 @@ public class GameActivity extends AppCompatActivity {
         });
     }
 
-    private void tryToChangeConstraints() {
+    private void initializeTaskObjects() {
         //Change constraints on taskObjects
         //Add them to the layout
 
@@ -107,16 +110,16 @@ public class GameActivity extends AppCompatActivity {
 
         //Create temp array for taskObjects that will be displayed
         //Add the questionObject to the array
-        Iterator keySet = taskObject.keySet().iterator();
+        Iterator keySet = taskObjects.keySet().iterator();
         final ArrayList<Button> tempObjects = new ArrayList<>();
-        tempObjects.add(taskObject.get(qObject));
+        tempObjects.add(taskObjects.get(qObject));
 
         //Add any random taskObjects necessary to match maxMastery
         while (keySet.hasNext() && tempObjects.size() != maxMastery){
 
             String temp = (String) keySet.next();
             if(!temp.equals(qObject))
-                tempObjects.add(taskObject.get(temp));
+                tempObjects.add(taskObjects.get(temp));
         }
 
         //Randomize button locations by randomizing array index

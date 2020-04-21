@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".TaskSuccessActivity"></activity>
-        <activity android:name=".SelectionActivity" />
+        <activity android:name=".GameSelectionActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".StatisticsActivity" />
         <activity android:name=".LoginActivity" />

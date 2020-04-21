@@ -9,4 +9,5 @@ public interface CategoryInterface {
     public void setCategory(String newCat);
     public void addTask(Task newTask);
     public void deleteTask(Task delTask);
+    public int getMastery();
 }

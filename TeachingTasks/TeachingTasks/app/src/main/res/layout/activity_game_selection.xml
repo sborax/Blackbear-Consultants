@@ -7,39 +7,69 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/woodHeaderImageView5"
-        android:layout_width="414dp"
-        android:layout_height="90dp"
-        android:layout_marginBottom="630dp"
+        android:id="@+id/woodHeaderImageView2"
+        android:layout_width="0dp"
+        android:layout_height="125dp"
         android:adjustViewBounds="true"
         android:background="#875B42"
-        android:contentDescription="@string/outerheader"
+        android:contentDescription="TODO"
         android:cropToPadding="true"
         android:scaleType="fitXY"
         android:tint="#634433"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/chalkwood" />
 
     <ImageView
-        android:id="@+id/chalkBackgroundImageView3"
-        android:layout_width="412dp"
-        android:layout_height="641dp"
+        android:id="@+id/woodHeaderImageView"
+        android:layout_width="0dp"
+        android:layout_height="104dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:adjustViewBounds="true"
+        android:cropToPadding="true"
+        android:scaleType="fitXY"
+        android:tint="#99875B42"
+        app:layout_constraintBottom_toBottomOf="@+id/woodHeaderImageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/woodHeaderImageView2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/chalkwood" />
+
+    <ImageView
+        android:id="@+id/chalkBackgroundImageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:adjustViewBounds="true"
         android:contentDescription="TODO"
         android:cropToPadding="true"
-        android:scaleType="center"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/woodHeaderImageView2"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/chalk" />
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="casual"
+        android:text="tempUser"
+        android:textColor="#FFFFFF"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/woodHeaderImageView"
+        app:layout_constraintEnd_toEndOf="@+id/woodHeaderImageView"
+        app:layout_constraintStart_toStartOf="@+id/woodHeaderImageView"
+        app:layout_constraintTop_toTopOf="@+id/woodHeaderImageView" />
 
     <!-- Rectangle 26 -->
 
@@ -52,12 +82,27 @@
         android:layout_height="202dp"
         android:layout_alignParentTop="true"
         android:background="@drawable/rectangle_2"
-        app:layout_constraintBottom_toBottomOf="@+id/chalkBackgroundImageView3"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/woodHeaderImageView5"
-        app:layout_constraintVertical_bias="0.316" />
+        app:layout_constraintTop_toBottomOf="@+id/woodHeaderImageView2" />
+
+    <Button
+        android:id="@+id/start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        android:fontFamily="casual"
+        android:text="Start"
+        android:textColor="#FFFFFF"
+        android:textSize="58sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rectangle_2" />
+
     <!--        android:layout_alignparentLeft="true"-->
 
     <!-- drawable/rectangle_2.xml -->

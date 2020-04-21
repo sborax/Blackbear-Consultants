@@ -47,10 +47,7 @@ public class NumberTask extends Task implements TaskInterface{
 
             taskObjects.put(questionObjects[k], curr);
         }
-
-
     }
-
 
     @Override
     public UUID getTaskID() {
@@ -74,7 +71,7 @@ public class NumberTask extends Task implements TaskInterface{
 
     @Override
     public int getMastery() {
-        return 0;
+        return this.mastery;
     }
 
     @Override
