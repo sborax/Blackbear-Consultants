@@ -17,7 +17,7 @@ public class GameController {
             categories.add(new MatchingCategory(gameActivity,"", null));
             mydb = new GameCategoryDBHelper(gameActivity);
             //Add the rest from the database
-            //categories.addAll(createDatabaseCategories());
+            categories.addAll(createDatabaseCategories());
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {

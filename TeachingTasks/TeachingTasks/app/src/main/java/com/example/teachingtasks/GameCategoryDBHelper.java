@@ -21,12 +21,12 @@ class GameCategoryDBHelper extends SQLiteOpenHelper {
     public GameCategoryDBHelper(Context context) {
         super(context, DATABASE_NAME, null, version);
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" + TABLE_ID+ " INTEGER PRIMARY KEY," + COL_USERNAME + " TEXT, " + COL_CATEGORY + " TEXT)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" + TABLE_ID+ " INTEGER PRIMARY KEY," + COL_USERNAME + " TEXT, " + COL_CATEGORY + " TEXT," + getTaskNames());
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" + TABLE_ID+ " INTEGER PRIMARY KEY," + COL_USERNAME + " TEXT, " + COL_CATEGORY + " TEXT)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" + TABLE_ID+ " INTEGER PRIMARY KEY," + COL_USERNAME + " TEXT, " + COL_CATEGORY + " TEXT," + getTaskNames());
     }
 
     @Override
@@ -34,6 +34,11 @@ class GameCategoryDBHelper extends SQLiteOpenHelper {
 
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
+    }
+
+    private String getTaskNames() {
+
+        return "NumberTask" + " TEXT)";
     }
 
     public void addCategory(String user, String category){
