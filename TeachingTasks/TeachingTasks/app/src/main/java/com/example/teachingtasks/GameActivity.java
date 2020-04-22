@@ -100,7 +100,7 @@ public class GameActivity extends AppCompatActivity {
         //Mastery < 100% = 4 taskObject
         //MAX = 4
         //MIN = 1
-        int maxMastery =  4;
+        int maxMastery =  currentTask.getMastery();
 
         //Create temp array for taskObjects that will be displayed
         //Add the questionObject to the array

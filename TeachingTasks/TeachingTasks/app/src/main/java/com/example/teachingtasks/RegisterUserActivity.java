@@ -60,7 +60,7 @@ public class RegisterUserActivity extends AppCompatActivity implements View.OnCl
         //Checks the ID and calls the appropriate EventHandler
         switch (v.getId()){
             case R.id.showPasswordCheckBox: new ShowPassEventHandler().onCheck(showPass, newPassword); break;
-            case R.id.createButton: new CreateUserEventHandler().onClick(this, mydb, newUsername, newPassword); break;
+            case R.id.createButton: new CreateUserEventHandler().onClick(this, newUsername, newPassword); break;
             default: return;
         }
     }

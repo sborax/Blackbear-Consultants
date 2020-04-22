@@ -9,7 +9,8 @@ import java.util.regex.Pattern;
 
 public class CreateUserEventHandler {
 
-    public void onClick(RegisterUserActivity mainActivity, RegisterUserDBHelper mydb, EditText newUsername, EditText newPassword) {
+
+    public void onClick(RegisterUserActivity mainActivity, EditText newUsername, EditText newPassword) {
 
         //Check password meets required guidelines (Caps, special char, length, etc)
         //Check database for duplicate username
@@ -24,12 +25,14 @@ public class CreateUserEventHandler {
         boolean invalidPass = false;
 
         //If the username doesn't exist in the database already, check the password
+        StatisticsDBHelper mydb = new StatisticsDBHelper(mainActivity);
+
         if(!mydb.containsUser(newUsername.getText().toString())){
 
             //If the password is acceptable, add the user
             if(isAcceptablePassword(pass)){
 
-                mydb.addUser(newUsername.getText().toString(), newPassword.getText().toString());
+                createUser(mainActivity, newUsername.getText().toString(), newPassword.getText().toString());
 
                 Intent userSelectIntent = new Intent(mainActivity.getBaseContext(),UserSelectActivity.class);
                 mainActivity.startActivity(userSelectIntent);
@@ -48,6 +51,18 @@ public class CreateUserEventHandler {
                     Toast.LENGTH_LONG).show();
         }
 
+    }
+
+    private void createUser(RegisterUserActivity mainActivity, String username, String password) {
+        //User was accepted, create the user
+
+        GameCategoryDBHelper gameCategoryDB = new GameCategoryDBHelper(mainActivity);
+        GameTaskDBHelper gameTasksDB = new GameTaskDBHelper(mainActivity);
+        RegisterUserDBHelper registerUserDB = new RegisterUserDBHelper(mainActivity);
+
+        registerUserDB.addUser(username, password);
+
+        gameCategoryDB.addCategory(username, "Matching");
     }
 
     private boolean isAcceptablePassword(String pass) {

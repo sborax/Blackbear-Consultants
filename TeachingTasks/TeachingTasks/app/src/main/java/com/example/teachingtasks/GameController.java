@@ -1,24 +1,23 @@
 package com.example.teachingtasks;
 
 import android.app.Activity;
-import android.widget.Button;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.UUID;
+import java.util.Collection;
 
 public class GameController {
 
     ArrayList<Category> categories = new ArrayList<Category>();
-    StatisticsDBHelper mydb;
+    Task currentTask;
+    GameCategoryDBHelper mydb;
 
     public GameController(GameActivity gameActivity){
 
         try {
             categories.add(new MatchingCategory(gameActivity,"", null));
-            mydb = new StatisticsDBHelper(gameActivity);
+            mydb = new GameCategoryDBHelper(gameActivity);
             //Add the rest from the database
-            categories.addAll(mydb.getCategories());
+            //categories.addAll(createDatabaseCategories());
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -26,8 +25,29 @@ public class GameController {
         }
     }
 
+    private Collection<? extends Category> createDatabaseCategories() {
+        //Create the Custom Categories to add to the categories arraylist
+
+        ArrayList<Category> tempCategories = new ArrayList<>();
+
+        ArrayList<String> categoryName = mydb.getCategories();
+
+        for (int k = 0; k < categoryName.size(); k++){
+
+            tempCategories.add(new Category(categoryName.get(k), null));
+        }
+
+        return tempCategories;
+    }
+
     public ArrayList<Category> getCategories(){
         return this.categories;
+    }
+
+    public int getNextTaskMastery(){
+        //Task mastery
+
+        return currentTask.getMastery();
     }
 
     public boolean addCategory(Category cat){
@@ -78,6 +98,8 @@ public class GameController {
                 taskMastery = nextTask.getMastery();
             }
         }
+
+        this.currentTask = nextTask;
 
         return nextTask;
     }

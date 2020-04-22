@@ -14,8 +14,8 @@ public class NumberTask extends Task implements TaskInterface{
     private final UUID ID = UUID.randomUUID();
     private final String QUESTION = "Click the Number";
     private String questionObject;
-    HashMap<String, Button> taskObjects = new HashMap<>();
-    int mastery = 0;
+    private HashMap<String, Button> taskObjects = new HashMap<>();
+    private int mastery = 1;
 
     public NumberTask(Activity gameActivity, UUID id, String q, HashMap<String, Button> obj) {
         super(id, q, obj);
