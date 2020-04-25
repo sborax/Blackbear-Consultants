@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 
@@ -17,7 +18,6 @@ class GameTaskDBHelper extends SQLiteOpenHelper {
     private static final String COL_USERNAME = "username";
     private static final String COL_TASK = "task";
     private static final String COL_TIME = "time";
-//    private static ArrayList<String> colTaskObjects;
 
 //  private static final String
     public static int version = 1;
@@ -75,25 +75,25 @@ class GameTaskDBHelper extends SQLiteOpenHelper {
         Cursor res = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
         res.moveToFirst();
 
-        if(res.isAfterLast() == false){
+        int mastery = -1;
 
-            String temp = res.getString(res.getColumnIndex(COL_USERNAME));
-            System.out.println("Username: " + temp);
-//            String tempCorrect = res.getString(res.getColumnIndex(taskObject.toLowerCase().concat("_correct")));
-//            String tempIncorrect = res.getString(res.getColumnIndex(taskObject.toLowerCase().concat("_incorrect")));
-//
-//            if(tempCorrect != null && tempIncorrect != null){
-//
-//                if(!tempCorrect.isEmpty() && !tempIncorrect.isEmpty()){
-//                    int returnTemp = Integer.getInteger(tempCorrect) / Integer.getInteger(tempIncorrect);
-//                    return returnTemp;
-//                }
-//            }
-//            else {
-//                System.out.println("GetTaskMastery Failed with: " + taskObject.toLowerCase().concat("_correct"));
-//                System.out.println("GetTaskMastery Failed with: " + taskObject.toLowerCase().concat("_incorrect"));
-//                return -1;
-//            }
+        while (res.isAfterLast() == false){
+
+            String tempUser = res.getString(res.getColumnIndex(COL_USERNAME));
+            System.out.println("User: " + tempUser);
+            if(tempUser.equalsIgnoreCase(username)){
+                System.out.println(tempUser + " = " + username);
+                String temp = res.getString(res.getColumnIndex(taskObject.toLowerCase().concat("_correct")));
+
+                if(temp != null){
+                    System.out.println("Print Temp: " + temp);
+                    return Integer.parseInt(temp);
+                }
+                else{
+
+                    return -1;
+                }
+            }
         }
 
         System.out.println("GameTaskDBHelper.java: getTaskObjectMastery FAILED");
@@ -109,6 +109,8 @@ class GameTaskDBHelper extends SQLiteOpenHelper {
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_USERNAME, username);
+        contentValues.put(COL_TASK, "numbertask");
+        contentValues.put(COL_TIME, System.currentTimeMillis()/1000);
         contentValues.put(taskObjectCorrect, 10);
         contentValues.put(taskObjectIncorrect, 2);
 

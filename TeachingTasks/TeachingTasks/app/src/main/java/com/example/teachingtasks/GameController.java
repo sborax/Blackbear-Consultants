@@ -127,6 +127,7 @@ public class GameController {
             int nextMastery = myGameDB.getTaskObjectMastery(username, nextTaskObject);
             System.out.println("Task " + nextTaskObject + " Mastery: " + nextMastery);
             if(nextMastery > mastery){
+                System.out.println("newMaster " + nextMastery + " > " + mastery + " currMaster");
                 mastery = nextMastery;
                 this.currentTask.setQuestionObject(nextTaskObject);
             }

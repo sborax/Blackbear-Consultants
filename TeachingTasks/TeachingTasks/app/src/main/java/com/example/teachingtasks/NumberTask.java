@@ -66,7 +66,7 @@ public class NumberTask extends Task implements TaskInterface{
 
     @Override
     public String getQuestionObject() {
-        return (String) this.taskObjects.keySet().toArray()[new Random().nextInt(9)];
+        return this.questionObject;
     }
 
     @Override
@@ -76,16 +76,16 @@ public class NumberTask extends Task implements TaskInterface{
 
     @Override
     public void setMastery(int newMastery) {
-
+        this.mastery = newMastery;
     }
 
     @Override
     public void setQuestionObject(String qObj) {
-
+        this.questionObject = qObj;
     }
 
     @Override
     public void setTaskObjects(HashMap<String, Button> objects) {
-
+        this.taskObjects = objects;
     }
 }
