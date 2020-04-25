@@ -1,9 +1,13 @@
 package com.example.teachingtasks;
 
 import android.app.Activity;
+import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
 
 public class GameController {
 
@@ -99,8 +103,35 @@ public class GameController {
             }
         }
 
+
+
         this.currentTask = nextTask;
 
         return nextTask;
+    }
+
+    public String getNextTaskObject(GameActivity activity, String username) {
+
+        final GameTaskDBHelper myGameDB = new GameTaskDBHelper(activity);
+        HashMap<String, Button> taskObjects = this.currentTask.getTaskObjects();
+        Set<String> questionObjects = taskObjects.keySet();
+        Iterator iterator = questionObjects.iterator();
+        int mastery = -1;
+        String nextTaskObject = "";
+
+        myGameDB.getAllCorrect("nine_correct");
+
+        while (iterator.hasNext()){
+
+            nextTaskObject = (String) iterator.next();
+            int nextMastery = myGameDB.getTaskObjectMastery(username, nextTaskObject);
+            System.out.println("Task " + nextTaskObject + " Mastery: " + nextMastery);
+            if(nextMastery > mastery){
+                mastery = nextMastery;
+                this.currentTask.setQuestionObject(nextTaskObject);
+            }
+        }
+
+        return this.currentTask.getQuestionObject();
     }
 }

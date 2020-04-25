@@ -47,7 +47,7 @@ public class UserSelectActivity extends AppCompatActivity {
 
         //If no users found, Intent to RegisterUser Activity
         //Else, user(s) found, userOptions initialized, display userOptions
-        if(users.get(0) == null) {
+        if(users.isEmpty()) {
             Intent createUserIntent = new Intent(UserSelectActivity.this, RegisterUserActivity.class);
             startActivity(createUserIntent);
         }

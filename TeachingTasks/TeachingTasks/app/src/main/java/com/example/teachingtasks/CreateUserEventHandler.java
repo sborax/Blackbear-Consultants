@@ -56,6 +56,7 @@ public class CreateUserEventHandler {
     private void createUser(RegisterUserActivity mainActivity, String username, String password) {
         //User was accepted, create the user
 
+        System.out.println("Creating User");
         GameCategoryDBHelper gameCategoryDB = new GameCategoryDBHelper(mainActivity);
         GameTaskDBHelper gameTasksDB = new GameTaskDBHelper(mainActivity);
         RegisterUserDBHelper registerUserDB = new RegisterUserDBHelper(mainActivity);
@@ -63,6 +64,7 @@ public class CreateUserEventHandler {
         registerUserDB.addUser(username, password);
 
         gameCategoryDB.addCategory(username, "Matching");
+        gameTasksDB.addMastery(username, "nine");
     }
 
     private boolean isAcceptablePassword(String pass) {

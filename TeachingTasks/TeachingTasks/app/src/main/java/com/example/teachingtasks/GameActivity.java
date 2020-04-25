@@ -50,7 +50,7 @@ public class GameActivity extends AppCompatActivity {
         question.setText(getIntent().getStringExtra("EXTRA_QUESTION"));
 
         questionObject = (TextView) findViewById(R.id.taskQuestionObject);
-        questionObject.setText(currentTask.getQuestionObject());
+        questionObject.setText(controller.getNextTaskObject(this, username.getText().toString()));
 
         initializeTaskObjects();
 
@@ -92,7 +92,7 @@ public class GameActivity extends AppCompatActivity {
 
 
         final String qObject = questionObject.getText().toString();
-
+        System.out.println("Initializing qObject: " + qObject);
         //Going to need to check for mastery level to determine how many to include on screen
         //Mastery < 25% = 1 taskObject
         //Mastery < 50% = 2 taskObject
