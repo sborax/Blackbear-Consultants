@@ -29,13 +29,17 @@ public class TaskObjectEventHandler {
         }
 
         if(curr.getText().toString().equals(qObject)){
+
+            GameTaskDBHelper mydb = new GameTaskDBHelper(gameActivity);
+            mydb.addMastery(username, "numbertask", questionObject);
+
             Intent taskSuccessIntent = new Intent(gameActivity, TaskSuccessActivity.class);
             taskSuccessIntent.putExtra("EXTRA_USER", username);
             taskSuccessIntent.putExtra("EXTRA_TASK_OBJECT", qObject);
             gameActivity.startActivity(taskSuccessIntent);
         }
         else {
-            Toast.makeText(gameActivity, "Incorrect Answer", Toast.LENGTH_LONG).show();
+            Toast.makeText(gameActivity, "Try Again", Toast.LENGTH_LONG).show();
         }
     }
 }

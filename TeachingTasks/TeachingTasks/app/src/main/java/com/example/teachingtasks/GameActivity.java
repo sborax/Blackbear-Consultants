@@ -52,6 +52,8 @@ public class GameActivity extends AppCompatActivity {
         questionObject = (TextView) findViewById(R.id.taskQuestionObject);
         questionObject.setText(controller.getNextTaskObject(this, username.getText().toString()));
 
+        System.out.println("Controller gotNextTaskObject: " + questionObject.getText().toString());
+
         initializeTaskObjects();
 
         taskNavButton = (Button) findViewById(R.id.taskNavButton);
@@ -90,6 +92,7 @@ public class GameActivity extends AppCompatActivity {
         //Change constraints on taskObjects
         //Add them to the layout
 
+        System.out.println("Initializing Task Objects");
 
         final String qObject = questionObject.getText().toString();
         System.out.println("Initializing qObject: " + qObject);

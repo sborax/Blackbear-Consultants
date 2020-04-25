@@ -14,6 +14,7 @@ public class GameController {
     ArrayList<Category> categories = new ArrayList<Category>();
     Task currentTask;
     GameCategoryDBHelper mydb;
+    private int mastery;
 
     public GameController(GameActivity gameActivity){
 
@@ -26,6 +27,10 @@ public class GameController {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
+        }
+
+        if(this.mastery == 0){
+            this.mastery = 1;
         }
     }
 
@@ -116,19 +121,16 @@ public class GameController {
         HashMap<String, Button> taskObjects = this.currentTask.getTaskObjects();
         Set<String> questionObjects = taskObjects.keySet();
         Iterator iterator = questionObjects.iterator();
-        int mastery = -1;
         String nextTaskObject = "";
 
-        myGameDB.getAllCorrect("nine_correct");
 
         while (iterator.hasNext()){
 
             nextTaskObject = (String) iterator.next();
             int nextMastery = myGameDB.getTaskObjectMastery(username, nextTaskObject);
-            System.out.println("Task " + nextTaskObject + " Mastery: " + nextMastery);
-            if(nextMastery > mastery){
-                System.out.println("newMaster " + nextMastery + " > " + mastery + " currMaster");
-                mastery = nextMastery;
+            if(nextMastery < this.mastery || this.mastery == 1){
+                System.out.println("newMaster " + nextMastery + " < " + mastery + " currMaster");
+                this.mastery = nextMastery;
                 this.currentTask.setQuestionObject(nextTaskObject);
             }
         }

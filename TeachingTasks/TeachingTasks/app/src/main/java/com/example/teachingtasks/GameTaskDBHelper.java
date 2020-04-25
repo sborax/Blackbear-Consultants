@@ -6,7 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.sql.Date;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 
@@ -28,6 +29,7 @@ class GameTaskDBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" + TABLE_ID + " INTEGER PRIMARY KEY," + COL_USERNAME + " TEXT, " + COL_TASK + " TEXT, " + COL_TIME + " TEXT, " + getTaskObjects());
     }
 
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" + TABLE_ID + " INTEGER PRIMARY KEY," + COL_USERNAME + " TEXT, " + COL_TASK + " TEXT, " + COL_TIME + " TEXT, " + getTaskObjects());
@@ -37,6 +39,41 @@ class GameTaskDBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
+    }
+
+    public void initializeTaskObjects(String username) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_USERNAME, username);
+        contentValues.put(COL_TASK, "numbertask");
+        contentValues.put(COL_TIME, formatter.format(date));
+        contentValues.put("zero_correct", 0);
+        contentValues.put("zero_incorrect", 0);
+        contentValues.put("one_correct", 0);
+        contentValues.put("one_incorrect", 0);
+        contentValues.put("two_correct", 0);
+        contentValues.put("two_incorrect", 0);
+        contentValues.put("three_correct", 0);
+        contentValues.put("three_incorrect", 0);
+        contentValues.put("four_correct", 0);
+        contentValues.put("four_incorrect", 0);
+        contentValues.put("five_correct", 0);
+        contentValues.put("five_incorrect", 0);
+        contentValues.put("six_correct", 0);
+        contentValues.put("six_incorrect", 0);
+        contentValues.put("seven_correct", 0);
+        contentValues.put("seven_incorrect", 0);
+        contentValues.put("eight_correct", 0);
+        contentValues.put("eight_incorrect", 0);
+        contentValues.put("nine_correct", 0);
+        contentValues.put("nine_incorrect", 0);
+
+        long temp = db.insert(TABLE_NAME, null, contentValues);
     }
 
     private String getTaskObjects() {
@@ -75,18 +112,18 @@ class GameTaskDBHelper extends SQLiteOpenHelper {
         Cursor res = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
         res.moveToFirst();
 
-        int mastery = -1;
+        int mastery = 1;
 
         while (res.isAfterLast() == false){
 
             String tempUser = res.getString(res.getColumnIndex(COL_USERNAME));
-            System.out.println("User: " + tempUser);
+            System.out.println(tempUser + " = " + username);
             if(tempUser.equalsIgnoreCase(username)){
-                System.out.println(tempUser + " = " + username);
+
                 String temp = res.getString(res.getColumnIndex(taskObject.toLowerCase().concat("_correct")));
 
                 if(temp != null){
-                    System.out.println("Print Temp: " + temp);
+
                     return Integer.parseInt(temp);
                 }
                 else{
@@ -94,27 +131,35 @@ class GameTaskDBHelper extends SQLiteOpenHelper {
                     return -1;
                 }
             }
+
+            res.moveToNext();
         }
 
-        System.out.println("GameTaskDBHelper.java: getTaskObjectMastery FAILED");
-        return 1;
+        return -1;
     }
 
-    public void addMastery(String username, String taskObject){
+    public void subMastery(String username, String task, String taskObject){
+
+
+    }
+
+    public void addMastery(String username, String task, String taskObject){
 
         String taskObjectCorrect = taskObject.toLowerCase().concat("_correct");
         String taskObjectIncorrect = taskObject.toLowerCase().concat("_incorrect");
 
         SQLiteDatabase db = this.getWritableDatabase();
 
+        int newMastery = this.getTaskObjectMastery(username, taskObject)+1;
+
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_USERNAME, username);
-        contentValues.put(COL_TASK, "numbertask");
-        contentValues.put(COL_TIME, System.currentTimeMillis()/1000);
-        contentValues.put(taskObjectCorrect, 10);
-        contentValues.put(taskObjectIncorrect, 2);
+        contentValues.put(COL_TASK, task);
+        contentValues.put(taskObjectCorrect, newMastery);
 
-        long temp = db.insert(TABLE_NAME, null, contentValues);
+        long temp = db.update(TABLE_NAME, contentValues, taskObjectCorrect + " = ?", new String[]{Integer.toString(newMastery-1)});
+
+        System.out.println("Inserting addMastery GameTaskDBHelper.java: " + temp);
     }
 
     public void getAllCorrect(String object) {
