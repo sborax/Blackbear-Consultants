@@ -49,7 +49,7 @@
     <ImageView
         android:id="@+id/chalkBackgroundImageView"
         android:layout_width="0dp"
-        android:layout_height="618dp"
+        android:layout_height="0dp"
         android:adjustViewBounds="true"
         android:contentDescription="@string/background"
         android:cropToPadding="true"
