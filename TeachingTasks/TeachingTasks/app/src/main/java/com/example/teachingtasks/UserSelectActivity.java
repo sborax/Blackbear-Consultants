@@ -48,6 +48,7 @@ public class UserSelectActivity extends AppCompatActivity {
         //If no users found, Intent to RegisterUser Activity
         //Else, user(s) found, userOptions initialized, display userOptions
         if(users.isEmpty()) {
+            mydb.close();
             Intent createUserIntent = new Intent(UserSelectActivity.this, RegisterUserActivity.class);
             startActivity(createUserIntent);
         }
@@ -62,7 +63,7 @@ public class UserSelectActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 switch (addButton.getText().toString()){
-                    case "Delete": new DeleteUserEventHandler().onClick(UserSelectActivity.this, mydb, selectedUsers, linearLayout, v); break;
+                    case "Delete": new DeleteUserEventHandler().onClick(UserSelectActivity.this, selectedUsers, linearLayout, v); break;
                     case "Add": addUserOption(); break;
                 }
             }

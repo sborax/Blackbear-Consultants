@@ -47,12 +47,10 @@ public class GameActivity extends AppCompatActivity {
         username.setText(getIntent().getStringExtra("EXTRA_USER"));
 
         question = (TextView) findViewById(R.id.taskQuestion);
-        question.setText(getIntent().getStringExtra("EXTRA_QUESTION"));
+        question.setText(currentTask.getQuestion());
 
         questionObject = (TextView) findViewById(R.id.taskQuestionObject);
         questionObject.setText(controller.getNextTaskObject(this, username.getText().toString()));
-
-        System.out.println("Controller gotNextTaskObject: " + questionObject.getText().toString());
 
         initializeTaskObjects();
 
@@ -64,7 +62,8 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-                new NavButtonEventHandler().onClick(GameActivity.this, v, username.getText().toString());
+                if(event.getAction() == MotionEvent.ACTION_UP)
+                    new NavButtonEventHandler().onClick(GameActivity.this, v, username.getText().toString());
                 return false;
             }
         });
@@ -73,7 +72,8 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-                new NavButtonEventHandler().onClick(GameActivity.this, v, username.getText().toString());
+                if(event.getAction() == MotionEvent.ACTION_UP)
+                    new NavButtonEventHandler().onClick(GameActivity.this, v, username.getText().toString());
                 return false;
             }
         });
@@ -82,7 +82,8 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-                new NavButtonEventHandler().onClick(GameActivity.this, v, username.getText().toString());
+                if(event.getAction() == MotionEvent.ACTION_UP)
+                    new NavButtonEventHandler().onClick(GameActivity.this, v, username.getText().toString());
                 return false;
             }
         });
@@ -92,10 +93,7 @@ public class GameActivity extends AppCompatActivity {
         //Change constraints on taskObjects
         //Add them to the layout
 
-        System.out.println("Initializing Task Objects");
-
         final String qObject = questionObject.getText().toString();
-        System.out.println("Initializing qObject: " + qObject);
         //Going to need to check for mastery level to determine how many to include on screen
         //Mastery < 25% = 1 taskObject
         //Mastery < 50% = 2 taskObject
@@ -170,7 +168,8 @@ public class GameActivity extends AppCompatActivity {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
 
-                    new TaskObjectEventHandler().onClick(GameActivity.this, v, username.getText().toString(), qObject);
+                    if(event.getAction() == MotionEvent.ACTION_UP)
+                        new TaskObjectEventHandler().onClick(GameActivity.this, v, username.getText().toString(), qObject);
                     return false;
                 }
             });

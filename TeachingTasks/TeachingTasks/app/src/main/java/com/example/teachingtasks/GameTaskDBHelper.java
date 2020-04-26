@@ -100,57 +100,54 @@ class GameTaskDBHelper extends SQLiteOpenHelper {
                 "nine_incorrect INTEGER)";
     }
 
-    public String getTaskMastery(){
-
-        return "mastery GameTaskDBHelper.java";
-    }
-
     public int getTaskObjectMastery(String username, String taskObject){
 
         SQLiteDatabase db = this.getReadableDatabase();
-
         Cursor res = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
         res.moveToFirst();
-
-        int mastery = 1;
 
         while (res.isAfterLast() == false){
 
             String tempUser = res.getString(res.getColumnIndex(COL_USERNAME));
-            System.out.println(tempUser + " = " + username);
-            if(tempUser.equalsIgnoreCase(username)){
 
-                String temp = res.getString(res.getColumnIndex(taskObject.toLowerCase().concat("_correct")));
+            if(tempUser.equalsIgnoreCase(username)){
+                String temp = res.getString(res.getColumnIndex(taskObject));
 
                 if(temp != null){
-
                     return Integer.parseInt(temp);
                 }
                 else{
-
                     return -1;
                 }
             }
-
             res.moveToNext();
         }
-
         return -1;
     }
 
     public void subMastery(String username, String task, String taskObject){
 
+        String taskObjectIncorrect = taskObject.toLowerCase().concat("_incorrect");
 
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        int newMastery = this.getTaskObjectMastery(username, taskObjectIncorrect)+1;
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_USERNAME, username);
+        contentValues.put(COL_TASK, task);
+        contentValues.put(taskObjectIncorrect, newMastery);
+
+        long temp = db.update(TABLE_NAME, contentValues, taskObjectIncorrect + " = ?", new String[]{Integer.toString(newMastery-1)});
     }
 
     public void addMastery(String username, String task, String taskObject){
 
         String taskObjectCorrect = taskObject.toLowerCase().concat("_correct");
-        String taskObjectIncorrect = taskObject.toLowerCase().concat("_incorrect");
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        int newMastery = this.getTaskObjectMastery(username, taskObject)+1;
+        int newMastery = this.getTaskObjectMastery(username, taskObjectCorrect)+1;
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_USERNAME, username);
@@ -159,38 +156,18 @@ class GameTaskDBHelper extends SQLiteOpenHelper {
 
         long temp = db.update(TABLE_NAME, contentValues, taskObjectCorrect + " = ?", new String[]{Integer.toString(newMastery-1)});
 
-        System.out.println("Inserting addMastery GameTaskDBHelper.java: " + temp);
     }
 
-    public void getAllCorrect(String object) {
-        //Returns a list of all users
-        //Limited to 20 users
+    public void deleteUser(String user) {
 
-        //Call Readable
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase();
 
-        ArrayList<String> users = new ArrayList<>();
-        Cursor res = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
-        res.moveToFirst();
+        String selection = COL_USERNAME + " LIKE ? ";
 
-        int count = 0;
-        while(res.isAfterLast() == false){
-            //If the next username is not an empty index, add to users
-            //Else, keep going until the end of database is reached
+        String[] selectionArgs = { user };
 
-            String temp = res.getString(res.getColumnIndex(object));
-            if(!temp.isEmpty())
-                users.add(temp);
-            res.moveToNext();
-            count++;
-        }
+        int temp = db.delete(TABLE_NAME, selection, selectionArgs);
 
-//        String[] cats = res.getColumnNames();
-//        for (int k = 0; k < cats.length; k++) {
-//            if(users.size() > k)
-//                System.out.println("Printing " + object + ": " + users.get(k));
-//            System.out.println("Column Names: " + cats[k]);
-//        }
         return;
     }
 }

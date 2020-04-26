@@ -44,7 +44,7 @@ public class RegisterUserActivity extends AppCompatActivity implements View.OnCl
 
             @Override
             public void onClick(View v) {
-
+                mydb.close();
                 Intent selectUserIntent = new Intent(RegisterUserActivity.this,UserSelectActivity.class);
                 RegisterUserActivity.this.startActivity(selectUserIntent);
             }
@@ -60,7 +60,7 @@ public class RegisterUserActivity extends AppCompatActivity implements View.OnCl
         //Checks the ID and calls the appropriate EventHandler
         switch (v.getId()){
             case R.id.showPasswordCheckBox: new ShowPassEventHandler().onCheck(showPass, newPassword); break;
-            case R.id.createButton: new CreateUserEventHandler().onClick(this, newUsername, newPassword); break;
+            case R.id.createButton: mydb.close(); new CreateUserEventHandler().onClick(this, newUsername, newPassword); break;
             default: return;
         }
     }

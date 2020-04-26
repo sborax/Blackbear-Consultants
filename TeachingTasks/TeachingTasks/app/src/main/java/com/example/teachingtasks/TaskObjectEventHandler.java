@@ -32,6 +32,7 @@ public class TaskObjectEventHandler {
 
             GameTaskDBHelper mydb = new GameTaskDBHelper(gameActivity);
             mydb.addMastery(username, "numbertask", questionObject);
+            mydb.close();
 
             Intent taskSuccessIntent = new Intent(gameActivity, TaskSuccessActivity.class);
             taskSuccessIntent.putExtra("EXTRA_USER", username);

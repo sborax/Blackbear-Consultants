@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Random;
 import java.util.Set;
 
 public class GameController {
@@ -14,7 +15,7 @@ public class GameController {
     ArrayList<Category> categories = new ArrayList<Category>();
     Task currentTask;
     GameCategoryDBHelper mydb;
-    private int mastery;
+    private int mastery = 11;
 
     public GameController(GameActivity gameActivity){
 
@@ -27,10 +28,6 @@ public class GameController {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
-        }
-
-        if(this.mastery == 0){
-            this.mastery = 1;
         }
     }
 
@@ -108,33 +105,41 @@ public class GameController {
             }
         }
 
-
-
         this.currentTask = nextTask;
 
         return nextTask;
     }
 
     public String getNextTaskObject(GameActivity activity, String username) {
+        //Returns the first task object found with the lowest number of correct answers
 
         final GameTaskDBHelper myGameDB = new GameTaskDBHelper(activity);
         HashMap<String, Button> taskObjects = this.currentTask.getTaskObjects();
         Set<String> questionObjects = taskObjects.keySet();
+
         Iterator iterator = questionObjects.iterator();
         String nextTaskObject = "";
 
-
+        //Iterate through all task objects in the current Task
         while (iterator.hasNext()){
 
             nextTaskObject = (String) iterator.next();
-            int nextMastery = myGameDB.getTaskObjectMastery(username, nextTaskObject);
-            if(nextMastery < this.mastery || this.mastery == 1){
-                System.out.println("newMaster " + nextMastery + " < " + mastery + " currMaster");
+            int nextMastery = myGameDB.getTaskObjectMastery(username, nextTaskObject.toLowerCase().concat("_correct"));
+
+            if(nextMastery < this.mastery){
                 this.mastery = nextMastery;
                 this.currentTask.setQuestionObject(nextTaskObject);
             }
         }
 
+        if(currentTask.getQuestionObject() == null){
+            Object [] tObjects = taskObjects.keySet().toArray();
+            int index = new Random().nextInt(tObjects.length);
+
+            currentTask.setQuestionObject(tObjects[index].toString());
+        }
+
+        myGameDB.close();
         return this.currentTask.getQuestionObject();
     }
 }

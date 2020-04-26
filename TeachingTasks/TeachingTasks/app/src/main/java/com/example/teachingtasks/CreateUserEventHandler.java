@@ -32,7 +32,7 @@ public class CreateUserEventHandler {
             if(isAcceptablePassword(pass)){
 
                 createUser(mainActivity, newUsername.getText().toString(), newPassword.getText().toString());
-
+                mydb.close();
                 Intent userSelectIntent = new Intent(mainActivity.getBaseContext(),UserSelectActivity.class);
                 mainActivity.startActivity(userSelectIntent);
             }
@@ -63,6 +63,11 @@ public class CreateUserEventHandler {
         registerUserDB.addUser(username, password);
 
         gameCategoryDB.addCategory(username, "Matching");
+
+        gameCategoryDB.close();
+        gameTasksDB.close();
+        registerUserDB.close();
+        return;
     }
 
     private boolean isAcceptablePassword(String pass) {
