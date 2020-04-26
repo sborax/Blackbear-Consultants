@@ -27,37 +27,31 @@ public class GameActivity extends AppCompatActivity {
     ConstraintLayout taskObjectLayout;
     ConstraintSet set;
     GameController controller;
+    Task currentTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        controller = new GameController(this);
-        /*
-        Initialize UI variables (Buttons, etc)
-        getIntent.Username
-        GameController.getNextTask
-        GameController.getNextQuestionObject
-         */
-
         taskObjectLayout = (ConstraintLayout) findViewById(R.id.taskObjectLayout);
 
         set = new ConstraintSet();
         set.clone(taskObjectLayout);
 
+        controller = new GameController(this);
+        currentTask = controller.getNextTask(this);
+        taskObjects = currentTask.getTaskObjects();
+
         username = (TextView) findViewById(R.id.username);
         username.setText(getIntent().getStringExtra("EXTRA_USER"));
 
         question = (TextView) findViewById(R.id.taskQuestion);
-        question.setText(getIntent().getStringExtra("EXTRA_QUESTION"));
+        question.setText(currentTask.getQuestion());
 
         questionObject = (TextView) findViewById(R.id.taskQuestionObject);
-        questionObject.setText(getIntent().getStringExtra("EXTRA_TASK_OBJECT"));
+        questionObject.setText(controller.getNextTaskObject(this, username.getText().toString()));
 
-        Task tempTask = controller.getNextTask(this);
-
-        taskObjects = tempTask.getTaskObjects();
         initializeTaskObjects();
 
         taskNavButton = (Button) findViewById(R.id.taskNavButton);
@@ -68,7 +62,8 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-                new NavButtonEventHandler().onClick(GameActivity.this, v, username.getText().toString());
+                if(event.getAction() == MotionEvent.ACTION_UP)
+                    new NavButtonEventHandler().onClick(GameActivity.this, v, username.getText().toString());
                 return false;
             }
         });
@@ -77,7 +72,8 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-                new NavButtonEventHandler().onClick(GameActivity.this, v, username.getText().toString());
+                if(event.getAction() == MotionEvent.ACTION_UP)
+                    new NavButtonEventHandler().onClick(GameActivity.this, v, username.getText().toString());
                 return false;
             }
         });
@@ -86,7 +82,8 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-                new NavButtonEventHandler().onClick(GameActivity.this, v, username.getText().toString());
+                if(event.getAction() == MotionEvent.ACTION_UP)
+                    new NavButtonEventHandler().onClick(GameActivity.this, v, username.getText().toString());
                 return false;
             }
         });
@@ -96,9 +93,7 @@ public class GameActivity extends AppCompatActivity {
         //Change constraints on taskObjects
         //Add them to the layout
 
-
         final String qObject = questionObject.getText().toString();
-
         //Going to need to check for mastery level to determine how many to include on screen
         //Mastery < 25% = 1 taskObject
         //Mastery < 50% = 2 taskObject
@@ -106,7 +101,7 @@ public class GameActivity extends AppCompatActivity {
         //Mastery < 100% = 4 taskObject
         //MAX = 4
         //MIN = 1
-        int maxMastery =  1;
+        int maxMastery =  (currentTask.getMastery() % 3) + 1;
 
         //Create temp array for taskObjects that will be displayed
         //Add the questionObject to the array
@@ -173,7 +168,8 @@ public class GameActivity extends AppCompatActivity {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
 
-                    new TaskObjectEventHandler().onClick(GameActivity.this, v, username.getText().toString(), qObject);
+                    if(event.getAction() == MotionEvent.ACTION_UP)
+                        new TaskObjectEventHandler().onClick(GameActivity.this, v, username.getText().toString(), qObject);
                     return false;
                 }
             });
@@ -185,7 +181,7 @@ public class GameActivity extends AppCompatActivity {
         }
 
         //Ensure the last taskObject is constraint to the PARENT_RIGHT
-        set.connect(tempObjects.get(maxMastery-1).getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0);
+        set.connect(tempObjects.get(maxMastery - 1).getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0);
         set.applyTo(taskObjectLayout);
     }
 }

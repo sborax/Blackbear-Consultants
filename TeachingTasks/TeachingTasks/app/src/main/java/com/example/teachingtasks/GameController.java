@@ -4,19 +4,26 @@ import android.app.Activity;
 import android.widget.Button;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.UUID;
+import java.util.Iterator;
+import java.util.Random;
+import java.util.Set;
 
 public class GameController {
 
     ArrayList<Category> categories = new ArrayList<Category>();
+    Task currentTask;
+    GameCategoryDBHelper mydb;
+    private int mastery = 11;
 
     public GameController(GameActivity gameActivity){
 
         try {
-
             categories.add(new MatchingCategory(gameActivity,"", null));
-
+            mydb = new GameCategoryDBHelper(gameActivity);
+            //Add the rest from the database
+            categories.addAll(createDatabaseCategories());
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -24,8 +31,29 @@ public class GameController {
         }
     }
 
+    private Collection<? extends Category> createDatabaseCategories() {
+        //Create the Custom Categories to add to the categories arraylist
+
+        ArrayList<Category> tempCategories = new ArrayList<>();
+
+        ArrayList<String> categoryName = mydb.getCategories();
+
+        for (int k = 0; k < categoryName.size(); k++){
+
+            tempCategories.add(new Category(categoryName.get(k), null));
+        }
+
+        return tempCategories;
+    }
+
     public ArrayList<Category> getCategories(){
         return this.categories;
+    }
+
+    public int getNextTaskMastery(){
+        //Task mastery
+
+        return currentTask.getMastery();
     }
 
     public boolean addCategory(Category cat){
@@ -74,11 +102,56 @@ public class GameController {
             if(tasks.get(n).getMastery() > taskMastery){
                 nextTask = tasks.get(n);
                 taskMastery = nextTask.getMastery();
-
-                System.out.println("Got Task: " + nextTask.getQuestion());
             }
         }
 
+        this.currentTask = nextTask;
+
         return nextTask;
+    }
+
+    public String getNextTaskObject(GameActivity activity, String username) {
+        //Returns the first task object found with the lowest number of correct answers
+
+        final GameTaskDBHelper myGameDB = new GameTaskDBHelper(activity);
+        HashMap<String, Button> taskObjects = this.currentTask.getTaskObjects();
+        Set<String> questionObjects = taskObjects.keySet();
+
+        Iterator iterator = questionObjects.iterator();
+        String nextTaskObject = "";
+
+        //Iterate through all task objects in the current Task
+        while (iterator.hasNext()){
+
+            nextTaskObject = (String) iterator.next();
+            int nextMastery = myGameDB.getTaskObjectMastery(username, nextTaskObject.toLowerCase().concat("_correct"));
+            int nextIncorrect = myGameDB.getTaskObjectMastery(username, nextTaskObject.toLowerCase().concat("_incorrect"));
+
+            if(nextIncorrect <= 1){
+                nextMastery /= 1;
+            }
+            else if (nextIncorrect/2 < 1){
+                nextMastery /= 1;
+            }
+            else {
+                nextMastery /= nextIncorrect/2;
+            }
+
+            if(nextMastery < this.mastery){
+                this.mastery = nextMastery;
+                this.currentTask.setQuestionObject(nextTaskObject);
+                this.currentTask.setMastery(nextMastery);
+            }
+        }
+
+        if(currentTask.getQuestionObject() == null){
+            Object [] tObjects = taskObjects.keySet().toArray();
+            int index = new Random().nextInt(tObjects.length);
+
+            currentTask.setQuestionObject(tObjects[index].toString());
+        }
+
+        myGameDB.close();
+        return this.currentTask.getQuestionObject();
     }
 }

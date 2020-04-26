@@ -11,7 +11,7 @@ public class Task implements TaskInterface {
     String question;
     String questionObject;
     HashMap<String, Button> taskObjects;  //questionObject, ButtonObject
-    int mastery = 0;
+    int mastery = 1;
     UUID taskID;
 
     public Task(UUID id, String q, HashMap<String, Button> obj){
@@ -42,9 +42,7 @@ public class Task implements TaskInterface {
     }
 
     @Override
-    public int getMastery() {
-        return this.mastery;
-    }
+    public int getMastery() { return this.mastery; }
 
     @Override
     public void setQuestionObject(String qObj) {

@@ -1,5 +1,6 @@
 package com.example.teachingtasks;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -49,8 +50,10 @@ public class RegisterUserDBHelper extends SQLiteOpenHelper {
         return;
     }
 
-    public void deleteUser(String user){
+    public void deleteUser(Activity activity, String user){
         //Delete a user from the database
+
+        GameTaskDBHelper myGameDB = new GameTaskDBHelper(activity);
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -59,6 +62,7 @@ public class RegisterUserDBHelper extends SQLiteOpenHelper {
         String[] selectionArgs = { user };
 
         int temp = db.delete(TABLE_NAME, selection, selectionArgs);
+        myGameDB.deleteUser(user);
 
         return;
     }

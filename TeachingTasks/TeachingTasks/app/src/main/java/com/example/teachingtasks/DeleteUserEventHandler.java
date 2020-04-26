@@ -1,5 +1,6 @@
 package com.example.teachingtasks;
 
+import android.content.Intent;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.view.View;
@@ -8,8 +9,9 @@ import java.util.ArrayList;
 
 public class DeleteUserEventHandler {
 
-    public void onClick(UserSelectActivity userSelectActivity, RegisterUserDBHelper mydb, ArrayList<EditText> selectedUsers, LinearLayout constraintLayout, View v) {
+    public void onClick(UserSelectActivity userSelectActivity, ArrayList<EditText> selectedUsers, LinearLayout constraintLayout, View v) {
 
+        RegisterUserDBHelper mydb = new RegisterUserDBHelper(userSelectActivity);
 
         ArrayList<String> temp = mydb.getAllUsers();
 
@@ -18,8 +20,12 @@ public class DeleteUserEventHandler {
                 return;
             }
 
-            mydb.deleteUser(selectedUsers.get(k).getText().toString());
+            mydb.deleteUser(userSelectActivity, selectedUsers.get(k).getText().toString());
             constraintLayout.removeView(v.findViewById(selectedUsers.get(k).getId()));
         }
+
+        mydb.close();
+        Intent userSelectIntent = new Intent(userSelectActivity.getBaseContext(), UserSelectActivity.class);
+        userSelectActivity.startActivity(userSelectIntent);
     }
 }

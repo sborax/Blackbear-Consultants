@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class StatisticsDBHelper extends SQLiteOpenHelper {  //TODO: integrate users with RegisterUserDBHelper
 
     public static final String DATABASE_NAME = "database";
@@ -132,5 +135,14 @@ public class StatisticsDBHelper extends SQLiteOpenHelper {  //TODO: integrate us
         res.moveToFirst();
         int ret = res.getInt(res.getColumnIndex(col));
         return ret;
+    }
+
+    public Collection<? extends Category> getCategories() {
+
+        Collection<Category> categories = new ArrayList<Category>();
+
+
+
+        return categories;
     }
 }
