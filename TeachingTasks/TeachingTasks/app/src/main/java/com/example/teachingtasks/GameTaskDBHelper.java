@@ -170,4 +170,38 @@ class GameTaskDBHelper extends SQLiteOpenHelper {
 
         return;
     }
+
+    public int getTaskMastery(String username, String task) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        int totalCorrect = 1;
+        Cursor res = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        res.moveToFirst();
+
+        while (res.isAfterLast() == false){
+
+            String tempUser = res.getString(res.getColumnIndex(COL_USERNAME));
+
+            if(tempUser.equalsIgnoreCase(username)){
+
+                String tempTask = res.getString(res.getColumnIndex(COL_TASK));
+
+                if(tempTask.equalsIgnoreCase(task)){
+
+                    String[] columnNames = res.getColumnNames();
+
+                    for (int k = 4; k < columnNames.length; k++){
+
+                        String tempCorrect = columnNames[k];
+
+                        totalCorrect += Integer.parseInt(res.getString(res.getColumnIndex(tempCorrect)));
+                    }
+                }
+            }
+
+            res.moveToNext();
+        }
+
+        return totalCorrect;
+    }
 }

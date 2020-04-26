@@ -11,6 +11,7 @@ public class TaskObjectEventHandler {
 
     public void  onClick(GameActivity gameActivity, View v, String username, String questionObject) {
 
+        GameTaskDBHelper mydb = new GameTaskDBHelper(gameActivity);
         Button curr = (Button) v.findViewById(v.getId());
 
         String qObject = "";
@@ -30,7 +31,6 @@ public class TaskObjectEventHandler {
 
         if(curr.getText().toString().equals(qObject)){
 
-            GameTaskDBHelper mydb = new GameTaskDBHelper(gameActivity);
             mydb.addMastery(username, "numbertask", questionObject);
             mydb.close();
 
@@ -40,6 +40,7 @@ public class TaskObjectEventHandler {
             gameActivity.startActivity(taskSuccessIntent);
         }
         else {
+            mydb.subMastery(username, "numbertask", questionObject);
             Toast.makeText(gameActivity, "Try Again", Toast.LENGTH_LONG).show();
         }
     }

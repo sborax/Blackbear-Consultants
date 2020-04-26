@@ -125,10 +125,22 @@ public class GameController {
 
             nextTaskObject = (String) iterator.next();
             int nextMastery = myGameDB.getTaskObjectMastery(username, nextTaskObject.toLowerCase().concat("_correct"));
+            int nextIncorrect = myGameDB.getTaskObjectMastery(username, nextTaskObject.toLowerCase().concat("_incorrect"));
+
+            if(nextIncorrect <= 1){
+                nextMastery /= 1;
+            }
+            else if (nextIncorrect/2 < 1){
+                nextMastery /= 1;
+            }
+            else {
+                nextMastery /= nextIncorrect/2;
+            }
 
             if(nextMastery < this.mastery){
                 this.mastery = nextMastery;
                 this.currentTask.setQuestionObject(nextTaskObject);
+                this.currentTask.setMastery(nextMastery);
             }
         }
 

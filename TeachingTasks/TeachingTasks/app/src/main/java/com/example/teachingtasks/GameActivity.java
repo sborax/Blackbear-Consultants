@@ -101,7 +101,7 @@ public class GameActivity extends AppCompatActivity {
         //Mastery < 100% = 4 taskObject
         //MAX = 4
         //MIN = 1
-        int maxMastery =  currentTask.getMastery();
+        int maxMastery =  (currentTask.getMastery() % 3) + 1;
 
         //Create temp array for taskObjects that will be displayed
         //Add the questionObject to the array
@@ -181,7 +181,7 @@ public class GameActivity extends AppCompatActivity {
         }
 
         //Ensure the last taskObject is constraint to the PARENT_RIGHT
-        set.connect(tempObjects.get(maxMastery-1).getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0);
+        set.connect(tempObjects.get(maxMastery - 1).getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0);
         set.applyTo(taskObjectLayout);
     }
 }

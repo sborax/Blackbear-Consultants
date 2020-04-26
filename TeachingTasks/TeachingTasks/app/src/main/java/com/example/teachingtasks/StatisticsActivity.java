@@ -26,7 +26,8 @@ import java.util.List;
 public class StatisticsActivity extends AppCompatActivity {
 
 
-    StatisticsDBHelper db;
+//    StatisticsDBHelper db;
+    GameTaskDBHelper db;
 
     PieChart chartTotal;
     PieDataSet pieDataSetTotal;
@@ -51,31 +52,35 @@ public class StatisticsActivity extends AppCompatActivity {
         username = (TextView) findViewById(R.id.username);
         username.setText(getIntent().getStringExtra("EXTRA_USER"));
 
-        db = new StatisticsDBHelper(this);
+//        db = new StatisticsDBHelper(this);
+        db = new GameTaskDBHelper(this);
 
         //test database entries
-        db.deleteUser("test");
-        db.addUser("test");
-        db.increment("test", "correct_square");
-        db.increment("test", "correct_square");
-        db.increment("test", "correct_square");
-        db.increment("test", "incorrect_square");
-        db.increment("test", "correct_circle");
-        db.increment("test", "incorrect_circle");
+//        db.deleteUser("test");
+//        db.addUser("test");
+//        db.increment("test", "correct_square");
+//        db.increment("test", "correct_square");
+//        db.increment("test", "correct_square");
+//        db.increment("test", "incorrect_square");
+//        db.increment("test", "correct_circle");
+//        db.increment("test", "incorrect_circle");
+//
+//        int squareCorrect = db.getValue("test", "correct_square");
+//        int squareIncorrect = db.getValue("test", "incorrect_square");
+//        int circleCorrect = db.getValue("test", "correct_circle");
+//        int circleIncorrect = db.getValue("test", "incorrect_circle");
 
-        int squareCorrect = db.getValue("test", "correct_square");
-        int squareIncorrect = db.getValue("test", "incorrect_square");
-        int circleCorrect = db.getValue("test", "correct_circle");
-        int circleIncorrect = db.getValue("test", "incorrect_circle");
-        int totalCorrect = squareCorrect + circleCorrect;
-        int totalIncorrect = squareIncorrect + circleIncorrect;
+        int totalCorrect = db.getTaskMastery(username.getText().toString(), "numbertask");
+        int totalIncorrect = totalCorrect;
 
 
         chartSquare = (PieChart) findViewById(R.id.chartSquare);
 
         List<PieEntry> pieEntriesSquare = Arrays.asList(
-                new PieEntry(squareCorrect, "Correct"),
-                new PieEntry(squareIncorrect, "Incorrect")
+//                new PieEntry(squareCorrect, "Correct"),
+//                new PieEntry(squareIncorrect, "Incorrect")
+                new PieEntry(1, "Correct"),
+                new PieEntry(1, "Incorrect")
         );
 
         pieDataSetSquare = new PieDataSet(pieEntriesSquare, "SquareData");
@@ -97,8 +102,10 @@ public class StatisticsActivity extends AppCompatActivity {
 
         //This will need to match the styling of whether we use Arrays, Lists, ArrayLists, etc.
         List<PieEntry> pieEntriesCircle = Arrays.asList(
-                new PieEntry(circleCorrect, "Correct"),
-                new PieEntry(circleIncorrect, "Incorrect")
+//                new PieEntry(circleCorrect, "Correct"),
+//                new PieEntry(circleIncorrect, "Incorrect")
+                new PieEntry(1, "Correct"),
+                new PieEntry(1, "Incorrect")
         );
 
         pieDataSetCircle = new PieDataSet(pieEntriesCircle, "CircleData");
