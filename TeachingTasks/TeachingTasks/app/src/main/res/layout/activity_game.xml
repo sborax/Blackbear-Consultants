@@ -58,4 +58,96 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/chalk" />
 
+
+    <TextView
+        android:id="@+id/taskQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="casual"
+        android:gravity="center"
+        android:text="Question"
+        android:textColor="#FFFFFF"
+        android:textSize="58sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/woodHeaderImageView2" />
+
+    <TextView
+        android:id="@+id/taskQuestionObject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="casual"
+        android:gravity="center"
+        android:text="qObject"
+        android:textColor="#FFFFFF"
+        android:textSize="58sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/taskQuestion" />
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="casual"
+        android:text="tempUser"
+        android:textColor="#FFFFFF"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/woodHeaderImageView"
+        app:layout_constraintEnd_toEndOf="@+id/woodHeaderImageView"
+        app:layout_constraintStart_toStartOf="@+id/woodHeaderImageView"
+        app:layout_constraintTop_toTopOf="@+id/woodHeaderImageView" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/taskObjectLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/taskQuestionObject">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:background="#073D64"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/taskNavButton"
+            android:layout_width="62dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="32dp"
+            android:background="@drawable/ic_task_button" />
+
+        <Button
+            android:id="@+id/statisticsNavButton"
+            android:layout_width="56dp"
+            android:layout_height="41dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:background="@drawable/ic_stats_button"
+            android:gravity="center" />
+
+        <Button
+            android:id="@+id/settingsNavButton"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/ic_settings_button" />
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

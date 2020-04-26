@@ -1,10 +1,13 @@
 package com.example.teachingtasks;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
 
 public class RegisterUserDBHelper extends SQLiteOpenHelper {
 
@@ -47,8 +50,10 @@ public class RegisterUserDBHelper extends SQLiteOpenHelper {
         return;
     }
 
-    public void deleteUser(String user){
+    public void deleteUser(Activity activity, String user){
         //Delete a user from the database
+
+        GameTaskDBHelper myGameDB = new GameTaskDBHelper(activity);
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -57,30 +62,28 @@ public class RegisterUserDBHelper extends SQLiteOpenHelper {
         String[] selectionArgs = { user };
 
         int temp = db.delete(TABLE_NAME, selection, selectionArgs);
+        myGameDB.deleteUser(user);
 
         return;
     }
 
-    public String[] getAllUsers() {
+    public ArrayList<String> getAllUsers() {
         //Returns a list of all users
-        //Limited to 20 users
 
         //Call Readable
         SQLiteDatabase db = this.getReadableDatabase();
-        String[] users = new String[20];
+        ArrayList<String> users = new ArrayList<String>();
         Cursor res = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
         res.moveToFirst();
 
-        int count = 0;
         while(res.isAfterLast() == false){
             //If the next username is not an empty index, add to users
             //Else, keep going until the end of database is reached
 
             String temp = res.getString(res.getColumnIndex(COL_USERNAME));
             if(!temp.isEmpty())
-                users[count] = temp;
+                users.add(temp);
             res.moveToNext();
-            count++;
         }
 
         return users;
@@ -90,13 +93,37 @@ public class RegisterUserDBHelper extends SQLiteOpenHelper {
         //If the database contains the username, return true
         //Else, false
 
-        String[] users = this.getAllUsers();
+        ArrayList<String> users = this.getAllUsers();
 
-        for(int k = 0; k < users.length-1; k++){
-            if(tempUser.equals(users[k])){
+        for(int k = 0; k < users.size(); k++){
+            if(tempUser.equals(users.get(k))){
                 return true;
             }
         }
+        return false;
+    }
+
+    public boolean userPasswordCheck(String username, String password){
+        //Checks the database for the username, if the password in the table matches the given password, return true
+
+        //Call Readable
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        res.moveToFirst();
+
+        while(res.isAfterLast() == false){
+            //If the next username is not an empty index, keep going
+            //Else, end of database is reached
+
+            String tempUser = res.getString(res.getColumnIndex(COL_USERNAME));
+            String tempPass = res.getString(res.getColumnIndex(COL_PASSWORD));
+
+            if(username.equals(tempUser) && password.equals(tempPass))
+                return true;
+
+            res.moveToNext();
+        }
+
         return false;
     }
 }
