@@ -17,19 +17,19 @@ public class NumberTask extends Task implements TaskInterface{
     private HashMap<String, Button> taskObjects = new HashMap<>();
     private int mastery = 1;
 
-    public NumberTask(Activity gameActivity, UUID id, String q, HashMap<String, Button> obj) {
+    public NumberTask(Activity activity, UUID id, String q, HashMap<String, Button> obj) {
         super(id, q, obj);
 
-        Button zero = new Button(gameActivity.getBaseContext());
-        Button one = new Button(gameActivity.getBaseContext());
-        Button two = new Button(gameActivity.getBaseContext());
-        Button three = new Button(gameActivity.getBaseContext());
-        Button four = new Button(gameActivity.getBaseContext());
-        Button five = new Button(gameActivity.getBaseContext());
-        Button six = new Button(gameActivity.getBaseContext());
-        Button seven = new Button(gameActivity.getBaseContext());
-        Button eight = new Button(gameActivity.getBaseContext());
-        Button nine = new Button(gameActivity.getBaseContext());
+        Button zero = new Button(activity.getBaseContext());
+        Button one = new Button(activity.getBaseContext());
+        Button two = new Button(activity.getBaseContext());
+        Button three = new Button(activity.getBaseContext());
+        Button four = new Button(activity.getBaseContext());
+        Button five = new Button(activity.getBaseContext());
+        Button six = new Button(activity.getBaseContext());
+        Button seven = new Button(activity.getBaseContext());
+        Button eight = new Button(activity.getBaseContext());
+        Button nine = new Button(activity.getBaseContext());
 
         String[] questionObjects = {"Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"};
         Button[] tempObjects = {zero, one, two, three, four, five, six, seven, eight, nine};

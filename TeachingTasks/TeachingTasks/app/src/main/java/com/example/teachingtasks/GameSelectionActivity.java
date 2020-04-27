@@ -11,14 +11,16 @@ import androidx.appcompat.app.AppCompatActivity;
 public class GameSelectionActivity extends AppCompatActivity {
 
     TextView category;
-    Button leftArrow, rightArrow, startButton;
+    Button leftArrow, rightArrow, startButton, taskObject;
     Button taskNavButton, statisticsNavButton, settingsNavButton;
     TextView username;
+    GameController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_selection);
+        controller = new GameController(this);
 
         //Grabbing the username to display
         username = (TextView) findViewById(R.id.username);
@@ -33,6 +35,11 @@ public class GameSelectionActivity extends AppCompatActivity {
                 new GameSelectionActivityEventHandler().onClick(GameSelectionActivity.this, username.getText().toString());
             }
         });
+
+        Task current = controller.getNextTask(this);
+        String taskObjectKey = controller.getNextTaskObject(this, username.getText().toString());
+        taskObject = (Button) findViewById(R.id.taskObject);
+        taskObject.setText(current.getTaskObjects().get(taskObjectKey).getText().toString());
 
         //Setting up bottom navigation.
         taskNavButton = (Button) findViewById(R.id.taskNavButton);
