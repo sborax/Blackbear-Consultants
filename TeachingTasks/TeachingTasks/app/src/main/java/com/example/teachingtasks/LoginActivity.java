@@ -26,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
         username = (TextView) findViewById(R.id.userNameText);
         inputPassword = (EditText) findViewById(R.id.newPasswordEditText);
         cancelButton = (Button) findViewById(R.id.editButton);
-        loginButton = (Button) findViewById(R.id.loginButton);
+        loginButton = (Button) findViewById(R.id.createButton);
         showPass = (CheckBox) findViewById(R.id.showPasswordCheckBox);
 
         //Initialize username text to the appropriate username
