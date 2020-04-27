@@ -54,7 +54,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/woodHeaderImageView2"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/chalk" />
 
     <TextView
@@ -78,21 +78,21 @@
 
     <View
         android:id="@+id/rectangle_2"
-        android:layout_width="186dp"
-        android:layout_height="202dp"
+        android:layout_width="185dp"
+        android:layout_height="189dp"
         android:layout_alignParentTop="true"
         android:background="@drawable/rectangle_2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/woodHeaderImageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/woodHeaderImageView2"
+        app:layout_constraintVertical_bias="0.35" />
 
     <Button
         android:id="@+id/start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00FFFFFF"
+        android:layout_width="292dp"
+        android:layout_height="78dp"
+        android:background="#004F77"
         android:fontFamily="casual"
         android:text="Start"
         android:textColor="#FFFFFF"
@@ -100,8 +100,81 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rectangle_2" />
+        app:layout_constraintTop_toBottomOf="@+id/rectangle_2"
+        app:layout_constraintVertical_bias="0.18"
+        tools:background="#004F77" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:background="#073D64"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/taskNavButton"
+            android:layout_width="62dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="32dp"
+            android:background="@drawable/ic_task_button" />
+
+        <Button
+            android:id="@+id/statisticsNavButton"
+            android:layout_width="56dp"
+            android:layout_height="41dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:background="@drawable/ic_stats_button"
+            android:gravity="center" />
+
+        <Button
+            android:id="@+id/settingsNavButton"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/ic_settings_button" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/Category"
+        android:layout_width="202dp"
+        android:layout_height="73dp"
+        android:text="Numbers"
+        android:textColor="#FFFFFF"
+        android:textColorLink="#FFFFFF"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toTopOf="@+id/rectangle_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/woodHeaderImageView2" />
+
+    <Button
+        android:id="@+id/leftArrow"
+        android:layout_width="54dp"
+        android:layout_height="53dp"
+        android:background="@drawable/triangle_arrow_point"
+        android:rotation="90"
+        app:layout_constraintBottom_toBottomOf="@+id/Category"
+        app:layout_constraintEnd_toStartOf="@+id/Category"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/Category" />
+
+    <Button
+        android:id="@+id/rightArrow"
+        android:layout_width="54dp"
+        android:layout_height="53dp"
+        android:background="@drawable/triangle_arrow_point"
+        android:rotation="-90"
+        app:layout_constraintBottom_toBottomOf="@+id/Category"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Category"
+        app:layout_constraintTop_toTopOf="@+id/Category" />
 
     <!--        android:layout_alignparentLeft="true"-->
 
