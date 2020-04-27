@@ -194,7 +194,9 @@ class GameTaskDBHelper extends SQLiteOpenHelper {
 
                         String tempCorrect = columnNames[k];
 
-                        totalCorrect += Integer.parseInt(res.getString(res.getColumnIndex(tempCorrect)));
+                        if(tempCorrect.contains("_correct")) {
+                            totalCorrect += Integer.parseInt(res.getString(res.getColumnIndex(tempCorrect)));
+                        }
                     }
                 }
             }
@@ -204,6 +206,45 @@ class GameTaskDBHelper extends SQLiteOpenHelper {
 
         return totalCorrect;
     }
+
+
+
+    public int getTaskIncorrect(String username, String task) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        int totalIncorrect = 1;
+        Cursor res = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        res.moveToFirst();
+
+        while (res.isAfterLast() == false){
+
+            String tempUser = res.getString(res.getColumnIndex(COL_USERNAME));
+
+            if(tempUser.equalsIgnoreCase(username)){
+
+                String tempTask = res.getString(res.getColumnIndex(COL_TASK));
+
+                if(tempTask.equalsIgnoreCase(task)){
+
+                    String[] columnNames = res.getColumnNames();
+
+                    for (int k = 4; k < columnNames.length; k++){
+
+                        String tempIncorrect = columnNames[k];
+
+                        if(tempIncorrect.contains("_incorrect")) {
+                            totalIncorrect += Integer.parseInt(res.getString(res.getColumnIndex(tempIncorrect)));
+                        }
+                    }
+                }
+            }
+
+            res.moveToNext();
+        }
+
+        return totalIncorrect;
+    }
+
     public String[] getAllUsers() {
         //Returns a list of all users
         //Limited to 20 users
