@@ -2,6 +2,7 @@ package com.example.teachingtasks;
 
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -79,11 +80,9 @@ public class StatisticsActivity extends AppCompatActivity {
         setChartStyle(chartTotal);
         totalLegend = chartTotal.getLegend();
         totalLegend.setTextColor(Color.WHITE);
+        totalLegend.setTypeface(Typeface.SANS_SERIF);
         totalDescription = chartTotal.getDescription();
-        totalDescription.setText("Total Accuracy");
-        totalDescription.setTextColor(Color.WHITE);
-        totalDescription.setTextSize(20);
-        totalDescription.setXOffset(50);
+        totalDescription.setEnabled(false);
 
         //number (also need to make generic)
         int numCorrect = db.getTaskMastery(username.getText().toString(), "numbertask");
@@ -103,6 +102,7 @@ public class StatisticsActivity extends AppCompatActivity {
 
         pieDataNumber = new PieData(pieDataSetNumber);
         pieDataNumber.setValueTextColor(Color.BLACK);
+        pieDataNumber.setValueTypeface(Typeface.SANS_SERIF);
         pieDataNumber.setValueTextSize(15);
         pieDataNumber.setValueFormatter(new MyValueFormatter());
 
