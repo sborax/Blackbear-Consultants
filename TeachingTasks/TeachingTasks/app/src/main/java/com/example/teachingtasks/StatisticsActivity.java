@@ -76,7 +76,7 @@ public class StatisticsActivity extends AppCompatActivity {
         pieDataTotal.setValueFormatter(new MyValueFormatter());
 
         chartTotal.setData(pieDataTotal);
-        chartTotal.setCenterText(Float.toString(percent*100)+"%");
+        chartTotal.setCenterText(Float.toString(Math.round(percent*10000)/(float)100)+"%");
         setChartStyle(chartTotal);
         totalLegend = chartTotal.getLegend();
         totalLegend.setTextColor(Color.WHITE);
