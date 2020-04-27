@@ -76,34 +76,20 @@
 
     <!-- drawable/rectangle_2.xml -->
 
-    <View
-        android:id="@+id/rectangle_2"
-        android:layout_width="185dp"
-        android:layout_height="189dp"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/rectangle_2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/woodHeaderImageView2"
-        app:layout_constraintVertical_bias="0.35" />
-
     <Button
         android:id="@+id/start"
         android:layout_width="292dp"
         android:layout_height="78dp"
-        android:background="#004F77"
+        android:layout_marginBottom="64dp"
         android:fontFamily="casual"
         android:text="Start"
         android:textColor="#FFFFFF"
         android:textSize="58sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rectangle_2"
-        app:layout_constraintVertical_bias="0.18"
         tools:background="#004F77" />
 
     <LinearLayout
@@ -143,25 +129,30 @@
 
     <TextView
         android:id="@+id/Category"
-        android:layout_width="202dp"
-        android:layout_height="73dp"
-        android:text="Numbers"
+        android:layout_width="239dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="casual"
+        android:gravity="center"
+        android:text="Matching"
         android:textColor="#FFFFFF"
         android:textColorLink="#FFFFFF"
         android:textSize="48sp"
-        app:layout_constraintBottom_toTopOf="@+id/rectangle_2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/rightArrow"
+        app:layout_constraintStart_toEndOf="@+id/leftArrow"
         app:layout_constraintTop_toBottomOf="@+id/woodHeaderImageView2" />
 
     <Button
         android:id="@+id/leftArrow"
         android:layout_width="54dp"
         android:layout_height="53dp"
-        android:background="@drawable/triangle_arrow_point"
-        android:rotation="90"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:background="@drawable/ic_leftarrow"
+        android:gravity="center"
+        android:rotation="0"
         app:layout_constraintBottom_toBottomOf="@+id/Category"
-        app:layout_constraintEnd_toStartOf="@+id/Category"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/Category" />
 
@@ -169,12 +160,53 @@
         android:id="@+id/rightArrow"
         android:layout_width="54dp"
         android:layout_height="53dp"
-        android:background="@drawable/triangle_arrow_point"
-        android:rotation="-90"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/ic_rightarrow"
+        android:gravity="center"
+        android:rotation="0"
         app:layout_constraintBottom_toBottomOf="@+id/Category"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/Category"
         app:layout_constraintTop_toTopOf="@+id/Category" />
+
+    <Button
+        android:id="@+id/taskObject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        android:fontFamily="casual"
+        android:text="1"
+        android:textColor="#FFFFFF"
+        android:textSize="58sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button2" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/ic_zerostars"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="casual"
+        android:text="Numbers"
+        android:textColor="#FFFFFF"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Category" />
 
     <!--        android:layout_alignparentLeft="true"-->
 
