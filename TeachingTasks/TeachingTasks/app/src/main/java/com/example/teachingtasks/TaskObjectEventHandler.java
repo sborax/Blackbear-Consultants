@@ -41,7 +41,7 @@ public class TaskObjectEventHandler {
         }
         else {
             mydb.subMastery(username, "numbertask", questionObject);
-            Toast.makeText(gameActivity, "Try Again", Toast.LENGTH_LONG).show();
+            Toast.makeText(gameActivity, "Try Again", Toast.LENGTH_SHORT).show();
         }
     }
 }
