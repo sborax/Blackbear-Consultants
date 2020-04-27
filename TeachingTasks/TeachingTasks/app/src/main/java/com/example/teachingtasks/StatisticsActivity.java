@@ -1,6 +1,7 @@
 package com.example.teachingtasks;
 
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -38,7 +39,8 @@ public class StatisticsActivity extends AppCompatActivity {
 
     Legend totalLegend;
     Legend numLegend;
-    Description description;
+    Description totalDescription;
+    Description numDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,7 @@ public class StatisticsActivity extends AppCompatActivity {
         //total (make generic!)
         int totalCorrect = db.getTaskMastery(username.getText().toString(), "numbertask");
         int totalIncorrect = db.getTaskIncorrect(username.getText().toString(), "numbertask");
+        float percent = (float)totalCorrect/(totalCorrect+totalIncorrect);
 
 
         chartTotal = (PieChart) findViewById(R.id.chartTotal);
@@ -72,10 +75,15 @@ public class StatisticsActivity extends AppCompatActivity {
         pieDataTotal.setValueFormatter(new MyValueFormatter());
 
         chartTotal.setData(pieDataTotal);
-        chartTotal.setCenterText("Total Accuracy");
+        chartTotal.setCenterText(Float.toString(percent*100)+"%");
         setChartStyle(chartTotal);
         totalLegend = chartTotal.getLegend();
         totalLegend.setTextColor(Color.WHITE);
+        totalDescription = chartTotal.getDescription();
+        totalDescription.setText("Total Accuracy");
+        totalDescription.setTextColor(Color.WHITE);
+        totalDescription.setTextSize(20);
+        totalDescription.setXOffset(50);
 
         //number (also need to make generic)
         int numCorrect = db.getTaskMastery(username.getText().toString(), "numbertask");
@@ -103,6 +111,8 @@ public class StatisticsActivity extends AppCompatActivity {
         setChartStyle(chartNumber);
         numLegend = chartNumber.getLegend();
         numLegend.setEnabled(false);
+        numDescription = chartNumber.getDescription();
+        numDescription.setEnabled(false);
 
         taskNavButton = (Button) findViewById(R.id.taskNavButton);
         statisticsNavButton = (Button) findViewById(R.id.statisticsNavButton);
@@ -141,8 +151,6 @@ public class StatisticsActivity extends AppCompatActivity {
         chart.setRotationEnabled(false);
         chart.setDrawEntryLabels(false);
         chart.setRotationAngle(180f);
-        description = chart.getDescription();
-        description.setEnabled(false);
     }
 
 }
