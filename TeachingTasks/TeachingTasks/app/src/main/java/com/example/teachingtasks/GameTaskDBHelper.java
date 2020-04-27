@@ -204,4 +204,43 @@ class GameTaskDBHelper extends SQLiteOpenHelper {
 
         return totalCorrect;
     }
+    public String[] getAllUsers() {
+        //Returns a list of all users
+        //Limited to 20 users
+
+        //Call Readable
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] users = new String[20];
+        Cursor res = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        res.moveToFirst();
+
+        int count = 0;
+        while(res.isAfterLast() == false){
+            //If the next username is not an empty index, add to users
+            //Else, keep going until the end of database is reached
+
+            String temp = res.getString(res.getColumnIndex(COL_USERNAME));
+            if(!temp.isEmpty())
+                users[count] = temp;
+            res.moveToNext();
+            count++;
+        }
+
+        return users;
+    }
+
+    public boolean containsUser(String tempUser) {
+        //If the database contains the username, return true
+        //Else, false
+
+        String[] users = this.getAllUsers();
+
+        for(int k = 0; k < users.length-1; k++){
+            if(tempUser.equals(users[k])){
+                return true;
+            }
+        }
+        return false;
+    }
 }

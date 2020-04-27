@@ -1,6 +1,5 @@
 package com.example.teachingtasks;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,9 +16,6 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 
-import com.example.teachingtasks.StatisticsDBHelper;
-
-import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
 
@@ -52,23 +48,7 @@ public class StatisticsActivity extends AppCompatActivity {
         username = (TextView) findViewById(R.id.username);
         username.setText(getIntent().getStringExtra("EXTRA_USER"));
 
-//        db = new StatisticsDBHelper(this);
         db = new GameTaskDBHelper(this);
-
-        //test database entries
-//        db.deleteUser("test");
-//        db.addUser("test");
-//        db.increment("test", "correct_square");
-//        db.increment("test", "correct_square");
-//        db.increment("test", "correct_square");
-//        db.increment("test", "incorrect_square");
-//        db.increment("test", "correct_circle");
-//        db.increment("test", "incorrect_circle");
-//
-//        int squareCorrect = db.getValue("test", "correct_square");
-//        int squareIncorrect = db.getValue("test", "incorrect_square");
-//        int circleCorrect = db.getValue("test", "correct_circle");
-//        int circleIncorrect = db.getValue("test", "incorrect_circle");
 
         int totalCorrect = db.getTaskMastery(username.getText().toString(), "numbertask");
         int totalIncorrect = totalCorrect;
@@ -77,8 +57,6 @@ public class StatisticsActivity extends AppCompatActivity {
         chartSquare = (PieChart) findViewById(R.id.chartSquare);
 
         List<PieEntry> pieEntriesSquare = Arrays.asList(
-//                new PieEntry(squareCorrect, "Correct"),
-//                new PieEntry(squareIncorrect, "Incorrect")
                 new PieEntry(1, "Correct"),
                 new PieEntry(1, "Incorrect")
         );
