@@ -143,9 +143,9 @@
 
     <TextView
         android:id="@+id/Category"
-        android:layout_width="196dp"
-        android:layout_height="72dp"
-        android:text="Category"
+        android:layout_width="202dp"
+        android:layout_height="73dp"
+        android:text="Numbers"
         android:textColor="#FFFFFF"
         android:textColorLink="#FFFFFF"
         android:textSize="48sp"

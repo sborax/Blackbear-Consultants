@@ -30,7 +30,7 @@ public class GameSelectionActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                new GameSelectionEventHandler().onClick(GameSelectionActivity.this, username.getText().toString());
+                new GameSelectionActivityEventHandler().onClick(GameSelectionActivity.this, username.getText().toString());
             }
         });
 
