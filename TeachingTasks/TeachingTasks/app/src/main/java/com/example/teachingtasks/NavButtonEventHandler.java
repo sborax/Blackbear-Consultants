@@ -21,8 +21,6 @@ public class NavButtonEventHandler {
 
         intent = new Intent(currActivity, GameActivity.class);
         intent.putExtra("EXTRA_USER", user);
-        intent.putExtra("EXTRA_QUESTION", "Click the Number");
-        intent.putExtra("EXTRA_TASK_OBJECT", "Zero");
         currActivity.startActivity(intent);
     }
 
