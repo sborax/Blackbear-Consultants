@@ -23,7 +23,6 @@ import java.util.List;
 public class StatisticsActivity extends AppCompatActivity {
 
 
-//    StatisticsDBHelper db;
     GameTaskDBHelper db;
 
     PieChart chartTotal;
