@@ -172,24 +172,30 @@ class GameTaskDBHelper extends SQLiteOpenHelper {
     }
 
     public int getTaskMastery(String username, String task) {
+        //Gets the total number of correct answers for the task
 
         SQLiteDatabase db = this.getReadableDatabase();
-        int totalCorrect = 1;
+        int totalCorrect = 0;
         Cursor res = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
         res.moveToFirst();
 
+        //Loop through table
         while (res.isAfterLast() == false){
 
             String tempUser = res.getString(res.getColumnIndex(COL_USERNAME));
 
+            //If this index in table contains the user
             if(tempUser.equalsIgnoreCase(username)){
 
                 String tempTask = res.getString(res.getColumnIndex(COL_TASK));
 
+                //If this index in table contains the user and the task
                 if(tempTask.equalsIgnoreCase(task)){
 
+                    //Grab all of the columns at this index ie: zero_correct, zero_incorrect, etc...
                     String[] columnNames = res.getColumnNames();
 
+                    //Loop through the columns and add up the total number of correct answers
                     for (int k = 4; k < columnNames.length; k++){
 
                         String tempCorrect = columnNames[k];
