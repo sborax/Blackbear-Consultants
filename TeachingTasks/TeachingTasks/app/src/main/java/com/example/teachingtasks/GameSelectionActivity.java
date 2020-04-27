@@ -8,15 +8,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class GameSelectionActivity extends AppCompatActivity {
 
+    TextView category;
+    Button leftArrow, rightArrow, startButton;
     TextView username;
-    Button startButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_selection);
 
-//        Task temp GameController.getNextTask(this);
+        username = (TextView) findViewById(R.id.username);
+        username.setText(getIntent().getStringExtra("EXTRA_USER"));
+
 
     }
 }

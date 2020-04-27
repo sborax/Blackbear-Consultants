@@ -19,7 +19,7 @@ public class LoginEventHandler {
 //            Intent gameIntent = new Intent(loginActivity.getBaseContext(), GameActivity.class);
 //            gameIntent.putExtra("EXTRA_USER", username);
 //            loginActivity.startActivity(gameIntent);
-            
+
             //The user entered the right login information, bring them to game selection menu.
             System.out.println("Authentication successful. Going to Game Selection.");
             mydb.close();
