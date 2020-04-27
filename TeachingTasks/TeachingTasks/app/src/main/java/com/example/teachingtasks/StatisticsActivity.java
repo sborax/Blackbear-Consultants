@@ -1,5 +1,6 @@
 package com.example.teachingtasks;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -36,7 +37,8 @@ public class StatisticsActivity extends AppCompatActivity {
     Button taskNavButton, statisticsNavButton, settingsNavButton;
     TextView username;
 
-    Legend legend;
+    Legend totalLegend;
+    Legend numLegend;
     Description description;
 
     @Override
@@ -66,15 +68,15 @@ public class StatisticsActivity extends AppCompatActivity {
         pieDataSetTotal.setColors(new int[] { R.color.colorPieGreen, R.color.colorPieRed }, StatisticsActivity.this);
 
         pieDataTotal = new PieData(pieDataSetTotal);
-        pieDataTotal.setValueTextColor(R.color.black);
+        pieDataTotal.setValueTextColor(Color.BLACK);
         pieDataTotal.setValueTextSize(15);
         pieDataTotal.setValueFormatter(new MyValueFormatter());
 
         chartTotal.setData(pieDataTotal);
         chartTotal.setCenterText("Total Accuracy");
         setChartStyle(chartTotal);
-        legend = chartTotal.getLegend();
-        legend.setTextColor(R.color.white);
+        totalLegend = chartTotal.getLegend();
+        totalLegend.setTextColor(Color.WHITE);
 
         //number (also need to make generic)
         int numCorrect = db.getTaskMastery(username.getText().toString(), "numbertask");
@@ -93,15 +95,15 @@ public class StatisticsActivity extends AppCompatActivity {
         pieDataSetNumber.setColors(new int[] { R.color.colorPieGreen, R.color.colorPieRed }, StatisticsActivity.this);
 
         pieDataNumber = new PieData(pieDataSetNumber);
-        pieDataNumber.setValueTextColor(R.color.black);
+        pieDataNumber.setValueTextColor(Color.BLACK);
         pieDataNumber.setValueTextSize(15);
         pieDataNumber.setValueFormatter(new MyValueFormatter());
 
         chartNumber.setData(pieDataNumber);
         chartNumber.setCenterText("Number Accuracy");
         setChartStyle(chartNumber);
-        legend = chartNumber.getLegend();
-        legend.setEnabled(false);
+        numLegend = chartNumber.getLegend();
+        numLegend.setEnabled(false);
 
         taskNavButton = (Button) findViewById(R.id.taskNavButton);
         statisticsNavButton = (Button) findViewById(R.id.statisticsNavButton);
