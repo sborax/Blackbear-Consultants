@@ -1,5 +1,6 @@
 package com.example.teachingtasks;
 
+import android.app.Activity;
 import android.widget.Button;
 
 import java.util.ArrayList;
@@ -12,10 +13,10 @@ public class MatchingCategory extends Category implements CategoryInterface {
     private ArrayList<Task> tasks = new ArrayList<>();
     private int mastery = 0;
 
-    public MatchingCategory(GameActivity gameActivity, String newCatName, ArrayList<Task> initTasks) throws InstantiationException, IllegalAccessException {
+    public MatchingCategory(Activity activity, String newCatName, ArrayList<Task> initTasks) throws InstantiationException, IllegalAccessException {
         super(newCatName, initTasks);
 
-        tasks.add(new NumberTask(gameActivity, new UUID(1000000, 10), "Click the Number", new HashMap<String, Button>()));
+        tasks.add(new NumberTask(activity, new UUID(1000000, 10), "Click the Number", new HashMap<String, Button>()));
     }
 
     @Override
