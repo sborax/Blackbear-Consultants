@@ -28,12 +28,11 @@ public class StatisticsActivity extends AppCompatActivity {
     PieChart chartTotal;
     PieDataSet pieDataSetTotal;
     PieData pieDataTotal;
-    PieChart chartSquare;
-    PieDataSet pieDataSetSquare;
-    PieData pieDataSquare;
-    PieChart chartCircle;
-    PieDataSet pieDataSetCircle;
-    PieData pieDataCircle;
+
+    PieChart chartNumber;
+    PieDataSet pieDataSetNumber;
+    PieData pieDataNumber;
+
     Button taskNavButton, statisticsNavButton, settingsNavButton;
     TextView username;
 
@@ -50,53 +49,9 @@ public class StatisticsActivity extends AppCompatActivity {
 
         db = new GameTaskDBHelper(this);
 
+        //total (make generic!)
         int totalCorrect = db.getTaskMastery(username.getText().toString(), "numbertask");
-        int totalIncorrect = totalCorrect;
-
-
-        chartSquare = (PieChart) findViewById(R.id.chartSquare);
-
-        List<PieEntry> pieEntriesSquare = Arrays.asList(
-                new PieEntry(1, "Correct"),
-                new PieEntry(1, "Incorrect")
-        );
-
-        pieDataSetSquare = new PieDataSet(pieEntriesSquare, "SquareData");
-        pieDataSetSquare.setColors(new int[] { R.color.colorPieGreen, R.color.colorPieRed }, StatisticsActivity.this);
-
-        pieDataSquare = new PieData(pieDataSetSquare);
-
-        pieDataSquare.setValueTextColors(Arrays.asList(R.color.black, R.color.white));
-        pieDataSquare.setValueTextSize(13);
-        pieDataSquare.setValueFormatter(new MyValueFormatter());
-
-        chartSquare.setData(pieDataSquare);
-        chartSquare.setCenterText("Square Identification");
-        setChartStyle(chartSquare);
-
-
-
-        chartCircle = (PieChart) findViewById(R.id.chartCircle);
-
-        //This will need to match the styling of whether we use Arrays, Lists, ArrayLists, etc.
-        List<PieEntry> pieEntriesCircle = Arrays.asList(
-//                new PieEntry(circleCorrect, "Correct"),
-//                new PieEntry(circleIncorrect, "Incorrect")
-                new PieEntry(1, "Correct"),
-                new PieEntry(1, "Incorrect")
-        );
-
-        pieDataSetCircle = new PieDataSet(pieEntriesCircle, "CircleData");
-        pieDataSetCircle.setColors(new int[] { R.color.colorPieGreen, R.color.colorPieRed }, StatisticsActivity.this);
-
-        pieDataCircle = new PieData(pieDataSetCircle);
-        pieDataCircle.setValueTextColor(R.color.black);
-        pieDataCircle.setValueTextSize(13);
-        pieDataCircle.setValueFormatter(new MyValueFormatter());
-
-        chartCircle.setData(pieDataCircle);
-        chartCircle.setCenterText("Circle Identification");
-        setChartStyle(chartCircle);
+        int totalIncorrect = db.getTaskIncorrect(username.getText().toString(), "numbertask");
 
 
         chartTotal = (PieChart) findViewById(R.id.chartTotal);
@@ -117,8 +72,36 @@ public class StatisticsActivity extends AppCompatActivity {
 
         chartTotal.setData(pieDataTotal);
         chartTotal.setCenterText("Total Accuracy");
-        setChartStyle(chartTotal, true);
+        setChartStyle(chartTotal);
         legend = chartTotal.getLegend();
+        legend.setTextColor(R.color.white);
+
+        //number (also need to make generic)
+        int numCorrect = db.getTaskMastery(username.getText().toString(), "numbertask");
+        int numIncorrect = db.getTaskIncorrect(username.getText().toString(), "numbertask");
+
+
+        chartNumber = (PieChart) findViewById(R.id.chartNumber);
+
+        //This will need to match the styling of whether we use Arrays, Lists, ArrayLists, etc.
+        List<PieEntry> pieEntriesNumber = Arrays.asList(
+                new PieEntry(numCorrect, "Correct"),
+                new PieEntry(numIncorrect, "Incorrect")
+        );
+
+        pieDataSetNumber = new PieDataSet(pieEntriesNumber, "");
+        pieDataSetNumber.setColors(new int[] { R.color.colorPieGreen, R.color.colorPieRed }, StatisticsActivity.this);
+
+        pieDataNumber = new PieData(pieDataSetNumber);
+        pieDataNumber.setValueTextColor(R.color.black);
+        pieDataNumber.setValueTextSize(15);
+        pieDataNumber.setValueFormatter(new MyValueFormatter());
+
+        chartNumber.setData(pieDataNumber);
+        chartNumber.setCenterText("Number Accuracy");
+        setChartStyle(chartNumber);
+        legend = chartNumber.getLegend();
+        legend.setEnabled(false);
 
         taskNavButton = (Button) findViewById(R.id.taskNavButton);
         statisticsNavButton = (Button) findViewById(R.id.statisticsNavButton);
@@ -152,23 +135,15 @@ public class StatisticsActivity extends AppCompatActivity {
         });
     }
 
-    private void setChartStyle(PieChart chart, boolean total) {
+    private void setChartStyle(PieChart chart) {
         chart.setHoleRadius(45f);
         chart.setRotationEnabled(false);
         chart.setDrawEntryLabels(false);
         chart.setRotationAngle(180f);
         description = chart.getDescription();
         description.setEnabled(false);
-        if (!total) {
-            chart.setMaxAngle(180f);
-            legend = chart.getLegend();
-            legend.setEnabled(false);
-        }
     }
 
-    private void setChartStyle(PieChart chart) {
-        setChartStyle(chart, false);
-    }
 }
 
 class MyValueFormatter extends ValueFormatter {
