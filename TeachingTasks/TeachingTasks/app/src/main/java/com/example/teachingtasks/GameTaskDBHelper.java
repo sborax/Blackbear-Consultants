@@ -218,7 +218,7 @@ class GameTaskDBHelper extends SQLiteOpenHelper {
     public int getTaskIncorrect(String username, String task) {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        int totalIncorrect = 1;
+        int totalIncorrect = 0;
         Cursor res = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
         res.moveToFirst();
 
