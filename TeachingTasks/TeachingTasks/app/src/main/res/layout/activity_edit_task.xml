@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/chalk">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:background="#073D64"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/taskNavButton"
+            android:layout_width="62dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="32dp"
+            android:background="@drawable/ic_task_button" />
+
+        <Button
+            android:id="@+id/statisticsNavButton"
+            android:layout_width="56dp"
+            android:layout_height="41dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:background="@drawable/ic_stats_button"
+            android:gravity="center" />
+
+        <Button
+            android:id="@+id/settingsNavButton"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/ic_settings_button" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/chalkBackgroundImageView3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/chalk"
+        android:contentDescription="TODO"
+        android:cropToPadding="true"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/woodHeaderImageView2"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/chalk" />
+
+    <ImageView
+        android:id="@+id/woodHeaderImageView7"
+        android:layout_width="0dp"
+        android:layout_height="125dp"
+        android:adjustViewBounds="true"
+        android:background="#875B42"
+        android:contentDescription="TODO"
+        android:cropToPadding="true"
+        android:scaleType="fitXY"
+        android:tint="#634433"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/chalkwood" />
+
+    <ImageView
+        android:id="@+id/woodHeaderImageView8"
+        android:layout_width="0dp"
+        android:layout_height="104dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:adjustViewBounds="true"
+        android:cropToPadding="true"
+        android:scaleType="fitXY"
+        android:tint="#99875B42"
+        app:layout_constraintBottom_toBottomOf="@+id/woodHeaderImageView7"
+        app:layout_constraintEnd_toEndOf="@+id/woodHeaderImageView7"
+        app:layout_constraintStart_toStartOf="@+id/woodHeaderImageView7"
+        app:layout_constraintTop_toTopOf="@+id/woodHeaderImageView7"
+        app:srcCompat="@drawable/chalkwood" />
+
+    <ImageView
+        android:id="@+id/task_pic"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/Image_Desc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/woodHeaderImageView7"
+        app:srcCompat="@drawable/sick" />
+
+    <TextView
+        android:id="@+id/Image_Desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="casual"
+        android:text="Image Description"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/input_image_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/ID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="casual"
+        android:text="tempUser"
+        android:textColor="#FFFFFF"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/woodHeaderImageView8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/woodHeaderImageView8" />
+
+    <EditText
+        android:id="@+id/input_image_name"
+        style="@style/Widget.AppCompat.EditText"
+        android:layout_width="290dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="164dp"
+        android:background="#FFFFFF"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/char_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="casual"
+        android:text="Char: chars_left"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.026"
+        app:layout_constraintStart_toStartOf="@+id/input_image_name"
+        app:layout_constraintTop_toBottomOf="@+id/input_image_name"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/retake_pic"
+        android:layout_width="91dp"
+        android:layout_height="57dp"
+        android:layout_marginBottom="10dp"
+        android:background="#00FFFFFF"
+        android:fontFamily="casual"
+        android:text="Retake Picture"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.121"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_image_name"
+        app:layout_constraintVertical_bias="0.752" />
+
+    <Button
+        android:id="@+id/new_pic"
+        android:layout_width="81dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="10dp"
+        android:background="#00FFFFFF"
+        android:fontFamily="casual"
+        android:text="New Picture"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_image_name"
+        app:layout_constraintVertical_bias="0.754" />
+
+    <Button
+        android:id="@+id/create_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="#00FFFFFF"
+        android:fontFamily="casual"
+        android:text="Create"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.88"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_image_name"
+        app:layout_constraintVertical_bias="0.75" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

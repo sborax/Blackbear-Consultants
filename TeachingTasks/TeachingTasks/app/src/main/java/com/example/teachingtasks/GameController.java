@@ -17,11 +17,11 @@ public class GameController {
     GameCategoryDBHelper mydb;
     private int mastery = 11;
 
-    public GameController(GameActivity gameActivity){
+    public GameController(Activity activity){
 
         try {
-            categories.add(new MatchingCategory(gameActivity,"", null));
-            mydb = new GameCategoryDBHelper(gameActivity);
+            categories.add(new MatchingCategory(activity,"", null));
+            mydb = new GameCategoryDBHelper(activity);
             //Add the rest from the database
             categories.addAll(createDatabaseCategories());
         } catch (InstantiationException e) {
@@ -110,7 +110,7 @@ public class GameController {
         return nextTask;
     }
 
-    public String getNextTaskObject(GameActivity activity, String username) {
+    public String getNextTaskObject(Activity activity, String username) {
         //Returns the first task object found with the lowest number of correct answers
 
         final GameTaskDBHelper myGameDB = new GameTaskDBHelper(activity);

@@ -167,30 +167,4 @@
         app:layout_constraintStart_toStartOf="@+id/newPasswordEditText"
         app:layout_constraintTop_toBottomOf="@+id/newPasswordEditText" />
 
-    <Button
-        android:id="@+id/testButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="32dp"
-        android:onClick="testButton"
-        android:text="@string/test_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/woodHeaderImageView2" />
-
-    <Button
-        android:id="@+id/selectionButton"
-        android:layout_width="153dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:onClick="selectionButton"
-        android:text="Game Selection"
-        app:layout_constraintBottom_toTopOf="@+id/newUserNameEditText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.796"
-        app:layout_constraintStart_toEndOf="@+id/testButton"
-        app:layout_constraintTop_toTopOf="@+id/chalkBackgroundImageView"
-        app:layout_constraintVertical_bias="0.0" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
