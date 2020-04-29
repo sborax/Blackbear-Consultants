@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,7 +11,7 @@ import android.widget.TextView;
 public class SettingsActivity extends AppCompatActivity {
 
     TextView username, customTask, mute, logout;
-    Button taskNavButton, settingsNavButton, statisticsNavButton;
+    Button taskNavButton, settingsNavButton, statisticsNavButton, customTaskButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +21,7 @@ public class SettingsActivity extends AppCompatActivity {
         username = (TextView) findViewById(R.id.username);
         username.setText(getIntent().getStringExtra("EXTRA_USER"));
 
-        customTask = (TextView) findViewById(R.id.customTask);
+        customTask = (TextView) findViewById(R.id.customTaskButton);
         mute = (TextView) findViewById(R.id.mute);
         logout = (TextView) findViewById(R.id.logout);
 
@@ -38,6 +37,15 @@ public class SettingsActivity extends AppCompatActivity {
         taskNavButton = (Button) findViewById(R.id.taskNavButton);
         statisticsNavButton = (Button) findViewById(R.id.statisticsNavButton);
         settingsNavButton = (Button) findViewById(R.id.settingsNavButton);
+
+        customTaskButton = (Button) findViewById(R.id.customTaskButton);
+        customTaskButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent createUserIntent = new Intent(SettingsActivity.this, EditTaskActivity.class);
+                startActivity(createUserIntent);
+            }
+        });
 
         taskNavButton.setOnClickListener(new View.OnClickListener() {
             @Override

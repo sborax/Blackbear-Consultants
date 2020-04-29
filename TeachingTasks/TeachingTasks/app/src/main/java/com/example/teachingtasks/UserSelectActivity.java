@@ -25,8 +25,6 @@ import java.util.Random;
 public class UserSelectActivity extends AppCompatActivity {
 
     Button editButton, addButton;
-    //Temp Button for edit_task activity REMOVE LATER
-    Button addTask;
 
     HashMap<Integer, EditText> userOptions = new HashMap<Integer, EditText>();
     RegisterUserDBHelper mydb;
@@ -43,16 +41,6 @@ public class UserSelectActivity extends AppCompatActivity {
         mydb = new RegisterUserDBHelper(this);
 
         //Initial variables with UI components
-
-        //TEMPORARY
-        addTask = (Button) findViewById(R.id.addTask);
-        addTask.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent createUserIntent = new Intent(UserSelectActivity.this, EditTaskActivity.class);
-                startActivity(createUserIntent);
-            }
-        });
 
         editButton = (Button) findViewById(R.id.editButton);
         addButton = (Button) findViewById(R.id.addButton);
