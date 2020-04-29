@@ -54,6 +54,7 @@ public class GameActivity extends AppCompatActivity {
 
         initializeTaskObjects();
 
+        //Setting up bottom navigation.
         taskNavButton = (Button) findViewById(R.id.taskNavButton);
         statisticsNavButton = (Button) findViewById(R.id.statisticsNavButton);
         settingsNavButton = (Button) findViewById(R.id.settingsNavButton);

@@ -24,7 +24,7 @@ public class CreateUserEventHandler {
         boolean invalidPass = false;
 
         //If the username doesn't exist in the database already, check the password
-        StatisticsDBHelper mydb = new StatisticsDBHelper(mainActivity);
+        GameTaskDBHelper mydb = new GameTaskDBHelper(mainActivity);
 
         if(!mydb.containsUser(newUsername.getText().toString())){
 
