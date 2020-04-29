@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
-import com.example.teachingtasks.ui.EditTaskActivity;
+import com.example.teachingtasks.EditTaskActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
