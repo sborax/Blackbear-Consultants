@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 public class EditTaskActivity extends AppCompatActivity {
     ImageView image;
+    Button taskNavButton, settingsNavButton, statisticsNavButton;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -39,9 +40,31 @@ public class EditTaskActivity extends AppCompatActivity {
         createTask.setOnClickListener(new Button.OnClickListener() {
 
             @Override
-            public void onClick(View arg0) {
-                //SET TASK NAME WITH SELECTED PHOTOS
+            public void onClick(View v) {
+                Intent createUserIntent = new Intent(EditTaskActivity.this, CreateTaskActivity.class);
+                startActivity(createUserIntent);
             }});
+
+//        taskNavButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                new NavButtonEventHandler().onClick(EditTaskActivity.this, v, username.getText().toString());
+//            }
+//        });
+//
+//        statisticsNavButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                new NavButtonEventHandler().onClick(EditTaskActivity.this, v, username.getText().toString());
+//            }
+//        });
+//
+//        settingsNavButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                new NavButtonEventHandler().onClick(EditTaskActivity.this, v, username.getText().toString());
+//            }
+//        });
     }
 
     @Override
