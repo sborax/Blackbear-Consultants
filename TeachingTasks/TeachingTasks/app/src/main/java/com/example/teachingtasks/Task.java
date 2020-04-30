@@ -2,7 +2,6 @@ package com.example.teachingtasks;
 
 import android.widget.Button;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -28,7 +27,7 @@ public class Task implements TaskInterface {
 
     @Override
     public UUID getTaskID() {
-        return null;
+        return taskID;
     }
 
     @Override

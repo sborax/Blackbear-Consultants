@@ -70,7 +70,7 @@ public class CreateUserEventHandler {
         return;
     }
 
-    private boolean isAcceptablePassword(String pass) {
+    public boolean isAcceptablePassword(String pass) {
         //True if pass length > 7 and contains at least 1 letter, number, and special char.
         //Else, false.
 
