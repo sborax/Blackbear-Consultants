@@ -56,7 +56,10 @@ public class EditTaskActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent createUserIntent = new Intent(EditTaskActivity.this, CreateTaskActivity.class);
                 createUserIntent.putExtra("EXTRA_USER", username.getText().toString());
-                createUserIntent.putExtra("NEW_IMAGE_DESC", imageDesc.getText().toString());
+                if (imageDesc.getText().toString().matches(""))
+                    return;
+                else
+                    createUserIntent.putExtra("NEW_IMAGE_DESC", imageDesc.getText().toString());
 
                 try {
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
