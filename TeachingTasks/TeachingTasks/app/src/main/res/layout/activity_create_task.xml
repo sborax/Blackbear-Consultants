@@ -15,7 +15,7 @@
         android:layout_marginTop="24dp"
         android:background="#FFFFFF"
         android:ems="10"
-        android:inputType="textPassword"
+        android:inputType="text"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -180,7 +180,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/ID"
+        android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="casual"
@@ -188,6 +188,7 @@
         android:text="tempUser"
         android:textColor="#FFFFFF"
         android:textSize="48sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/woodHeaderImageView2"
         app:layout_constraintEnd_toEndOf="@+id/woodHeaderImageView2"
         app:layout_constraintHorizontal_bias="0.497"

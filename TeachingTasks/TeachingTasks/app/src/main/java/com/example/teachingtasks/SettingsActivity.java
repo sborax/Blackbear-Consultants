@@ -21,7 +21,6 @@ public class SettingsActivity extends AppCompatActivity {
         username = (TextView) findViewById(R.id.username);
         username.setText(getIntent().getStringExtra("EXTRA_USER"));
 
-        customTask = (TextView) findViewById(R.id.customTaskButton);
         mute = (TextView) findViewById(R.id.mute);
         logout = (TextView) findViewById(R.id.logout);
 
@@ -43,6 +42,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent createUserIntent = new Intent(SettingsActivity.this, EditTaskActivity.class);
+                createUserIntent.putExtra("EXTRA_USER", username.getText().toString());
                 startActivity(createUserIntent);
             }
         });

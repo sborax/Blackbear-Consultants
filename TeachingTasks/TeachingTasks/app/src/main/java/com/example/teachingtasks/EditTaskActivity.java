@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.FileNotFoundException;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class EditTaskActivity extends AppCompatActivity {
+    TextView username;
     ImageView image;
     Button taskNavButton, settingsNavButton, statisticsNavButton;
 
@@ -27,6 +27,13 @@ public class EditTaskActivity extends AppCompatActivity {
         Button loadImage = (Button)findViewById(R.id.new_pic_button);
         Button createTask = (Button)findViewById(R.id.create_task);
         image = (ImageView)findViewById(R.id.task_pic);
+
+        taskNavButton = (Button) findViewById(R.id.taskNavButton);
+        statisticsNavButton = (Button) findViewById(R.id.statisticsNavButton);
+        settingsNavButton = (Button) findViewById(R.id.settingsNavButton);
+
+        username = (TextView) findViewById(R.id.username);
+        username.setText(getIntent().getStringExtra("EXTRA_USER"));
 
         loadImage.setOnClickListener(new Button.OnClickListener(){
 
@@ -42,29 +49,30 @@ public class EditTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent createUserIntent = new Intent(EditTaskActivity.this, CreateTaskActivity.class);
+                createUserIntent.putExtra("EXTRA_USER", username.getText().toString());
                 startActivity(createUserIntent);
             }});
 
-//        taskNavButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                new NavButtonEventHandler().onClick(EditTaskActivity.this, v, username.getText().toString());
-//            }
-//        });
-//
-//        statisticsNavButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                new NavButtonEventHandler().onClick(EditTaskActivity.this, v, username.getText().toString());
-//            }
-//        });
-//
-//        settingsNavButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                new NavButtonEventHandler().onClick(EditTaskActivity.this, v, username.getText().toString());
-//            }
-//        });
+        taskNavButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new NavButtonEventHandler().onClick(EditTaskActivity.this, v, username.getText().toString());
+            }
+        });
+
+        statisticsNavButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new NavButtonEventHandler().onClick(EditTaskActivity.this, v, username.getText().toString());
+            }
+        });
+
+        settingsNavButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new NavButtonEventHandler().onClick(EditTaskActivity.this, v, username.getText().toString());
+            }
+        });
     }
 
     @Override
