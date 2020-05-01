@@ -1,9 +1,11 @@
 package com.example.teachingtasks;
 
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 
 import android.content.Intent;
@@ -16,7 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class EditTaskActivity extends AppCompatActivity {
-    TextView username;
+    TextView username, imageDesc;
     ImageView image;
     Button taskNavButton, settingsNavButton, statisticsNavButton;
 
@@ -27,6 +29,7 @@ public class EditTaskActivity extends AppCompatActivity {
         Button loadImage = (Button)findViewById(R.id.new_pic_button);
         Button createTask = (Button)findViewById(R.id.create_task);
         image = (ImageView)findViewById(R.id.task_pic);
+        image.setImageResource(android.R.color.transparent);
 
         taskNavButton = (Button) findViewById(R.id.taskNavButton);
         statisticsNavButton = (Button) findViewById(R.id.statisticsNavButton);
@@ -34,6 +37,9 @@ public class EditTaskActivity extends AppCompatActivity {
 
         username = (TextView) findViewById(R.id.username);
         username.setText(getIntent().getStringExtra("EXTRA_USER"));
+
+        //TODO: Need to somehow verify input image name
+        imageDesc = (TextView) findViewById(R.id.input_image_name);
 
         loadImage.setOnClickListener(new Button.OnClickListener(){
 
@@ -50,7 +56,19 @@ public class EditTaskActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent createUserIntent = new Intent(EditTaskActivity.this, CreateTaskActivity.class);
                 createUserIntent.putExtra("EXTRA_USER", username.getText().toString());
-                startActivity(createUserIntent);
+                createUserIntent.putExtra("NEW_IMAGE_DESC", imageDesc.getText().toString());
+
+                try {
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
+                    Bitmap bitmap = drawable.getBitmap();
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    byte[] byteArray = stream.toByteArray();
+                    createUserIntent.putExtra("NEW_IMAGE", byteArray);
+                    startActivity(createUserIntent);
+                }catch(RuntimeException exc) {
+                    exc.printStackTrace();
+                }
             }});
 
         taskNavButton.setOnClickListener(new View.OnClickListener() {
@@ -76,10 +94,10 @@ public class EditTaskActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    protected void onActivityResult(int request, int result, Intent data) {
+        super.onActivityResult(request, result, data);
 
-        if (resultCode == RESULT_OK){
+        if (result == RESULT_OK){
             Uri targetUri = data.getData();
             Bitmap bitmap;
             try {

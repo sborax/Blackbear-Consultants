@@ -16,7 +16,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class CreateTaskActivity extends AppCompatActivity {
-    TextView username;
+    TextView username, desc1, desc2;
+    ImageView image1, image2;
     Button taskNavButton, settingsNavButton, statisticsNavButton;
 
     @Override
@@ -24,7 +25,7 @@ public class CreateTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_task);
 
-        
+
         taskNavButton = (Button) findViewById(R.id.taskNavButton);
         statisticsNavButton = (Button) findViewById(R.id.statisticsNavButton);
         settingsNavButton = (Button) findViewById(R.id.settingsNavButton);
@@ -32,7 +33,14 @@ public class CreateTaskActivity extends AppCompatActivity {
         username = (TextView) findViewById(R.id.username);
         username.setText(getIntent().getStringExtra("EXTRA_USER"));
 
+        desc1 = (TextView) findViewById(R.id.text_object1);
+        desc2 = (TextView) findViewById(R.id.text_object2);
 
+        desc1.setText("Click on " + getIntent().getStringExtra("NEW_IMAGE_DESC"));
+
+        byte[] byteArray = getIntent().getByteArrayExtra("NEW_IMAGE");
+        image1 = (ImageView) findViewById(R.id.image1);
+        image1.setImageBitmap(BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length));
 
         taskNavButton.setOnClickListener(new View.OnClickListener() {
             @Override
