@@ -15,7 +15,7 @@
         android:layout_marginTop="24dp"
         android:background="#FFFFFF"
         android:ems="10"
-        android:inputType="textPassword"
+        android:inputType="text"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,62 +72,74 @@
         app:srcCompat="@drawable/chalkwood" />
 
     <ImageView
-        android:id="@+id/object1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/image1"
+        android:layout_width="123dp"
+        android:layout_height="115dp"
         android:layout_marginStart="60dp"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="80dp"
+        android:cropToPadding="true"
+        android:scaleType="centerInside"
         android:src="@drawable/ic_launcher_foreground"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_task_name" />
+        app:layout_constraintTop_toBottomOf="@+id/input_task_name"
+        app:srcCompat="@drawable/sick" />
+
+    <ImageView
+        android:id="@+id/image2"
+        android:layout_width="123dp"
+        android:layout_height="115dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
+        android:cropToPadding="false"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_launcher_foreground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/image1"
+        app:layout_constraintTop_toBottomOf="@+id/input_task_name"
+        app:srcCompat="@drawable/sick" />
 
     <TextView
         android:id="@+id/text_object1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginLeft="64dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginLeft="68dp"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="32dp"
         android:fontFamily="casual"
         android:text="Click on Object1"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/create_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/object1" />
+        app:layout_constraintTop_toBottomOf="@+id/image1"
+        app:layout_constraintVertical_bias="0.392" />
 
     <TextView
         android:id="@+id/text_object2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginRight="64dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginRight="68dp"
+        android:layout_marginBottom="32dp"
         android:fontFamily="casual"
         android:text="Click on Object2"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/create_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/object1" />
-
-    <ImageView
-        android:id="@+id/object1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginRight="60dp"
-        android:src="@drawable/ic_launcher_foreground"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/object1"
-        app:layout_constraintTop_toBottomOf="@+id/input_task_name" />
+        app:layout_constraintTop_toBottomOf="@+id/image2"
+        app:layout_constraintVertical_bias="0.392" />
 
     <Button
         android:id="@+id/create_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
+        android:layout_marginBottom="16dp"
         android:background="#00FFFFFF"
         android:fontFamily="casual"
         android:text="Create"
@@ -135,10 +147,10 @@
         android:textColor="#FFFFFF"
         android:textSize="36sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_object1" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -149,9 +161,7 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/create_button"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/taskNavButton"
@@ -178,16 +188,20 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/ID"
+        android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="casual"
+        android:gravity="center"
         android:text="tempUser"
         android:textColor="#FFFFFF"
         android:textSize="48sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/woodHeaderImageView2"
         app:layout_constraintEnd_toEndOf="@+id/woodHeaderImageView2"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="@+id/woodHeaderImageView2"
-        app:layout_constraintTop_toTopOf="@+id/woodHeaderImageView" />
+        app:layout_constraintTop_toTopOf="@+id/woodHeaderImageView2"
+        app:layout_constraintVertical_bias="0.25" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

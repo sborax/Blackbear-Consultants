@@ -87,7 +87,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/customTask" />
+        app:layout_constraintTop_toBottomOf="@+id/customTaskButton" />
 
     <TextView
         android:id="@+id/logout"
@@ -103,13 +103,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mute" />
 
-    <TextView
-        android:id="@+id/customTask"
+    <Button
+        android:id="@+id/customTaskButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:background="#00FFFFFF"
         android:fontFamily="casual"
         android:text="Custom Task"
+        android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:textSize="48sp"
         android:textStyle="bold"

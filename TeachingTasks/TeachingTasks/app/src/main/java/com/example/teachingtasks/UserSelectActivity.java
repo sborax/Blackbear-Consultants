@@ -16,6 +16,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
+import com.example.teachingtasks.EditTaskActivity;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -23,6 +25,7 @@ import java.util.Random;
 public class UserSelectActivity extends AppCompatActivity {
 
     Button editButton, addButton;
+
     HashMap<Integer, EditText> userOptions = new HashMap<Integer, EditText>();
     RegisterUserDBHelper mydb;
     ArrayList<String> users;
@@ -38,6 +41,7 @@ public class UserSelectActivity extends AppCompatActivity {
         mydb = new RegisterUserDBHelper(this);
 
         //Initial variables with UI components
+
         editButton = (Button) findViewById(R.id.editButton);
         addButton = (Button) findViewById(R.id.addButton);
         linearLayout = (LinearLayout) findViewById(R.id.userSelectionLayout);

@@ -98,6 +98,8 @@
         android:layout_height="0dp"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="8dp"
+        android:cropToPadding="false"
+        android:scaleType="centerInside"
         app:layout_constraintBottom_toTopOf="@+id/Image_Desc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -120,7 +122,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/ID"
+        android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="casual"
@@ -142,7 +144,7 @@
         android:layout_marginBottom="164dp"
         android:background="#FFFFFF"
         android:ems="10"
-        android:inputType="textPassword"
+        android:inputType="text"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
@@ -158,6 +160,7 @@
         android:fontFamily="casual"
         android:text="Char: chars_left"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.026"
@@ -166,39 +169,23 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/retake_pic"
-        android:layout_width="91dp"
-        android:layout_height="57dp"
-        android:layout_marginBottom="10dp"
-        android:background="#00FFFFFF"
-        android:fontFamily="casual"
-        android:text="Retake Picture"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.121"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_image_name"
-        app:layout_constraintVertical_bias="0.752" />
-
-    <Button
-        android:id="@+id/new_pic"
+        android:id="@+id/new_pic_button"
         android:layout_width="81dp"
         android:layout_height="54dp"
         android:layout_marginBottom="10dp"
         android:background="#00FFFFFF"
         android:fontFamily="casual"
-        android:text="New Picture"
+        android:text="Choose Picture"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.12"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_image_name"
-        app:layout_constraintVertical_bias="0.754" />
+        app:layout_constraintVertical_bias="0.75" />
 
     <Button
         android:id="@+id/create_task"
@@ -211,6 +198,7 @@
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.88"
