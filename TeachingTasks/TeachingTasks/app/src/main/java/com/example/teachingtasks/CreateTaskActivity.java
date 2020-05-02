@@ -36,6 +36,7 @@ public class CreateTaskActivity extends AppCompatActivity {
         desc1 = (TextView) findViewById(R.id.text_object1);
         desc2 = (TextView) findViewById(R.id.text_object2);
 
+        //TODO: Need to implement with multiple images somehow
         desc1.setText("Click on " + getIntent().getStringExtra("NEW_IMAGE_DESC"));
 
         byte[] byteArray = getIntent().getByteArrayExtra("NEW_IMAGE");
