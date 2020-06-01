@@ -17,4 +17,15 @@ Jeremy Hutchinson - Ayyko
 
 Mark Sullivan - sborax
 
-Teaching Tasks
+
+# Teaching Tasks
+
+Teaching Tasks is an Android app built with Java. Designed to help children with autism learn fundamental skills.
+
+# Features
+
+- User Accounts stored with Android SQL storage
+- User Creation, Deletion, and Login
+- Simple matching game with Correct / Incorrect data collection
+- Simple algorithm for game mechanics
+- Statistics view
